@@ -157,12 +157,12 @@
                         <div class="flex items-center justify-between">
                             <h3 class="text-xs uppercase tracking-wider text-orange-400 font-extrabold flex items-center space-x-1.5">
                                 <span class="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 inline-flex items-center justify-center text-[10px]">1</span>
-                                <span>Belt Width & Material Path</span>
+                                <span>Belt Width & Blade Coverage</span>
                             </h3>
                             <span id="badgeBeltStandard" class="text-[11px] font-mono text-slate-400">36" (900 mm)</span>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div class="grid grid-cols-1 gap-3.5">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1.5">Standard Belt Width</label>
                                 <select id="beltWidthSelect" onchange="syncBeltWidthFromSelect()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium">
@@ -184,22 +184,12 @@
                                 </select>
                             </div>
 
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Troughing Angle (Path Rule)</label>
-                                <select id="troughAngle" onchange="calculateScrapers()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium">
-                                    <option value="0">0° Flat Belt (Belt minus 2" / 50mm)</option>
-                                    <option value="20">20° Trough (Belt minus 4" / 100mm)</option>
-                                    <option value="35" selected>35° Trough (Belt minus 6" / 150mm)</option>
-                                    <option value="45">45° Trough (Belt minus 8" / 200mm)</option>
-                                    <option value="60">Severe / Deep Trough (Minus 12" / 300mm)</option>
-                                </select>
-                            </div>
                         </div>
 
                         <!-- Visual Material Path & Smiling Blade Prevention Bar -->
                         <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
                             <div class="flex justify-between text-[11px] mb-1">
-                                <span class="text-slate-400">Blade-to-Material Path Match <span class="text-emerald-400 font-semibold">(Prevents "Smiling" Blade Wear)</span></span>
+                                <span class="text-slate-400">Blade Coverage of Belt Width</span>
                                 <span id="pathRatioText" class="font-mono text-orange-400 font-bold">85.7% Coverage</span>
                             </div>
                             <div class="w-full bg-slate-950 h-4 rounded-full overflow-hidden flex items-center justify-center p-0.5 border border-slate-800">
@@ -222,23 +212,20 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div>
-                                <div class="flex justify-between items-center mb-1">
-                                    <label class="text-xs font-semibold text-slate-300" id="labelPulleyDia">Head Pulley Dia</label>
-                                    <span id="subPulleyDia" class="text-[11px] font-mono text-orange-400">19.7 in</span>
-                                </div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5" id="labelPulleyDia">Head Pulley Diameter (incl. belt &amp; lagging)</label>
                                 <select id="pulleyDiameter" onchange="calculateScrapers()"
                                     class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-orange-500">
-                                    <option value="300">300 mm (11.8 in)</option>
-                                    <option value="400">400 mm (15.7 in)</option>
-                                    <option value="500" selected>500 mm (19.7 in)</option>
-                                    <option value="600">600 mm (23.6 in)</option>
-                                    <option value="700">700 mm (27.6 in)</option>
-                                    <option value="800">800 mm (31.5 in)</option>
-                                    <option value="900">900 mm (35.4 in)</option>
-                                    <option value="1000">1000 mm (39.4 in)</option>
-                                    <option value="1100">1100 mm (43.3 in)</option>
-                                    <option value="1200">1200 mm (47.2 in)</option>
-                                    <option value="1300">Over 1200 mm (&gt; 47.2 in)</option>
+                                    <option value="150">150</option>
+                                    <option value="300">300</option>
+                                    <option value="400">400</option>
+                                    <option value="500" selected>500</option>
+                                    <option value="600">600</option>
+                                    <option value="700">700</option>
+                                    <option value="800">800</option>
+                                    <option value="900">900</option>
+                                    <option value="1000">1000</option>
+                                    <option value="1100">1100</option>
+                                    <option value="1200">1200</option>
                                 </select>
                             </div>
 
@@ -337,24 +324,22 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Service & Tensioner Style</label>
-                                <select id="serviceStyle" onchange="calculateScrapers()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium">
-                                    <option value="standard" selected>Standard Spring / Twist Tensioner</option>
-                                    <option value="sts">Safe-to-Service™ (STS External Slide-Out)</option>
-                                    <option value="air">Pneumatic / Air Tensioner System</option>
-                                    <option value="cleanscrape">Prefer CleanScrape® Diagonal Matrix</option>
-                                </select>
+                        <div class="bg-slate-900/60 border border-orange-500/20 rounded-xl p-3 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-orange-300">Primary Cleaner Options</span>
+                                <span id="optionsForLabel" class="text-[11px] font-mono text-slate-400">—</span>
                             </div>
-
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mainframe Metallurgy</label>
-                                <select id="metallurgy" onchange="calculateScrapers()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium">
-                                    <option value="P" selected>Painted Industrial Steel (Martin Orange)</option>
-                                    <option value="C">304 / 316 Stainless Steel (Corrosive)</option>
-                                </select>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Tensioner</label>
+                                    <select id="tensionerType" onchange="calculateScrapers()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium disabled:opacity-60 disabled:cursor-not-allowed"></select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mainframe Finishing</label>
+                                    <select id="mainframeFinish" onchange="calculateScrapers()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 font-medium disabled:opacity-60 disabled:cursor-not-allowed"></select>
+                                </div>
                             </div>
+                            <p class="text-[10px] text-slate-500">Choices follow the selected cleaner's Martin® data sheet and change the assembly part number.</p>
                         </div>
                     </div>
 
@@ -612,74 +597,53 @@
                         </thead>
                         <tbody class="divide-y divide-slate-800/70">
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">Compact Cleaner</td>
-                                <td class="p-3 font-mono">6–10 in (152–250 mm)</td>
-                                <td class="p-3 font-mono">350 fpm (1.8 m/s)</td>
-                                <td class="p-3 font-mono">Up to 48 in (1400 mm)</td>
-                                <td class="p-3 text-slate-400">1.75" (45 mm) square tube; fits tight 6.75" (171 mm) head chute spaces.</td>
+                                <td class="p-3 font-bold text-white">Compact Cleaner <span class="text-[10px] font-mono text-orange-400">L3667</span></td>
+                                <td class="p-3 font-mono">6–11 in (150–299 mm)</td>
+                                <td class="p-3 font-mono">350 fpm (1.78 m/s)</td>
+                                <td class="p-3 font-mono">12–48 in</td>
+                                <td class="p-3 text-slate-400">P/N 33464-[BW][Seg][Color]; internal spring tensioner 33036-P.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner PV (1-pc / 3-pc)</td>
-                                <td class="p-3 font-mono">12–16 in (300–400 mm)</td>
-                                <td class="p-3 font-mono">500 fpm (2.5 m/s)</td>
-                                <td class="p-3 font-mono">Up to 72 in (2000 mm)</td>
-                                <td class="p-3 text-slate-400">Pit Viper CARP blade profile with one-pin quick replacement.</td>
+                                <td class="p-3 font-bold text-white">QC1+™ Cleaner PV <span class="text-[10px] font-mono text-orange-400">L4135</span></td>
+                                <td class="p-3 font-mono">12–15 in (300–399 mm)</td>
+                                <td class="p-3 font-mono">500 fpm (2.54 m/s)</td>
+                                <td class="p-3 font-mono">18–72 in</td>
+                                <td class="p-3 text-slate-400">P/N C1QCP1 S[BW] [S2/S6] [Color] [Seg] [Frame] [Tens.]; dual tensioners 54 in+.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner PD</td>
-                                <td class="p-3 font-mono">16–22 in (400–500 mm)</td>
+                                <td class="p-3 font-bold text-white">QC1+™ Cleaner HD <span class="text-[10px] font-mono text-orange-400">L4151</span></td>
+                                <td class="p-3 font-mono">16–23 in (400–599 mm)</td>
                                 <td class="p-3 font-mono">900 fpm (4.6 m/s)</td>
-                                <td class="p-3 font-mono">Up to 72 in (2000 mm)</td>
-                                <td class="p-3 text-slate-400">Performance Duty mainframe with patented CARP urethane blade.</td>
+                                <td class="p-3 font-mono">18–96 in</td>
+                                <td class="p-3 text-slate-400">P/N C1QCH1 S[BW] [S2/S6] [Color] [Seg] [Frame] [Tens.]; rated to 22 in pulley; dual tensioners 54 in+.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner HD (1-pc / 3-pc)</td>
-                                <td class="p-3 font-mono">16–22 in (400–500 mm)</td>
-                                <td class="p-3 font-mono">900 fpm (4.6 m/s)</td>
-                                <td class="p-3 font-mono">Up to 96 in (2400 mm)</td>
-                                <td class="p-3 text-slate-400">2.88" (73 mm) Sch 80 pipe; heavy-duty CARP blade up to 35% more wearable urethane.</td>
+                                <td class="p-3 font-bold text-white">QC1+™ Cleaner HD Max <span class="text-[10px] font-mono text-orange-400">L4174</span></td>
+                                <td class="p-3 font-mono">24–31 in (600–799 mm)</td>
+                                <td class="p-3 font-mono">1200 fpm (6 m/s)</td>
+                                <td class="p-3 font-mono">18–48 in (tool rule)</td>
+                                <td class="p-3 text-slate-400">P/N C1QCG3 S[BW] [S6/S8/SC] [Color] [Seg] [Frame] [Tens.]; rated to 30 in pulley; dual tensioners 48 in+.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner HD STS™</td>
-                                <td class="p-3 font-mono">16–22 in (400–500 mm)</td>
-                                <td class="p-3 font-mono">900 fpm (4.6 m/s)</td>
-                                <td class="p-3 font-mono">Up to 72 in (2000 mm)</td>
-                                <td class="p-3 text-slate-400">Safe-to-Service™ external slide-out blade access for medium pulleys.</td>
+                                <td class="p-3 font-bold text-white">QC1+™ Cleaner XHD <span class="text-[10px] font-mono text-orange-400">L4176</span></td>
+                                <td class="p-3 font-mono">24–31 in (600–799 mm)</td>
+                                <td class="p-3 font-mono">1200 fpm (6 m/s)</td>
+                                <td class="p-3 font-mono">54–72 in (tool rule)</td>
+                                <td class="p-3 text-slate-400">P/N C1QCE3 S[BW] [S6/S8/SC] [Color] [Seg] [Frame] [Tens.]; spring tensioner 38003.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner HD Max (1-pc / 3-pc)</td>
-                                <td class="p-3 font-mono">24–30 in (600–760 mm)</td>
-                                <td class="p-3 font-mono">1200 fpm (6.1 m/s)</td>
-                                <td class="p-3 font-mono">Up to 120 in (3000 mm)</td>
-                                <td class="p-3 text-slate-400">3/8" (9.5 mm) DOM tubing w/ steel bar backbone & aluminum blade base.</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">QC1+™ Cleaner XHD (1-pc / 3-pc)</td>
-                                <td class="p-3 font-mono">24–30 in (600–760 mm)</td>
-                                <td class="p-3 font-mono">1200 fpm (6.1 m/s)</td>
-                                <td class="p-3 font-mono">Up to 120 in (3000 mm)</td>
-                                <td class="p-3 text-slate-400">Extra Heavy Duty mainframe (QC1+ XHD STS™ rated up to 72 in / 2000 mm).</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">CleanScrape® Primary Cleaner</td>
-                                <td class="p-3 font-mono">24–48 in (600–1200 mm)</td>
+                                <td class="p-3 font-bold text-white">SHD Cleaner (SHD 600) <span class="text-[10px] font-mono text-orange-400">L3439</span></td>
+                                <td class="p-3 font-mono">24–47 in (600–1199 mm)</td>
                                 <td class="p-3 font-mono">1500 fpm (7.5 m/s)</td>
-                                <td class="p-3 font-mono">Up to 120 in (3000 mm)</td>
-                                <td class="p-3 text-slate-400">Diagonal tungsten carbide matrix; Heated version rated up to 72 in (2000 mm).</td>
+                                <td class="p-3 font-mono">42–120 in</td>
+                                <td class="p-3 text-slate-400">P/N SH1X-[BW]U[A]6[Color][Frame]0[Tens.]; also used on 24–31 in pulleys for belts over 72 in.</td>
                             </tr>
                             <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">SHD 600 Series Cleaner</td>
-                                <td class="p-3 font-mono">24–48 in (600–1200 mm)</td>
+                                <td class="p-3 font-bold text-white">SHD Cleaner (SHD 1200) <span class="text-[10px] font-mono text-orange-400">L3439</span></td>
+                                <td class="p-3 font-mono">48 in (1200 mm) and over</td>
                                 <td class="p-3 font-mono">1500 fpm (7.5 m/s)</td>
-                                <td class="p-3 font-mono">Up to 120 in (3000 mm)</td>
-                                <td class="p-3 text-slate-400">Structural steel beam; 10.5 in (267 mm) massive wearable urethane blade.</td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/40">
-                                <td class="p-3 font-bold text-white">H1 Primary HD / SHD 1200 Series</td>
-                                <td class="p-3 font-mono">&gt; 48 in (&gt; 1200 mm)</td>
-                                <td class="p-3 font-mono">1500 fpm (7.5 m/s)</td>
-                                <td class="p-3 font-mono">Up to 96 in / 120 in (3000 mm)</td>
-                                <td class="p-3 text-slate-400">H1 HD (up to 96 in / 2400 mm) & SHD 1200 (up to 120 in / 3000 mm) for &gt;48" pulleys.</td>
+                                <td class="p-3 font-mono">42–120 in</td>
+                                <td class="p-3 text-slate-400">P/N SH1X-[BW]U[A]1[Color][Frame]0[Tens.]; Spring Link Tensioner 35978-SxxxX.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -805,7 +769,7 @@
             </div>
 
             <div class="pt-4 mt-4 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-                <span>Rule: In instances of conflict between pulley size and speed, choose the next larger cleaner size.</span>
+                <span>Primary cleaner is selected by head pulley range and belt width (Martin® data sheets L3667, L4135, L4151, L4174, L4176, L3439).</span>
                 <button type="button" onclick="closeCatalogModal()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-5 py-2 rounded-xl transition">
                     Close Catalog
                 </button>
@@ -844,6 +808,147 @@
         // Global state for unit system and latest calculation snapshot
         let currentUnitSystem = 'metric'; // 'metric' or 'imperial'
         let currentSelectionState = {};
+
+        // Unit convention used across the tool (same as belt width): 150 mm = 6 in, i.e. 25 mm = 1 in
+        const MM_PER_IN = 25;
+        // Head pulley ranges: value = lower bound in mm; each range runs to the next value minus 1 mm
+        const PULLEY_RANGES = [150, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200];
+
+        function pulleyRangeLabel(mm, imperial) {
+            const i = PULLEY_RANGES.indexOf(mm);
+            const next = i >= 0 && i < PULLEY_RANGES.length - 1 ? PULLEY_RANGES[i + 1] : null;
+            if (imperial) {
+                const lo = mm / MM_PER_IN;
+                return next ? `${ lo } – ${ next / MM_PER_IN - 1 } in` : `${ lo } in and over`;
+            }
+            return next ? `${ mm } – ${ next - 1 } mm` : `${ mm } mm and over`;
+        }
+
+        // Per-cleaner tensioner and mainframe finishing options (codes from the Martin® data sheets)
+        const PRODUCT_NAMES = { compact: 'Compact Cleaner (L3667)', pv: 'QC1+ PV (L4135)', hd: 'QC1+ HD (L4151)', hdmax: 'QC1+ HD Max (L4174)', xhd: 'QC1+ XHD (L4176)', shd600: 'SHD 600 (L3439)', shd1200: 'SHD 1200 (L3439)' };
+        const QC_SPRING_38003 = [
+            { code: 'S', pn: '38003', label: 'Martin® Spring Tensioner', short: 'Spring' },
+            { code: 'P', pn: '38003-C', label: 'Martin® Spring Tensioner, Stainless Steel', short: 'Spring SS' },
+            { code: '', pn: null, label: 'No Tensioner', short: 'None' }
+        ];
+        const TENSIONER_OPTIONS = {
+            compact: [
+                { code: '', pn: '33036-P', label: 'Martin® Internal Spring Tensioner', short: 'Internal Spring' }
+            ],
+            pv: [
+                { code: 'S', pn: '38180', label: 'Martin® Spring Tensioner', short: 'Spring' },
+                { code: 'P', pn: '38180-SS', label: 'Martin® Spring Tensioner, Stainless Steel', short: 'Spring SS' },
+                { code: 'T', pn: '38850', label: 'Martin® Twist Tensioner', short: 'Twist' },
+                { code: 'O', pn: '31443', label: 'Martin® Twist Tensioner, Alternate', short: 'Twist (alt.)' },
+                { code: 'F', pn: '31443-SS', label: 'Martin® Twist Tensioner, Stainless Steel', short: 'Twist SS' },
+                { code: 'C', pn: '37944', label: 'Martin® Cable Spring Tensioner', short: 'Cable Spring' },
+                { code: 'M', pn: '37944', label: 'Martin® Cable Spring Tensioner w/ Mount Plate', short: 'Cable Spring + Plate', maxBelt: 48 },
+                { code: '', pn: null, label: 'No Tensioner', short: 'None' }
+            ],
+            hd: [
+                { code: 'S', pn: '38180', label: 'Martin® Spring Tensioner', short: 'Spring' },
+                { code: 'P', pn: '38180-SS', label: 'Martin® Spring Tensioner, Stainless Steel', short: 'Spring SS' },
+                { code: 'T', pn: '38850', label: 'Martin® Twist Tensioner', short: 'Twist' },
+                { code: 'O', pn: '31443', label: 'Martin® Twist Tensioner, Alternate', short: 'Twist (alt.)' },
+                { code: 'F', pn: '31443-SS', label: 'Martin® Twist Tensioner, Stainless Steel', short: 'Twist SS' }
+            ],
+            hdmax: QC_SPRING_38003,
+            xhd: QC_SPRING_38003,
+            shd600: [
+                { code: 'L', pn: '35978-S500X', label: 'Martin® Spring Link Tensioner, Painted', short: 'Painted Link' },
+                { code: 'C', pn: '35978-S500X (CR)', label: 'Martin® Spring Link Tensioner, Corrosion Resistant', short: 'CR Link' },
+                { code: '0', pn: null, label: 'No Tensioner', short: 'None' }
+            ],
+            shd1200: [
+                { code: 'L', pn: '35978-S750X', label: 'Martin® Spring Link Tensioner, Painted', short: 'Painted Link' },
+                { code: 'C', pn: '35978-S750X (CR)', label: 'Martin® Spring Link Tensioner, Corrosion Resistant', short: 'CR Link' },
+                { code: '0', pn: null, label: 'No Tensioner', short: 'None' }
+            ]
+        };
+        const QC_3PC_FINISH = [
+            { code: 'P', label: 'Painted Steel w/ Aluminum Blade Insert', short: 'Painted / Al Insert', ss: false },
+            { code: 'E', label: 'Painted Steel, Extended Torque Tubes, Aluminum Blade Insert', short: 'Painted / Ext. Tubes', ss: false },
+            { code: 'T', label: 'Painted Steel w/ Steel Blade Insert', short: 'Painted / Steel Insert', ss: false },
+            { code: 'F', label: 'Stainless Steel w/ Steel Blade Insert', short: 'Stainless', ss: true },
+            { code: 'Z', label: 'Stainless Steel, Extended Torque Tubes, Steel Blade Insert', short: 'Stainless / Ext. Tubes', ss: true }
+        ];
+        const SHD_FINISH = [
+            { code: 'P', label: 'Painted Orange', short: 'Painted Orange', ss: false },
+            { code: 'C', label: 'Corrosion Resistant', short: 'Corrosion Resistant', ss: true }
+        ];
+        const FINISH_OPTIONS = {
+            compact: [
+                { code: '', label: 'Standard Internal Square Tube (no finishing option in L3667)', short: 'Standard', ss: false }
+            ],
+            pv: [
+                { code: 'P', label: 'Painted Steel w/ Aluminum Blade Insert', short: 'Painted / Al Insert', ss: false },
+                { code: 'E', label: 'Painted Steel w/ Extended Torque Tubes', short: 'Painted / Ext. Tubes', ss: false },
+                { code: 'T', label: 'Painted Steel w/ Stainless Steel Blade Insert', short: 'Painted / SS Insert', ss: false },
+                { code: 'F', label: 'Stainless Steel', short: 'Stainless', ss: true },
+                { code: 'Z', label: 'Stainless Steel w/ Extended Torque Tubes', short: 'Stainless / Ext. Tubes', ss: true }
+            ],
+            hd: [
+                { code: 'P', label: 'Painted Steel w/ Aluminum Blade Insert', short: 'Painted / Al Insert', ss: false },
+                { code: 'T', label: 'Painted Steel w/ Steel Blade Insert', short: 'Painted / Steel Insert', ss: false },
+                { code: 'F', label: 'Stainless Steel w/ Steel Blade Insert', short: 'Stainless', ss: true }
+            ],
+            hdmax: QC_3PC_FINISH,
+            xhd: QC_3PC_FINISH,
+            shd600: SHD_FINISH,
+            shd1200: SHD_FINISH
+        };
+
+        // Rebuild a select only when its option set changes; keep the user's choice when it is still offered
+        function fillOptionSelect(sel, opts, showPn) {
+            const sig = opts.map(o => o.label).join('|');
+            if (sel.dataset.sig !== sig) {
+                const prev = sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex].dataset.label : null;
+                sel.innerHTML = opts.map((o, i) => {
+                    const text = `${ o.code ? o.code + ' — ' : '' }${ o.label }${ showPn && o.pn ? ' (' + o.pn + ')' : '' }`;
+                    return `<option value="${ i }" data-label="${ o.label }">${ text }</option>`;
+                }).join('');
+                const keep = opts.findIndex(o => o.label === prev);
+                sel.value = String(keep >= 0 ? keep : 0);
+                sel.dataset.sig = sig;
+            }
+            sel.disabled = opts.length < 2;
+            return opts[parseInt(sel.value) || 0];
+        }
+
+        function applyProductOptions(key, beltIn) {
+            const tSel = document.getElementById('tensionerType');
+            const fSel = document.getElementById('mainframeFinish');
+            const note = document.getElementById('optionsForLabel');
+            if (!key) {
+                [tSel, fSel].forEach(sel => {
+                    sel.innerHTML = '<option>— No standard cleaner —</option>';
+                    sel.dataset.sig = '';
+                    sel.disabled = true;
+                });
+                note.innerText = 'No cleaner selected';
+                return {};
+            }
+            const tOpts = TENSIONER_OPTIONS[key].filter(o => !o.maxBelt || beltIn <= o.maxBelt);
+            const ten = fillOptionSelect(tSel, tOpts, true);
+            const fin = fillOptionSelect(fSel, FINISH_OPTIONS[key], false);
+            note.innerText = `For ${ PRODUCT_NAMES[key] }`;
+            return { ten, fin };
+        }
+
+        function fmtLen(mm, inch) {
+            return currentUnitSystem === 'imperial' ? `${ inch } in` : `${ mm } mm`;
+        }
+
+        function updateDropdownLabels() {
+            const imperial = currentUnitSystem === 'imperial';
+            Array.from(document.getElementById('beltWidthSelect').options).forEach(o => {
+                const mm = parseInt(o.value);
+                o.text = imperial ? `${ BELT_WIDTH_TABLE[mm] } in` : `${ mm } mm`;
+            });
+            Array.from(document.getElementById('pulleyDiameter').options).forEach(o => {
+                o.text = pulleyRangeLabel(parseInt(o.value), imperial);
+            });
+        }
 
         // Standard CEMA / ISO Belt Width Lookup Table (mm <-> inches)
         const BELT_WIDTH_TABLE = {
@@ -1018,6 +1123,7 @@
             }
 
             currentUnitSystem = system;
+            updateDropdownLabels();
             calculateScrapers();
         }
 
@@ -1034,52 +1140,17 @@
         function calculateScrapers() {
             // 1. Read Belt Width in both mm and inches
             const beltWidthMm = parseInt(document.getElementById('beltWidthSelect').value) || 1050;
-            const beltWidthIn = BELT_WIDTH_TABLE[beltWidthMm] || Math.round(beltWidthMm / 25.4);
-            document.getElementById('badgeBeltStandard').innerText = `${beltWidthIn}" (${beltWidthMm} mm)`;
+            const beltWidthIn = BELT_WIDTH_TABLE[beltWidthMm] || Math.round(beltWidthMm / MM_PER_IN);
+            const beltWidthLabel = fmtLen(beltWidthMm, beltWidthIn);
+            document.getElementById('badgeBeltStandard').innerText = beltWidthLabel;
 
-            // 2. Read Troughing Angle & Calculate Material Path Blade Width (Page 5 of Martin Guide)
-            const troughAngle = parseInt(document.getElementById('troughAngle').value) || 35;
-            let deductionIn = 6;
-            let deductionMm = 150;
-            let troughRuleLabel = '35° Trough (Belt minus 6" / 150mm)';
-
-            if (troughAngle === 0) {
-                deductionIn = 2;
-                deductionMm = 50;
-                troughRuleLabel = '0° Flat Belt (Belt minus 2" / 50mm)';
-            } else if (troughAngle === 20) {
-                deductionIn = 4;
-                deductionMm = 100;
-                troughRuleLabel = '20° Trough (Belt minus 4" / 100mm)';
-            } else if (troughAngle === 35) {
-                deductionIn = 6;
-                deductionMm = 150;
-                troughRuleLabel = '35° Trough (Belt minus 6" / 150mm)';
-            } else if (troughAngle === 45) {
-                deductionIn = 8;
-                deductionMm = 200;
-                troughRuleLabel = '45° Trough (Belt minus 8" / 200mm)';
-            } else if (troughAngle === 60) {
-                deductionIn = 12;
-                deductionMm = 300;
-                troughRuleLabel = 'Deep Trough (Belt minus 12" / 300mm)';
-            }
-
-            const bladeWidthIn = Math.max(6, beltWidthIn - deductionIn);
-            const bladeWidthMm = Math.max(150, beltWidthMm - deductionMm);
-            const coveragePct = Math.round((bladeWidthMm / beltWidthMm) * 1000) / 10;
-
-            document.getElementById('pathRatioText').innerText = `${ bladeWidthIn }" / ${ beltWidthIn }" (${ coveragePct }% Path)`;
-            document.getElementById('pathVisualBar').style.width = `${ Math.max(40, Math.min(96, coveragePct)) }%`;
-            document.getElementById('pathVisualBar').innerText = `BLADE WIDTH: ${ bladeWidthMm } mm (${ bladeWidthIn } in)`;
-
-            // 3. Read Pulley Diameter (dropdown, always mm; 1300 = "Over 1200 mm") & Belt Speed
+            // 2. Blade width is set by the selected cleaner (see section 6)
+            let bladeWidthIn = Math.max(6, beltWidthIn - 6);
+            let bladeWidthMm = Math.max(150, beltWidthMm - 150);
+            // 3. Read Head Pulley Range (value = lower bound in mm) & Belt Speed
             const pulleyMm = parseInt(document.getElementById('pulleyDiameter').value) || 500;
-            const pulleyOver1200 = pulleyMm > 1200;
-            const pulleyIn = Math.round((pulleyMm / 25.4) * 10) / 10;
-            const pulleyDisplayMm = pulleyOver1200 ? '> 1200 mm' : `${ pulleyMm } mm`;
-            const pulleyDisplayIn = pulleyOver1200 ? '> 47.2 in' : `${ pulleyIn } in`;
-            const pulleyDisplay = `${ pulleyDisplayMm } (${ pulleyDisplayIn })`;
+            const pulleyIn = pulleyMm / MM_PER_IN; // 150 mm = 6 in convention
+            const pulleyDisplay = pulleyRangeLabel(pulleyMm, currentUnitSystem === 'imperial');
 
             const rawSpeed = parseFloat(document.getElementById('beltSpeed').value) || 3.5;
 
@@ -1087,13 +1158,11 @@
             if (currentUnitSystem === 'metric') {
                 speedMs = rawSpeed;
                 speedFpm = Math.round(rawSpeed * 196.85);
-                document.getElementById('subPulleyDia').innerText = pulleyDisplayIn;
                 document.getElementById('subBeltSpeed').innerText = `${ speedFpm } fpm`;
                 document.getElementById('speedSlider').value = Math.min(10, speedMs);
             } else {
                 speedFpm = rawSpeed;
                 speedMs = Math.round((rawSpeed / 196.85) * 100) / 100;
-                document.getElementById('subPulleyDia').innerText = pulleyDisplayMm;
                 document.getElementById('subBeltSpeed').innerText = `${ speedMs } m/s`;
                 document.getElementById('speedSlider').value = Math.min(2000, speedFpm);
             }
@@ -1104,15 +1173,13 @@
             const moistureLevel = document.getElementById('moistureLevel').value;
             const spliceType = document.getElementById('spliceType').value;
             const reversingBelt = document.getElementById('reversingBelt').value;
-            const serviceStyle = document.getElementById('serviceStyle').value;
-            const metallurgy = document.getElementById('metallurgy').value; // 'P' Painted or 'C' Stainless
 
             let warnings = [];
 
             // 5. Auto-Select Martin High-Performance Color-Coded Urethane Formulation
             // Official Reference: https://www.martin-eng.com/content/page/683/high-performance-urethane/
             let urethaneKey = 'OR';
-            if (tempRange === 'high' || materialType === 'clinker_hot') {
+            if (tempRange === 'high' || tempRange === 'extreme' || materialType === 'clinker_hot') {
                 urethaneKey = 'GR'; // Green (83A) High Temperature (-40° to 300°F; 350°F Intermittent)
             } else if (tempRange === 'subzero' || materialType === 'limestone_chem') {
                 urethaneKey = 'BR'; // Brown (86A) Chemical Resistant / High Moisture Limestone (-40° to 180°F, pH 4-11)
@@ -1134,494 +1201,331 @@
             const autoTextEl = document.getElementById('autoUrethaneText');
             if (autoDotEl && autoTextEl) {
                 autoDotEl.className = `w-2.5 h-2.5 rounded-full inline-block ${ urethaneObj.dotClass }`;
-                autoTextEl.innerText = tempRange === 'extreme'
-                    ? 'Metal-Tipped / Tungsten Carbide (>300°F)'
-                    : `${ urethaneObj.name } — ${ urethaneObj.durometer }`;
+                autoTextEl.innerText = `${ urethaneObj.name } — ${ urethaneObj.durometer }`;
             }
 
-            // 6. Official Martin Primary Cleaner Matrix (https://www.martin-eng.com/content/product_subcategory/482/primary-belt-cleaners-products)
-            // Normalize pulley diameter bands so Metric (mm) and Imperial (in) thresholds align seamlessly:
-            // Band 1: 6-10 in (152-250 mm) -> Compact Cleaner (Max Speed 350 fpm / 1.8 m/s, Max Belt Width 48 in / 1400 mm)
-            // Band 2: 12-16 in (300-400 mm) -> QC1+ Cleaner PV 1-pc / 3-pc (Max Speed 500 fpm / 2.5 m/s, Max Belt Width 72 in / 2000 mm)
-            // Band 3: 16-22 in (400-560 mm) -> QC1+ Cleaner PD (up to 72"), QC1+ Cleaner HD 1-pc / 3-pc (up to 96"), QC1+ HD STS (up to 72"), QC1 Metal-Tipped (up to 96") [Max Speed 900 fpm / 4.6 m/s]
-            // Band 4: 24-30 in (600-760 mm) -> QC1+ Cleaner HD Max 1-pc / 3-pc (up to 120"), QC1+ Cleaner XHD 1-pc / 3-pc (up to 120"), QC1+ XHD STS (up to 72") [Max Speed 1200 fpm / 6.1 m/s]
-            // Band 5: 32-48 in (800-1200 mm) [and 24-48 in for SHD 600 / CleanScrape] -> SHD 600 Series / CleanScrape Primary [Max Speed 1500 fpm / 7.5 m/s, Max Belt Width 120 in / 3000 mm]
-            // Band 6: > 48 in (> 1200 mm) -> H1 Primary Belt Cleaner HD (up to 96 in / 2400 mm) & SHD 1200 Series Cleaner (up to 120 in / 3000 mm) [Max Speed 1500 fpm / 7.5 m/s]
+            // 6. Primary Cleaner Selection — driven by HEAD PULLEY RANGE and BELT WIDTH
+            // Source: Martin® Technical Data Sheets
+            //   L3667 Compact Cleaner .......... pulley 6–11 in (150–299 mm), belt 12–48 in, 350 fpm (1.78 m/s)
+            //   L4135 QC1+ Cleaner PV .......... pulley 12–16 in (300–400 mm), belt 18–72 in, 500 fpm (2.54 m/s)
+            //   L4151 QC1+ Cleaner HD .......... pulley 16–22 in (400–559 mm), belt 18–96 in, 900 fpm (4.6 m/s)
+            //   L4174 QC1+ Cleaner HD Max ...... pulley 24–30 in (600–762 mm), belt 18–72 in (P/N), 1200 fpm (6 m/s)
+            //   L4176 QC1+ Cleaner XHD ......... pulley 24–30 in (600–762 mm), belt 18–72 in (P/N), 1200 fpm (6 m/s)
+            //   L3439 SHD Cleaner .............. pulley > 24 in (600 mm); SHD 600 < 48 in, SHD 1200 >= 48 in (1200 mm);
+            //                                    belt 42–120 in, 1500 fpm (7.5 m/s)
+            // Unit convention (same as belt width): 150 mm = 6 in, i.e. 25 mm = 1 in.
+            // Selection assumption (not stated in the data sheets): on 24–31 in pulleys, HD Max for belts up to 48 in, XHD for 54–72 in.
+            // Blade width: standard "belt width less 6 in" (S6) blade for the QC1+ family; Compact and SHD per their dimension tables.
 
-            let pulleyBand = 3;
-            let pulleyScaleText = '16-22 in';
-            let pulleyScaleSub = '400-500 mm (Medium)';
-
-            if (pulleyMm <= 265) {
-                pulleyBand = 1;
-                pulleyScaleText = '6-10 in';
-                pulleyScaleSub = '152-250 mm (Compact)';
-            } else if (pulleyMm <= 410) {
-                pulleyBand = 2;
-                pulleyScaleText = '12-16 in';
-                pulleyScaleSub = '300-400 mm (Small)';
-            } else if (pulleyMm <= 575) {
-                pulleyBand = 3;
-                pulleyScaleText = '16-22 in';
-                pulleyScaleSub = '400-500 mm (Medium)';
-            } else if (pulleyMm <= 775) {
-                pulleyBand = 4;
-                pulleyScaleText = '24-30 in';
-                pulleyScaleSub = '600-760 mm (Large)';
-            } else if (pulleyMm <= 1225) {
-                pulleyBand = 5;
-                pulleyScaleText = '24-48 in';
-                pulleyScaleSub = '600-1200 mm (Heavy Mine)';
-            } else {
-                pulleyBand = 6;
-                pulleyScaleText = '> 48 in';
-                pulleyScaleSub = '> 1200 mm (Super Heavy)';
-            }
-
-            // Determine effective category & check for speed/width conflicts per Martin Catalog L3651 Rule:
-            // "In instances of conflict between pulley size and belt speed (or belt width), choose the next larger cleaner size."
-            let effectiveBand = pulleyBand;
-            let speedUpgraded = false;
-            let pulleyLimitedWarning = false;
-
-            if (effectiveBand === 1) {
-                if (speedMs > 1.8 || beltWidthIn > 48) {
-                    if (pulleyMm >= 225) {
-                        // Near 9-10" transition: step up to QC1+ PV (or HD if speed > 2.5)
-                        effectiveBand = (speedMs > 2.5 || beltWidthIn > 72) ? 3 : 2;
-                        speedUpgraded = true;
-                    } else {
-                        // Physical 6-8" pulley cannot fit a large blade profile; keep Compact Cleaner and flag speed/width exceedance
-                        pulleyLimitedWarning = true;
-                        warnings.push(`<strong>Small Pulley Operating Limit (Ø${ pulleyMm } mm / ${ pulleyIn }"):</strong> The <strong>Martin® Compact Cleaner</strong> is the only primary blade profile contoured for 6–9 in pulleys, and is rated up to <strong>1.8 m/s (350 fpm)</strong> and <strong>48 in (1200 mm)</strong> belt width. Current belt speed (${ speedMs } m/s) or width (${ beltWidthIn }") exceeds Compact rating.`);
-                    }
-                }
-            } else if (effectiveBand === 2) {
-                if (speedMs > 2.5 || beltWidthIn > 72) {
-                    effectiveBand = 3;
-                    speedUpgraded = true;
-                }
-            }
-
-            if (effectiveBand === 3) {
-                if (speedMs > 4.6 || beltWidthIn > 96) {
-                    effectiveBand = 4;
-                    speedUpgraded = true;
-                }
-            }
-
-            if (effectiveBand === 4) {
-                if (speedMs > 6.1) {
-                    effectiveBand = 5;
-                    speedUpgraded = true;
-                }
-            }
-
-            if (speedUpgraded) {
-                warnings.push(`<strong>Mainframe Speed/Width Upgrade Applied (Catalog Rule L3651):</strong> Faster belts and wider spans require stronger mainframes to prevent vibration and deflection. Stepped up primary cleaner from <strong>${ pulleyScaleText }</strong> class to match <strong>${ speedMs } m/s (${ speedFpm } fpm)</strong> and <strong>${ beltWidthMm } mm (${ beltWidthIn }")</strong> belt.`);
-                document.getElementById('speedPulleyStatus').innerText = 'Upgraded for Speed/Width';
-                document.getElementById('speedPulleyStatus').className = 'text-[11px] font-mono text-amber-400';
-            } else if (pulleyLimitedWarning) {
-                document.getElementById('speedPulleyStatus').innerText = 'Pulley Size Limit Alert';
-                document.getElementById('speedPulleyStatus').className = 'text-[11px] font-mono text-rose-400';
-            } else {
-                document.getElementById('speedPulleyStatus').innerText = 'Pulley & Speed Matched';
-                document.getElementById('speedPulleyStatus').className = 'text-[11px] font-mono text-emerald-400';
-            }
-
-            // Build Primary Cleaner Specification & Authentic Part Numbers
-            let primarySpec = {};
+            const URETHANE_1CHAR = { OR: 'O', BR: 'B', CL: 'T', NB: 'N', GR: 'G' };
+            const COMPACT_COLOR = { OR: '', BR: 'BR', GR: 'GR', NB: 'NB', CL: 'CL' };
             const bwCode = String(beltWidthIn).padStart(2, '0');
-            const blCode = String(bladeWidthIn).padStart(2, '0');
-            const matSuffix = metallurgy === 'C' ? 'C' : 'P';
-            const tenCode = serviceStyle === 'air' ? 'A' : 'S';
+            const uc = URETHANE_1CHAR[urethaneKey];
+
+            function noSelection(reason) {
+                return {
+                    badge: 'No Standard Selection',
+                    title: 'No Standard Martin® Primary Cleaner for This Combination',
+                    desc: reason,
+                    mainframe: '—',
+                    bladeCompoundLabel: '—',
+                    dataSheet: '—',
+                    bladeRule: '—',
+                    ratedSpeedMs: null,
+                    ratedSpeedFpm: null,
+                    assemblyPart: 'Contact Martin Engineering',
+                    bladePart: '—',
+                    tensionerPart: '—',
+                    tensionerName: '—',
+                    tokens: [{ code: 'N/A', label: 'Contact Martin® Engineering' }]
+                };
+            }
+
+            // Tensioner P/N text, doubled where the data sheet calls for dual tensioners
+            function tensionerPn(t, dual) {
+                if (!t.pn) return '—';
+                return dual ? `${ t.pn } (x2)` : t.pn;
+            }
+
+            let primarySpec = {};
+            let selectedBladeDed = 6;
+            let productFamily = '';
+            let productKey = null;
+
+            if (pulleyIn < 12) {
+                // ---------- Martin® Compact Cleaner (L3667) ----------
+                productFamily = 'Compact Cleaner (6–11 in / 150–299 mm pulley)';
+                const compactWidths = [12, 14, 16, 18, 24, 30, 36, 42, 45, 48];
+                if (!compactWidths.includes(beltWidthIn)) {
+                    primarySpec = noSelection(`The Martin® Compact Cleaner (L3667) is the cleaner for 6–11 in (150–299 mm) pulleys and is offered for belts of 12–48 in only. A ${ beltWidthLabel } belt is outside that range.`);
+                } else {
+                    productKey = 'compact';
+                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const seg = '11'; // 11 = without segments (use 10 = with segments on crowned pulleys)
+                    const col = COMPACT_COLOR[urethaneKey];
+                    selectedBladeDed = 2;
+                    primarySpec = {
+                        badge: 'Martin® Compact',
+                        title: 'Martin® Compact Cleaner',
+                        desc: 'For confined head chutes with as little as 6.75 in (171 mm) clearance. Internal square-tube mainframe with internal spring tensioner.',
+                        mainframe: fin.label,
+                        finishStainless: fin.ss,
+                        bladeCompoundLabel: urethaneObj.fullTitle,
+                        dataSheet: 'L3667',
+                        bladeRule: 'Blade coverage = belt width less 2 in (L3667 table)',
+                        ratedSpeedMs: 1.78,
+                        ratedSpeedFpm: 350,
+                        assemblyPart: `33464-${ bwCode }${ seg }${ col }`,
+                        bladePart: `33463-${ bwCode }${ seg }${ col }`,
+                        tensionerPart: tensionerPn(ten, false),
+                        tensionerName: ten.label,
+                        tokens: [
+                            { code: '33464', label: 'Compact Cleaner' },
+                            { code: bwCode, label: `${ beltWidthLabel } Belt` },
+                            { code: seg, label: 'Without Segments' },
+                            { code: col || '(blank)', label: urethaneObj.name }
+                        ]
+                    };
+                }
+            } else if (pulleyIn < 24) {
+                // ---------- Martin® QC1+ Cleaner PV (L4135) / HD (L4151) ----------
+                const isPV = pulleyIn < 16;
+                const minBw = 18;
+                const maxBw = isPV ? 72 : 96;
+                productFamily = isPV ? 'QC1+ PV (12–15 in / 300–399 mm pulley)' : 'QC1+ HD (16–23 in / 400–599 mm pulley)';
+                if (beltWidthIn < minBw || beltWidthIn > maxBw) {
+                    primarySpec = noSelection(isPV
+                        ? `The Martin® QC1+™ Cleaner PV (L4135) covers 12–16 in (300–400 mm) pulleys on belts of 18–72 in. A ${ beltWidthLabel } belt is outside that range.`
+                        : `The Martin® QC1+™ Cleaner HD (L4151) covers 16–22 in (400–559 mm) pulleys on belts of 18–96 in. A ${ beltWidthLabel } belt is outside that range.`);
+                } else {
+                    if (!isPV && pulleyIn >= 20) {
+                        warnings.push('<strong>Pulley Range 20–23 in (500–599 mm):</strong> L4151 rates the QC1+™ HD for pulleys up to 22 in (559 mm). For 23 in (584 mm) and larger, confirm with your Martin® representative.');
+                    }
+                    productKey = isPV ? 'pv' : 'hd';
+                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const prefix = isPV ? 'C1QCP1' : 'C1QCH1';
+                    const bladePrefix = isPV ? 'C1QCPBS' : 'C1QCHBS';
+                    const blade = 'S6';
+                    const dual = beltWidthIn >= 54 && !!ten.pn;
+                    selectedBladeDed = 6;
+                    primarySpec = {
+                        badge: isPV ? 'Martin® QC1+™ PV' : 'Martin® QC1+™ HD',
+                        title: isPV ? 'Martin® QC1+™ Cleaner PV' : 'Martin® QC1+™ Cleaner HD',
+                        desc: isPV
+                            ? 'Primary cleaner for 12–16 in (300–400 mm) head pulleys, belt speeds up to 500 fpm (2.54 m/s).'
+                            : 'Heavy-duty primary cleaner for 16–22 in (400–559 mm) head pulleys, belt speeds up to 900 fpm (4.6 m/s). 4.5 in (114 mm) usable blade wear life.',
+                        mainframe: fin.label,
+                        finishStainless: fin.ss,
+                        bladeCompoundLabel: `${ urethaneObj.fullTitle } — Solid w/ Slots`,
+                        dataSheet: isPV ? 'L4135' : 'L4151',
+                        bladeRule: 'S6 — belt width less 6 in',
+                        ratedSpeedMs: isPV ? 2.54 : 4.6,
+                        ratedSpeedFpm: isPV ? 500 : 900,
+                        assemblyPart: `${ prefix }S${ bwCode }${ blade }${ uc }3${ fin.code }${ ten.code }`,
+                        bladePart: `${ bladePrefix }${ bwCode }${ blade }${ uc }3`,
+                        tensionerPart: tensionerPn(ten, dual),
+                        tensionerName: `${ ten.label }${ dual ? ' — Dual (belt 54 in+)' : '' }`,
+                        tokens: [
+                            { code: prefix, label: isPV ? 'QC1+ PV' : 'QC1+ HD' },
+                            { code: `S${ bwCode }`, label: `${ beltWidthLabel } Belt` },
+                            { code: blade, label: 'Belt less 6 in' },
+                            { code: uc, label: urethaneObj.name },
+                            { code: '3', label: 'Solid w/ Slots' },
+                            { code: fin.code, label: fin.short },
+                            { code: ten.code || '(blank)', label: ten.short }
+                        ]
+                    };
+                }
+            } else if (pulleyIn < 32 && beltWidthIn <= 72) {
+                // ---------- Martin® QC1+ Cleaner HD Max (L4174) / XHD (L4176) ----------
+                const useXHD = beltWidthIn >= 54;
+                productFamily = `${ useXHD ? 'QC1+ XHD' : 'QC1+ HD Max' } (24–31 in / 600–799 mm pulley)`;
+                if (pulleyIn >= 28) {
+                    warnings.push('<strong>Pulley Range 28–31 in (700–799 mm):</strong> L4174/L4176 rate the QC1+™ HD Max and XHD for pulleys up to 30 in (762 mm), including belt and lagging. Confirm with your Martin® representative above 30 in.');
+                }
+                if (beltWidthIn < 18) {
+                    primarySpec = noSelection(`QC1+™ HD Max / XHD part numbers start at 18 in belt width. A ${ beltWidthLabel } belt is outside that range.`);
+                } else {
+                    productKey = useXHD ? 'xhd' : 'hdmax';
+                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const blade = 'S6';
+                    selectedBladeDed = 6;
+                    const prefix = useXHD ? 'C1QCE3' : 'C1QCG3';
+                    const bladePrefix = useXHD ? 'C1QCEBS' : 'C1QCGBS';
+                    const dual = beltWidthIn >= 48 && !!ten.pn;
+                    primarySpec = {
+                        badge: useXHD ? 'Martin® QC1+™ XHD' : 'Martin® QC1+™ HD Max',
+                        title: useXHD ? 'Martin® QC1+™ Cleaner XHD (3-pc Mainframe)' : 'Martin® QC1+™ Cleaner HD Max (3-pc Mainframe)',
+                        desc: `${ useXHD ? 'Extra heavy-duty' : 'Heavy-duty' } pre-cleaner with three-piece mainframe for 24–30 in (600–762 mm) head pulleys, belt speeds up to 1200 fpm (6 m/s).`,
+                        mainframe: `3-pc ${ fin.label }`,
+                        finishStainless: fin.ss,
+                        bladeCompoundLabel: `${ urethaneObj.fullTitle } — Solid Blade`,
+                        dataSheet: useXHD ? 'L4176' : 'L4174',
+                        bladeRule: 'S6 — belt width less 6 in',
+                        ratedSpeedMs: 6.0,
+                        ratedSpeedFpm: 1200,
+                        assemblyPart: `${ prefix }S${ bwCode }${ blade }${ uc }1${ fin.code }${ ten.code }`,
+                        bladePart: `${ bladePrefix }${ bwCode }${ blade }${ uc }1`,
+                        tensionerPart: tensionerPn(ten, dual),
+                        tensionerName: `${ ten.label }${ dual ? ' — Dual (belt 48 in+)' : '' }`,
+                        tokens: [
+                            { code: prefix, label: useXHD ? 'QC1+ XHD' : 'QC1+ HD Max' },
+                            { code: `S${ bwCode }`, label: `${ beltWidthLabel } Belt` },
+                            { code: blade, label: 'Belt less 6 in' },
+                            { code: uc, label: urethaneObj.name },
+                            { code: '1', label: 'Solid Blade' },
+                            { code: fin.code, label: fin.short },
+                            { code: ten.code || '(blank)', label: ten.short }
+                        ]
+                    };
+                }
+            } else {
+                // ---------- Martin® SHD Cleaner (L3439) ----------
+                // Also used on 24–31 in pulleys when the belt is wider than 72 in (QC1+ HD Max/XHD P/Ns stop at 72 in).
+                const is1200 = pulleyIn >= 48;
+                productFamily = is1200 ? 'SHD 1200 (48 in / 1200 mm and over)' : 'SHD 600 (24–47 in / 600–1199 mm pulley)';
+                const SHD_TABLE = {
+                    42: { bw: '42', a: '39', aIn: 39.38, b12: 0, b20: 2 },
+                    48: { bw: '48', a: '43', aIn: 43.31, b12: 2, b20: 1 },
+                    54: { bw: '54', a: '51', aIn: 51.19, b12: 1, b20: 2 },
+                    60: { bw: '60', a: '59', aIn: 59.06, b12: 0, b20: 3 },
+                    72: { bw: '72', a: '71', aIn: 70.88, b12: 1, b20: 3 },
+                    84: { bw: '84', a: '79', aIn: 78.75, b12: 0, b20: 6 },
+                    96: { bw: '96', a: '83', aIn: 82.69, b12: 2, b20: 3 },
+                    108: { bw: 'A8', a: '98', aIn: 98.44, b12: 0, b20: 5 },
+                    120: { bw: 'C0', a: 'A2', aIn: 102.38, b12: 2, b20: 4 }
+                };
+                const row = SHD_TABLE[beltWidthIn];
+                if (!row) {
+                    primarySpec = noSelection(`The Martin® SHD Cleaner (L3439) is listed for 42, 48, 54, 60, 72, 84, 96, 108 and 120 in belts. A ${ beltWidthLabel } belt has no standard SHD assembly${ beltWidthIn < 42 ? ', and no other cleaner in these data sheets covers this pulley size on a belt that narrow' : '' }.`);
+                } else {
+                    productKey = is1200 ? 'shd1200' : 'shd600';
+                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const profile = is1200 ? '1' : '6';
+                    const SHD_COLOR = { OR: 'O', BR: 'B', GR: 'G' };
+                    let col = SHD_COLOR[urethaneKey];
+                    let shdUrethane = urethaneObj;
+                    if (!col) {
+                        col = 'O';
+                        shdUrethane = URETHANE_DB.OR;
+                        warnings.push(`<strong>SHD Urethane:</strong> ${ urethaneObj.name } is not offered in the SHD assembly nomenclature (L3439 lists Orange, Brown, Green and Ceramic). Orange specified.${ urethaneKey === 'NB' && is1200 ? ' Navy Blue is available as an SHD 1200 replacement blade (35569-12NB / 35569-20NB).' : '' }`);
+                    }
+                    const bladeSeries = is1200 ? '35569' : '35568';
+                    const bladeSuffix = { O: '', B: 'BR', G: 'GR' }[col];
+                    const bladeParts = [];
+                    if (row.b20) bladeParts.push(`${ bladeSeries }-20${ bladeSuffix } (x${ row.b20 })`);
+                    if (row.b12) bladeParts.push(`${ bladeSeries }-12${ bladeSuffix } (x${ row.b12 })`);
+                    if (ten.pn) {
+                        warnings.push(`<strong>SHD Tensioner Size:</strong> L3439 lists 90#, 150#, 500# and 750# Spring Link Tensioners without a sizing rule. ${ ten.pn } is a default, so confirm the size with your Martin® representative.`);
+                    }
+                    if (pulleyIn < 32) {
+                        warnings.push(`<strong>Wide Belt on 24–31 in Pulley:</strong> QC1+™ HD Max / XHD part numbers stop at 72 in belt width, so the SHD 600 (rated for pulleys over 24 in / 600 mm) was selected for this ${ beltWidthLabel } belt.`);
+                    }
+                    selectedBladeDed = beltWidthIn - Math.round(row.aIn);
+                    primarySpec = {
+                        badge: is1200 ? 'Martin® SHD 1200' : 'Martin® SHD 600',
+                        title: `Martin® SHD Cleaner (${ is1200 ? 'SHD 1200' : 'SHD 600' } Blades)`,
+                        desc: `Super heavy-duty primary cleaner for head pulleys ${ is1200 ? '48 in (1200 mm) and larger' : 'over 24 in (600 mm) and smaller than 48 in (1200 mm)' }, belt speeds up to 1500 fpm (7.5 m/s). Up to ${ is1200 ? '12 in (305 mm)' : '10.5 in' } of wearable urethane.`,
+                        mainframe: fin.label,
+                        finishStainless: fin.ss,
+                        bladeCompoundLabel: `${ shdUrethane.fullTitle } — ${ is1200 ? 'SHD 1200' : 'SHD 600' } Profile`,
+                        dataSheet: 'L3439',
+                        bladeRule: `Blade coverage (Dim A) ${ row.aIn } in per L3439 table`,
+                        ratedSpeedMs: 7.5,
+                        ratedSpeedFpm: 1500,
+                        assemblyPart: `SH1X-${ row.bw }U${ row.a }${ profile }${ col }${ fin.code }0${ ten.code }`,
+                        bladePart: bladeParts.join(' + '),
+                        tensionerPart: tensionerPn(ten, false),
+                        tensionerName: ten.label,
+                        tokens: [
+                            { code: 'SH1X', label: 'SHD Cleaner' },
+                            { code: row.bw, label: `${ beltWidthLabel } Belt` },
+                            { code: 'U', label: 'Urethane Blades' },
+                            { code: row.a, label: 'Blade Coverage (Dim A)' },
+                            { code: profile, label: is1200 ? 'SHD 1200 Profile' : 'SHD 600 Profile' },
+                            { code: col, label: shdUrethane.name },
+                            { code: fin.code, label: fin.short },
+                            { code: '0', label: 'No End Weldment' },
+                            { code: ten.code, label: ten.short }
+                        ]
+                    };
+                }
+            }
+
+            if (!productKey) applyProductOptions(null, beltWidthIn);
+
+            // Actual blade width from the selected blade (inches, then mm using 25 mm = 1 in)
+            bladeWidthIn = Math.max(6, beltWidthIn - selectedBladeDed);
+            bladeWidthMm = Math.round(bladeWidthIn * 25);
+            const blCode = String(Math.round(bladeWidthIn)).padStart(2, '0');
+            const matSuffix = primarySpec.finishStainless ? 'C' : 'P';
+            const coveragePctSel = Math.round((bladeWidthIn / beltWidthIn) * 1000) / 10;
+            document.getElementById('pathRatioText').innerText = `${ fmtLen(bladeWidthMm, bladeWidthIn) } / ${ beltWidthLabel } (${ coveragePctSel }%)`;
+            document.getElementById('pathVisualBar').style.width = `${ Math.max(40, Math.min(96, coveragePctSel)) }%`;
+            document.getElementById('pathVisualBar').innerText = `BLADE WIDTH: ${ fmtLen(bladeWidthMm, bladeWidthIn) }`;
+
+            // Speed check against the selected cleaner's rating
+            const statusEl = document.getElementById('speedPulleyStatus');
+            if (primarySpec.ratedSpeedMs === null) {
+                statusEl.innerText = 'No Standard Cleaner';
+                statusEl.className = 'text-[11px] font-mono text-rose-400';
+            } else if (speedMs > primarySpec.ratedSpeedMs) {
+                warnings.push(`<strong>Belt Speed Exceeds Rating:</strong> ${ primarySpec.title } is rated to ${ primarySpec.ratedSpeedFpm } fpm (${ primarySpec.ratedSpeedMs } m/s) per data sheet ${ primarySpec.dataSheet }. Current speed is ${ speedFpm } fpm (${ speedMs } m/s). Consult your Martin® representative.`);
+                statusEl.innerText = 'Speed Exceeds Rating';
+                statusEl.className = 'text-[11px] font-mono text-amber-400';
+            } else {
+                statusEl.innerText = 'Pulley, Width & Speed OK';
+                statusEl.className = 'text-[11px] font-mono text-emerald-400';
+            }
 
             if (reversingBelt === 'yes') {
-                // Full reversing belt: use Martin DT2S/DT2H Reversing Cleaner
-                const isXHDRev = speedMs > 4.6 || beltWidthIn > 72 || effectiveBand >= 4;
-                const revModelCode = isXHDRev ? 'DT2H' : 'DT2S';
-                primarySpec = {
-                    badge: `Martin® ${ revModelCode }™ Reversing`,
-                    title: `Martin® ${ revModelCode }™ Reversing Belt Cleaner${ isXHDRev ? ' XHD' : '' }`,
-                    desc: 'Bi-directional split-track cartridge cleaner with reversing urethane/rubber buffer blades that flip smoothly when belt direction reverses.',
-                    mainframe: isXHDRev ? 'XHD Split-Track Steel Cartridge Frame' : 'Split-Track Steel Cartridge Frame',
-                    bladeCompoundLabel: `${ urethaneObj.fullTitle } (Bi-Directional Reversing Profile)`,
-                    ratedSpeedMs: isXHDRev ? 6.1 : 4.6,
-                    ratedSpeedFpm: isXHDRev ? 1200 : 900,
-                    assemblyPart: `${ revModelCode }-${ bwCode }X${ blCode }REV${ urethaneObj.code }${ matSuffix }`,
-                    bladePart: `31104-${ bwCode }${ urethaneObj.code }`,
-                    tensionerPart: `34542-${ matSuffix }`,
-                    tensionerName: 'Martin® Dual Spring/Turnbuckle Tensioner',
-                    mountingAngle: '90° Zero-Peel Reversing Angle',
-                    tokens: [
-                        { code: revModelCode, label: isXHDRev ? 'XHD Reversing' : 'Reversing Series' },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: `X${ blCode }`, label: `${ bladeWidthIn }" Path` },
-                        { code: 'REV', label: 'Bi-Directional Blade' },
-                        { code: urethaneObj.code, label: urethaneObj.name },
-                        { code: matSuffix, label: metallurgy === 'C' ? 'Stainless' : 'Painted Steel' }
-                    ]
-                };
-                warnings.push(`<strong>Full Reversing Belt Selected:</strong> Standard peeling-angle primary cleaners cannot run in reverse without gouging the belt. Configured bi-directional <strong>Martin® ${ revModelCode }™ Reversing Cleaner</strong> assembly.`);
-            } else if (serviceStyle === 'cleanscrape') {
-                // CleanScrape Primary Cleaner (Standard or Heated for subzero <= 72")
-                const isHeated = tempRange === 'subzero' && beltWidthIn <= 72;
-                const tuTip = (spliceType === 'vulcanized' && (materialType === 'coal' || materialType === 'clinker_hot')) ? 'TU03' : 'TU02';
-                const csPrefix = isHeated ? 'CS1H' : 'CS1';
-                if (pulleyMm < 550) {
-                    warnings.push(`<strong>CleanScrape® Pulley Diameter Note (Catalog Page 482):</strong> Martin® CleanScrape® Primary Cleaner is officially rated for <strong>24–48 in (600–1200 mm)</strong> pulleys. Verify discharge chute geometry on Ø${ pulleyMm } mm (${ pulleyIn }") pulley.`);
-                }
-                primarySpec = {
-                    badge: isHeated ? 'CleanScrape® Heated' : 'CleanScrape® Primary',
-                    title: isHeated ? 'Martin® CleanScrape® Heated Primary Cleaner' : 'Martin® CleanScrape® Primary Cleaner',
-                    desc: `Installed diagonally across the discharge pulley to form a 3D curve. Matrix of tungsten carbide tips (${ tuTip }) delivers up to 4x wear life with ultra-low belt pressure.`,
-                    mainframe: isHeated ? 'Heated 304/316 Stainless Matrix Assembly' : '304/316 Stainless Cable & Turnbuckle Matrix',
-                    bladeCompoundLabel: `Tungsten Carbide Matrix (${ tuTip === 'TU03' ? 'TU03 Severe Ore Grade' : 'TU02 Splice-Safe Grade' })`,
-                    ratedSpeedMs: 7.5,
-                    ratedSpeedFpm: 1500,
-                    assemblyPart: `${ csPrefix }-${ bwCode }X${ blCode }-${ tuTip }-${ matSuffix }`,
-                    bladePart: `${ csPrefix }-CARB-${ bwCode }-${ tuTip }`,
-                    tensionerPart: `CS1-TB-${ matSuffix }`,
-                    tensionerName: 'CleanScrape® Dual Turnbuckle Tensioner',
-                    mountingAngle: 'Diagonal 3D Pulley Wrap',
-                    tokens: [
-                        { code: csPrefix, label: isHeated ? 'CleanScrape Heated' : 'CleanScrape Primary' },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: `X${ blCode }`, label: `${ bladeWidthIn }" Path` },
-                        { code: tuTip, label: tuTip === 'TU02' ? 'Splice-Safe Carbide' : 'Severe Ore Carbide' },
-                        { code: matSuffix, label: metallurgy === 'C' ? 'Stainless' : 'Standard Mount' }
-                    ]
-                };
-            } else if (tempRange === 'extreme') {
-                // Extreme Temp (>300°F / >150°C Metal-Tipped):
-                // Use QC1 Primary Cleaner with Metal-Tipped Blade for pulleys <= 22" (up to 96" belt), or CleanScrape Primary for larger pulleys / wider belts
-                if (effectiveBand <= 3 && beltWidthIn <= 96) {
-                    primarySpec = {
-                        badge: 'Martin® QC1™ Metal-Tipped',
-                        title: 'Martin® QC1™ Primary Cleaner with Metal-Tipped Blade',
-                        desc: 'Engineered for extreme temperature (>300°F / >150°C) applications up to 96 in (2400 mm) belt width where thermal loads exceed urethane limits.',
-                        mainframe: '2.88 in (73 mm) Schedule 80 Steel Pipe',
-                        bladeCompoundLabel: 'High-Temp Segmented Metal-Tipped Blade (>300°F / >150°C)',
-                        ratedSpeedMs: 4.6,
-                        ratedSpeedFpm: 900,
-                        assemblyPart: `QC1MT-${ bwCode }X${ blCode }-MT-${ tenCode }${ matSuffix }`,
-                        bladePart: `35897-MT-${ bwCode }X${ blCode }`,
-                        tensionerPart: `38454-${ tenCode }${ matSuffix }`,
-                        tensionerName: serviceStyle === 'air' ? 'Martin® Air Tensioner (39100-A)' : 'Martin® Spring/Twist Tensioner (38454)',
-                        mountingAngle: '15° Peeling Angle below Pulley Centerline',
-                        tokens: [
-                            { code: 'QC1MT', label: 'QC1 Metal-Tipped' },
-                            { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                            { code: `X${ blCode }`, label: `${ bladeWidthIn }" Blade` },
-                            { code: 'MT', label: 'Metal-Tipped' },
-                            { code: `${ tenCode }${ matSuffix }`, label: `${ tenCode === 'A' ? 'Air' : 'Spring' } / ${ matSuffix === 'C' ? 'SS' : 'Steel' }` }
-                        ]
-                    };
-                    warnings.push(`<strong>Extreme Temperature (&gt;300°F / &gt;150°C):</strong> Exceeds all urethane thermal limits. Configured <strong>Martin® QC1™ Primary Cleaner with Metal-Tipped Blade</strong>.`);
-                } else {
-                    const tuTip = spliceType === 'vulcanized' ? 'TU03' : 'TU02';
-                    primarySpec = {
-                        badge: 'CleanScrape® Primary (High-Temp)',
-                        title: 'Martin® CleanScrape® Primary Cleaner (Extreme Temp Metal Matrix)',
-                        desc: `Engineered for extreme temperatures (>300°F / >150°C) on large pulleys (${ pulleyScaleText }). Diagonal tungsten carbide matrix (${ tuTip }) withstands extreme heat.`,
-                        mainframe: '304/316 Stainless Cable & Turnbuckle Matrix',
-                        bladeCompoundLabel: `Tungsten Carbide Matrix (${ tuTip }) — Extreme Heat Rated`,
-                        ratedSpeedMs: 7.5,
-                        ratedSpeedFpm: 1500,
-                        assemblyPart: `CS1-${ bwCode }X${ blCode }-${ tuTip }-${ matSuffix }`,
-                        bladePart: `CS1-CARB-${ bwCode }-${ tuTip }`,
-                        tensionerPart: `CS1-TB-${ matSuffix }`,
-                        tensionerName: 'CleanScrape® Dual Turnbuckle Tensioner',
-                        mountingAngle: 'Diagonal 3D Pulley Wrap',
-                        tokens: [
-                            { code: 'CS1', label: 'CleanScrape Primary' },
-                            { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                            { code: `X${ blCode }`, label: `${ bladeWidthIn }" Path` },
-                            { code: tuTip, label: 'High-Temp Carbide' },
-                            { code: matSuffix, label: metallurgy === 'C' ? 'Stainless' : 'Standard Mount' }
-                        ]
-                    };
-                    warnings.push(`<strong>Extreme Temperature (&gt;300°F / &gt;150°C):</strong> Exceeds all urethane thermal limits. Upgraded primary cleaner to metal-tipped <strong>Martin® CleanScrape® Primary (${ tuTip })</strong>.`);
-                }
-            } else if (effectiveBand === 1) {
-                primarySpec = {
-                    badge: 'Martin® Compact',
-                    title: 'Martin® Compact Belt Cleaner',
-                    desc: 'Fits in confined head chutes with as little as 6.75 in (171 mm) clearance on pulleys as small as 6–10 in (152–250 mm). Patented CARP profile.',
-                    mainframe: '1.75 in (45 mm) Square Steel Tube',
-                    bladeCompoundLabel: urethaneObj.fullTitle,
-                    ratedSpeedMs: 1.8,
-                    ratedSpeedFpm: 350,
-                    assemblyPart: `32245-${ bwCode }X${ blCode }${ urethaneObj.code }${ matSuffix }`,
-                    bladePart: `32246-${ blCode }${ urethaneObj.code }`,
-                    tensionerPart: `32247-INT-${ matSuffix }`,
-                    tensionerName: 'Internal Compression Spring Tensioner',
-                    mountingAngle: '15° Peeling Angle below Pulley Centerline',
-                    tokens: [
-                        { code: '32245', label: 'Compact Cleaner' },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: `X${ blCode }`, label: `${ bladeWidthIn }" Blade` },
-                        { code: urethaneObj.code, label: urethaneObj.name },
-                        { code: matSuffix, label: metallurgy === 'C' ? 'Stainless' : 'Painted Steel' }
-                    ]
-                };
-            } else if (effectiveBand === 2) {
-                const is3PcPV = beltWidthIn >= 54 || speedMs >= 2.0;
-                const pvCode = is3PcPV ? 'PV3QC1' : 'PV1QC1';
-                primarySpec = {
-                    badge: is3PcPV ? 'Martin® QC1+™ PV (3-pc)' : 'Martin® QC1+™ PV (1-pc)',
-                    title: is3PcPV ? 'Martin® QC1+™ Cleaner PV w/3-pc Mainframe' : 'Martin® QC1+™ Cleaner PV w/1-pc Mainframe',
-                    desc: 'Engineered for 12–16 in (300–400 mm) pulleys and speeds up to 500 fpm (2.5 m/s). Pit Viper CARP blade contains 20% more wearable urethane with one-pin replacement.',
-                    mainframe: is3PcPV ? '3-Piece Segmented 1.90 in (48 mm) Steel Pipe' : '1-Piece 1.90 in (48 mm) OD Reinforced Steel Pipe',
-                    bladeCompoundLabel: urethaneObj.fullTitle,
-                    ratedSpeedMs: 2.5,
-                    ratedSpeedFpm: 500,
-                    assemblyPart: `${ pvCode }-${ bwCode }X${ blCode }${ urethaneObj.code }${ tenCode }${ matSuffix }`,
-                    bladePart: `PV35897-${ bwCode }${ urethaneObj.code }${ blCode }`,
-                    tensionerPart: `38450-${ tenCode }${ matSuffix }`,
-                    tensionerName: serviceStyle === 'air' ? 'Martin® Pneumatic Air Tensioner' : 'Martin® Twist™ Tensioner (38450)',
-                    mountingAngle: '15° Peeling Angle below Pulley Centerline',
-                    tokens: [
-                        { code: pvCode, label: is3PcPV ? 'QC1+ PV 3-pc' : 'QC1+ PV 1-pc' },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: `X${ blCode }`, label: `${ bladeWidthIn }" Blade` },
-                        { code: urethaneObj.code, label: urethaneObj.name },
-                        { code: `${ tenCode }${ matSuffix }`, label: `${ tenCode === 'A' ? 'Air' : 'Twist' } / ${ matSuffix === 'C' ? 'SS' : 'Steel' }` }
-                    ]
-                };
-            } else if (effectiveBand === 3) {
-                const isSTS = serviceStyle === 'sts' && beltWidthIn <= 72;
-                if (serviceStyle === 'sts' && beltWidthIn > 72) {
-                    warnings.push(`<strong>STS™ Belt Width Limit (Page 482):</strong> Martin® QC1+™ Cleaner HD STS™ is rated up to <strong>72 in (2000 mm)</strong> max belt width. Selected 3-Piece Heavy-Duty Mainframe for ${ beltWidthIn } in (${ beltWidthMm } mm) belt.`);
-                }
-                // Select between QC1+ PD (light/medium duty <= 48" & <= 3.0 m/s), QC1+ HD 1-pc (<= 60" & <= 3.8 m/s), QC1+ HD 3-pc (heavy duty / wide up to 96"), or QC1+ HD STS
-                const isPD = !isSTS && !speedUpgraded && beltWidthIn <= 48 && speedMs <= 3.0 && (materialType === 'sand_gravel' || moistureLevel === 'dry');
-                const isHD1Pc = !isSTS && !isPD && beltWidthIn <= 54 && speedMs <= 3.5;
-                let modelPrefix = 'QC1HD3';
-                let badgeLabel = 'Martin® QC1+™ HD (3-pc)';
-                let titleLabel = 'Martin® QC1+™ Cleaner HD w/3-pc Mainframe';
-                let tokenLabel = 'QC1+ HD 3-pc';
-
-                if (isSTS) {
-                    modelPrefix = 'STSHDQC';
-                    badgeLabel = 'Martin® QC1+™ HD STS™';
-                    titleLabel = 'Martin® QC1+™ Cleaner HD STS™';
-                    tokenLabel = 'QC1+ HD STS';
-                } else if (isPD) {
-                    modelPrefix = 'QC1PD';
-                    badgeLabel = 'Martin® QC1+™ PD';
-                    titleLabel = 'Martin® QC1+™ Cleaner PD';
-                    tokenLabel = 'QC1+ PD';
-                } else if (isHD1Pc) {
-                    modelPrefix = 'QC1HD1';
-                    badgeLabel = 'Martin® QC1+™ HD (1-pc)';
-                    titleLabel = 'Martin® QC1+™ Cleaner HD w/1-pc Mainframe';
-                    tokenLabel = 'QC1+ HD 1-pc';
-                }
-
-                primarySpec = {
-                    badge: badgeLabel,
-                    title: titleLabel,
-                    desc: isSTS
-                        ? 'Safe-to-Service™ slide-out blade assembly (for belts up to 72 in / 2000 mm and pulleys 16–22 in / 400–500 mm) allows external blade access.'
-                        : 'Engineered for 16–22 in (400–500 mm) pulleys and speeds up to 900 fpm (4.6 m/s). Patented CARP blade has up to 35% more urethane in the wearable area.',
-                    mainframe: isPD ? '2.38 in (60 mm) Performance Duty Steel Pipe' : '2.88 in (73 mm) OD Schedule 80 Steel Pipe',
-                    bladeCompoundLabel: urethaneObj.fullTitle,
-                    ratedSpeedMs: 4.6,
-                    ratedSpeedFpm: 900,
-                    assemblyPart: `${ modelPrefix }-${ bwCode }${ urethaneObj.code }${ blCode }${ tenCode }${ matSuffix }`,
-                    bladePart: `35897-${ bwCode }${ urethaneObj.code }${ blCode }`,
-                    tensionerPart: isSTS ? `39100-HDSTS${ matSuffix }` : `38454-${ tenCode }${ matSuffix }`,
-                    tensionerName: isSTS ? 'Martin® STS™ External Spring Tensioner' : (serviceStyle === 'air' ? 'Martin® Air Tensioner (39100-A)' : 'Martin® Spring/Twist Tensioner (38454)'),
-                    mountingAngle: '15° Peeling Angle (2 psi / 13.8 kPa Belt Pressure)',
-                    tokens: [
-                        { code: modelPrefix, label: tokenLabel },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: urethaneObj.code, label: urethaneObj.name },
-                        { code: blCode, label: `${ bladeWidthIn }" Blade` },
-                        { code: `${ tenCode }${ matSuffix }`, label: `${ tenCode === 'A' ? 'Air' : 'Spring' } / ${ matSuffix === 'C' ? 'SS' : 'Steel' }` }
-                    ]
-                };
-            } else if (effectiveBand === 4) {
-                const isSTS = serviceStyle === 'sts' && beltWidthIn <= 72;
-                if (serviceStyle === 'sts' && beltWidthIn > 72) {
-                    warnings.push(`<strong>STS™ Belt Width Limit (Page 482):</strong> Martin® QC1+™ Cleaner XHD STS™ is rated up to <strong>72 in (2000 mm)</strong> max belt width. Selected 3-Piece XHD Mainframe for ${ beltWidthIn } in (${ beltWidthMm } mm) belt.`);
-                }
-                // Distinguish between QC1+ HD Max (1-pc / 3-pc) and QC1+ XHD (1-pc / 3-pc) and QC1+ XHD STS
-                const isXHD = isSTS || beltWidthIn >= 72 || speedMs >= 5.0 || materialType === 'clinker_hot' || materialType === 'coal';
-                const is3Pc = beltWidthIn >= 60 || speedMs >= 4.5;
-                let modelPrefix = 'QC1HDM3';
-                let badgeLabel = 'Martin® QC1+™ HD Max (3-pc)';
-                let titleLabel = 'Martin® QC1+™ Cleaner HD Max w/3-pc Mainframe';
-                let tokenLabel = 'QC1+ HD Max';
-
-                if (isSTS) {
-                    modelPrefix = 'STSXHDQC';
-                    badgeLabel = 'Martin® QC1+™ XHD STS™';
-                    titleLabel = 'Martin® QC1+™ Cleaner XHD STS™';
-                    tokenLabel = 'QC1+ XHD STS';
-                } else if (isXHD) {
-                    modelPrefix = is3Pc ? 'QC1XHD3' : 'QC1XHD1';
-                    badgeLabel = is3Pc ? 'Martin® QC1+™ XHD (3-pc)' : 'Martin® QC1+™ XHD (1-pc)';
-                    titleLabel = is3Pc ? 'Martin® QC1+™ Cleaner XHD w/3-pc Mainframe' : 'Martin® QC1+™ Cleaner XHD w/1-pc Mainframe';
-                    tokenLabel = is3Pc ? 'QC1+ XHD 3-pc' : 'QC1+ XHD 1-pc';
-                } else {
-                    modelPrefix = is3Pc ? 'QC1HDM3' : 'QC1HDM1';
-                    badgeLabel = is3Pc ? 'Martin® QC1+™ HD Max (3-pc)' : 'Martin® QC1+™ HD Max (1-pc)';
-                    titleLabel = is3Pc ? 'Martin® QC1+™ Cleaner HD Max w/3-pc Mainframe' : 'Martin® QC1+™ Cleaner HD Max w/1-pc Mainframe';
-                    tokenLabel = is3Pc ? 'QC1+ HD Max 3-pc' : 'QC1+ HD Max 1-pc';
-                }
-
-                primarySpec = {
-                    badge: badgeLabel,
-                    title: titleLabel,
-                    desc: 'Engineered for 24–30 in (600–760 mm) pulleys and belt speeds up to 1200 fpm (6.1 m/s). 3/8-in (9.5 mm) DOM steel tubing with steel bar backbone.',
-                    mainframe: '2.88 in (73 mm) DOM 3/8" Wall Tube w/ Steel Backbone',
-                    bladeCompoundLabel: urethaneObj.fullTitle,
-                    ratedSpeedMs: 6.1,
-                    ratedSpeedFpm: 1200,
-                    assemblyPart: `${ modelPrefix }-${ bwCode }${ urethaneObj.code }${ blCode }${ tenCode }${ matSuffix }`,
-                    bladePart: `35897-XHD-${ bwCode }${ urethaneObj.code }${ blCode }`,
-                    tensionerPart: serviceStyle === 'air' ? `39100-A${ matSuffix }` : `39100-XHDSX${ matSuffix }`,
-                    tensionerName: serviceStyle === 'air' ? 'Martin® XHD Air Tensioner (39100-A)' : 'Martin® Spring Tensioner XHD (39100-XHDSX)',
-                    mountingAngle: '15° Peeling Angle (DOM Backbone Reinforced)',
-                    tokens: [
-                        { code: modelPrefix, label: tokenLabel },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: urethaneObj.code, label: urethaneObj.name },
-                        { code: blCode, label: `${ bladeWidthIn }" Blade` },
-                        { code: `${ tenCode }${ matSuffix }`, label: `${ tenCode === 'A' ? 'Air' : 'XHD Spring' } / ${ matSuffix === 'C' ? 'SS' : 'Steel' }` }
-                    ]
-                };
-            } else if (effectiveBand === 5) {
-                // Band 5: 24-48 in (600-1200 mm) -> SHD 600 Series Cleaner
-                primarySpec = {
-                    badge: 'Martin® SHD 600 Series',
-                    title: 'Martin® SHD 600 Series Cleaner',
-                    desc: 'Engineered for 24–48 in (600–1200 mm) pulleys and speeds up to 1500 fpm (7.5 m/s) across belt widths up to 120 in (3000 mm). Structural steel beam with 10.5 in (267 mm) wearable urethane blade.',
-                    mainframe: 'Structural Steel Box Beam (No-Bend Design)',
-                    bladeCompoundLabel: urethaneObj.fullTitle,
-                    ratedSpeedMs: 7.5,
-                    ratedSpeedFpm: 1500,
-                    assemblyPart: `SH1X-${ bwCode }6${ blCode }U${ urethaneObj.code }${ matSuffix }`,
-                    bladePart: `SHD600-BL-${ blCode }${ urethaneObj.code }`,
-                    tensionerPart: `35978-S500X-${ matSuffix }`,
-                    tensionerName: 'Martin® SHD Spring-Link Tensioner (500#)',
-                    mountingAngle: 'Constant Angle CARP Geometry (10.5" / 267 mm Wear Life)',
-                    tokens: [
-                        { code: 'SH1X', label: 'SHD Cleaner Series' },
-                        { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                        { code: '6', label: '600 Series (24-48" Pulley)' },
-                        { code: blCode, label: `${ bladeWidthIn }" Blade` },
-                        { code: `U${ urethaneObj.code }`, label: urethaneObj.name },
-                        { code: matSuffix, label: metallurgy === 'C' ? 'Corrosion Resistant' : 'Painted Orange' }
-                    ]
-                };
-            } else {
-                // Band 6: Pulley > 48 in (> 1200 mm)
-                // H1 Primary Belt Cleaner HD (Up to 96 in / 2400 mm) vs SHD 1200 Series Cleaner (Up to 120 in / 3000 mm or extreme speed)
-                const useH1HD = beltWidthIn <= 96 && speedMs <= 6.1;
-                if (useH1HD) {
-                    primarySpec = {
-                        badge: 'Martin® H1 Primary HD',
-                        title: 'Martin® H1 Primary Belt Cleaner HD',
-                        desc: 'Engineered for large head pulleys more than 48 in (>1200 mm), speeds up to 1500 fpm (7.5 m/s), and belt widths up to 96 in (2400 mm). Heavy-duty segmented urethane modules.',
-                        mainframe: 'Heavy-Duty H1 Structural Tubular Steel Frame',
-                        bladeCompoundLabel: urethaneObj.fullTitle,
-                        ratedSpeedMs: 7.5,
-                        ratedSpeedFpm: 1500,
-                        assemblyPart: `H1HD-${ bwCode }X${ blCode }-${ urethaneObj.code }${ tenCode }${ matSuffix }`,
-                        bladePart: `H1HD-BL-${ blCode }${ urethaneObj.code }`,
-                        tensionerPart: `H1HD-TEN-${ tenCode }${ matSuffix }`,
-                        tensionerName: 'Martin® H1 Heavy-Duty Dual Tensioner',
-                        mountingAngle: 'Large-Radius Pulley Attack Angle (>48" / >1200 mm)',
-                        tokens: [
-                            { code: 'H1HD', label: 'H1 Primary HD (>48" Pulley)' },
-                            { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                            { code: `X${ blCode }`, label: `${ bladeWidthIn }" Blade` },
-                            { code: urethaneObj.code, label: urethaneObj.name },
-                            { code: `${ tenCode }${ matSuffix }`, label: `${ tenCode === 'A' ? 'Air' : 'Spring' } / ${ matSuffix === 'C' ? 'SS' : 'Steel' }` }
-                        ]
-                    };
-                } else {
-                    primarySpec = {
-                        badge: 'Martin® SHD 1200 Series',
-                        title: 'Martin® SHD 1200 Series Cleaner',
-                        desc: 'Super Heavy-Duty primary cleaner for head pulleys more than 48 in (>1200 mm), speeds up to 1500 fpm (7.5 m/s), and wide belts up to 120 in (3000 mm). 12 in (305 mm) massive wearable urethane blade.',
-                        mainframe: 'Super Heavy-Duty Structural Steel Box Beam',
-                        bladeCompoundLabel: urethaneObj.fullTitle,
-                        ratedSpeedMs: 7.5,
-                        ratedSpeedFpm: 1500,
-                        assemblyPart: `SH1X-${ bwCode }1${ blCode }U${ urethaneObj.code }${ matSuffix }`,
-                        bladePart: `SHD1200-BL-${ blCode }${ urethaneObj.code }`,
-                        tensionerPart: `35978-S750X-${ matSuffix }`,
-                        tensionerName: 'Martin® SHD Spring-Link Tensioner (750#)',
-                        mountingAngle: 'Constant Angle CARP Geometry (12" / 305 mm Wear Life)',
-                        tokens: [
-                            { code: 'SH1X', label: 'SHD Cleaner Series' },
-                            { code: bwCode, label: `${ beltWidthIn }" Belt` },
-                            { code: '1', label: '1200 Series (>48" Pulley)' },
-                            { code: blCode, label: `${ bladeWidthIn }" Blade` },
-                            { code: `U${ urethaneObj.code }`, label: urethaneObj.name },
-                            { code: matSuffix, label: metallurgy === 'C' ? 'Corrosion Resistant' : 'Painted Orange' }
-                        ]
-                    };
-                }
+                warnings.push('<strong>Reversing Belt:</strong> The primary cleaners in these data sheets are set at a peeling angle for one direction of travel. Confirm a reversing-capable arrangement with your Martin® representative.');
+            }
+            if (tempRange === 'extreme') {
+                warnings.push('<strong>Extreme Temperature (&gt;300°F / &gt;150°C):</strong> Above the continuous rating of Green high-temperature urethane. Contact Martin® Engineering for a metal-tipped blade.');
+            } else if (tempRange === 'high' && (primarySpec.dataSheet === 'L4151' || primarySpec.dataSheet === 'L4135' || primarySpec.dataSheet === 'L3667')) {
+                warnings.push(`<strong>High Temperature:</strong> Data sheet ${ primarySpec.dataSheet } lists a service temperature of 160°F (70°C) continuous / 180°F (82°C) intermittent. Green urethane is specified; confirm suitability with your Martin® representative.`);
             }
 
-            // 7. Build Secondary Cleaner Specification & Authentic Part Numbers
+            const pulleyScaleText = pulleyDisplay;
+            const pulleyScaleSub = productFamily;
+
+            // 7. Secondary Cleaner (not covered by the supplied data sheets — indicative selection)
             let secondarySpec = {};
             const isSpliceUnskived = spliceType === 'mech_unskived';
             const isSpliceSkived = spliceType === 'mech_skived';
 
-            if (reversingBelt === 'yes' || reversingBelt === 'rollback' || beltWidthMm > 2400) {
-                // DT2S or DT2H XHD Reversing Secondary
-                const isXHD = speedMs > 4.6 || beltWidthMm >= 2100;
+            if (reversingBelt === 'yes' || reversingBelt === 'rollback' || beltWidthIn > 96) {
+                const isXHD = speedMs > 4.6 || beltWidthIn >= 84;
                 const dtPrefix = isXHD ? 'DT2H' : 'DT2S';
                 const bladeTipCode = isSpliceUnskived ? `UR${ urethaneObj.code }` : 'TC';
                 secondarySpec = {
                     badge: `Martin® ${ dtPrefix }™ Secondary`,
-                    title: `Martin® ${ dtPrefix }™ Durt Tracker® Secondary Cleaner`,
-                    desc: 'Slide-in/slide-out split-track cartridge design with rubber-buffered reversing-safe blades. Allows easy blade service even when encrusted with carryback.',
+                    title: `Martin® ${ dtPrefix }™ Reversing Secondary Cleaner`,
+                    desc: 'Slide-in/slide-out split-track cartridge design with rubber-buffered, reversing-safe blades.',
                     bladeType: isSpliceUnskived ? `Urethane Segments (${ urethaneObj.name })` : 'Tungsten Carbide w/ Reversing Rubber Buffers',
                     ratedSpeedMs: isXHD ? 6.1 : 4.6,
                     ratedSpeedFpm: isXHD ? 1200 : 900,
                     assemblyPart: `${ dtPrefix }-${ bwCode }X${ blCode }-${ bladeTipCode }-${ matSuffix }`,
-                    bladePart: reversingBelt === 'yes' ? `31104-${ blCode }-${ bladeTipCode }` : `36316-${ blCode }-${ bladeTipCode }`,
-                    tensionerPart: `34542-DT-${ tenCode }${ matSuffix }`,
+                    bladePart: `${ reversingBelt === 'yes' ? '31104' : '36316' }-${ blCode }-${ bladeTipCode }`,
+                    tensionerPart: `34542-DT-S${ matSuffix }`,
                     tensionerName: 'Martin® Twist / Spring Secondary Tensioner'
                 };
-            } else if (serviceStyle === 'cleanscrape') {
-                secondarySpec = {
-                    badge: 'CleanScrape® Secondary',
-                    title: 'Martin® CleanScrape® Secondary Cleaner',
-                    desc: 'Installed at a gentle angle on the return run leaving the head pulley. Tungsten carbide TU02 tips safely glide over mechanical and vulcanized splices.',
-                    bladeType: 'Tungsten Carbide Matrix (TU02 Splice-Safe)',
-                    ratedSpeedMs: 4.6,
-                    ratedSpeedFpm: 900,
-                    assemblyPart: `CS2-${ bwCode }X${ blCode }-TU02-${ matSuffix }`,
-                    bladePart: `CS2-CARB-${ blCode }-TU02`,
-                    tensionerPart: `CS2-TB-${ matSuffix }`,
-                    tensionerName: 'CleanScrape® Secondary Turnbuckle Tensioner'
-                };
             } else {
-                // Martin SQC2S Secondary Cleaner (Standard or STS)
-                const isSTS = serviceStyle === 'sts';
-                const sqcPrefix = isSTS ? 'STSSQC2S' : 'SQC2S';
                 const tipCode = isSpliceUnskived ? `UR${ urethaneObj.code }` : 'TC';
                 secondarySpec = {
-                    badge: isSTS ? 'Martin® SQC2S™ STS™' : 'Martin® SQC2S™ Secondary',
-                    title: isSTS ? 'Martin® SQC2S™ Safe-to-Service™ Secondary Cleaner' : 'Martin® SQC2S™ Secondary Belt Cleaner',
-                    desc: 'Independently cushioned individual blade segments conform strictly to belt contours. Patented rubber buffers deflect to pass splices safely without damage.',
+                    badge: 'Martin® SQC2S™ Secondary',
+                    title: 'Martin® SQC2S™ Secondary Belt Cleaner',
+                    desc: 'Independently cushioned blade segments conform to the belt. Rubber buffers deflect to pass splices without damage.',
                     bladeType: isSpliceUnskived
                         ? `Segmented Urethane Fingers (${ urethaneObj.name } - Clip Safe)`
-                        : 'Tungsten Carbide Tips w/ Patented Rubber Buffers',
+                        : 'Tungsten Carbide Tips w/ Rubber Buffers',
                     ratedSpeedMs: 7.5,
                     ratedSpeedFpm: 1500,
-                    assemblyPart: `${ sqcPrefix }-${ bwCode }X${ blCode }-${ tipCode }-${ tenCode }${ matSuffix }`,
+                    assemblyPart: `SQC2S-${ bwCode }X${ blCode }-${ tipCode }-S${ matSuffix }`,
                     bladePart: `SQC2S-35696-${ blCode }-${ tipCode }`,
-                    tensionerPart: `38657-TEN-${ tenCode }${ matSuffix }`,
-                    tensionerName: isSTS ? 'Martin® SQC2S™ STS External Tensioner' : 'Martin® SQC2S™ Spring/Twist Tensioner'
+                    tensionerPart: `38657-TEN-S${ matSuffix }`,
+                    tensionerName: 'Martin® SQC2S™ Spring/Twist Tensioner'
                 };
             }
 
@@ -1645,16 +1549,14 @@
             };
 
             // Update Top KPI Cards
-            document.getElementById('kpiBladeWidth').innerText = currentUnitSystem === 'metric'
-                ? `${ bladeWidthMm } mm (${ bladeWidthIn }")`
-                : `${ bladeWidthIn } in (${ bladeWidthMm }mm)`;
-            document.getElementById('kpiBladeRule').innerText = troughRuleLabel;
+            document.getElementById('kpiBladeWidth').innerText = fmtLen(bladeWidthMm, bladeWidthIn);
+            document.getElementById('kpiBladeRule').innerText = primarySpec.bladeRule;
             document.getElementById('kpiPulleyClass').innerText = pulleyScaleText;
             document.getElementById('kpiPulleyMm').innerText = pulleyScaleSub;
-            document.getElementById('kpiRatedSpeed').innerText = currentUnitSystem === 'metric'
-                ? `${ primarySpec.ratedSpeedMs } m/s`
-                : `${ primarySpec.ratedSpeedFpm } fpm`;
-            document.getElementById('kpiRatedFpm').innerText = `Max Rated (${ primarySpec.ratedSpeedFpm } fpm / ${ primarySpec.ratedSpeedMs } m/s)`;
+            document.getElementById('kpiRatedSpeed').innerText = primarySpec.ratedSpeedMs === null ? '—'
+                : (currentUnitSystem === 'metric' ? `${ primarySpec.ratedSpeedMs } m/s` : `${ primarySpec.ratedSpeedFpm } fpm`);
+            document.getElementById('kpiRatedFpm').innerText = primarySpec.ratedSpeedMs === null ? 'No standard cleaner'
+                : `Data Sheet ${ primarySpec.dataSheet }`;
 
             // Render Live Part Number Tokens
             document.getElementById('decoderActiveModel').innerText = `${ primarySpec.title } — P/N: ${ primarySpec.assemblyPart }`;
@@ -1668,15 +1570,15 @@
             `).join('');
 
             // Update Interactive SVG Schematic
-            const svgRadius = Math.max(32, Math.min(64, Math.round(30 + (pulleyMm / 1600) * 34)));
+            const svgRadius = Math.max(32, Math.min(64, Math.round(30 + ((pulleyMm + 50) / 1600) * 34)));
             document.getElementById('svgHeadPulley').setAttribute('r', svgRadius);
-            document.getElementById('svgPulleyText').textContent = currentUnitSystem === 'metric' ? `Ø${ pulleyDisplayMm }` : `Ø${ pulleyDisplayIn }`;
+            document.getElementById('svgPulleyText').textContent = `Ø${ pulleyDisplay }`;
             document.getElementById('svgDirectionLabel').textContent = currentUnitSystem === 'metric'
                 ? `BELT TRAVEL (${ speedMs } m/s)`
                 : `BELT TRAVEL (${ speedFpm } fpm)`;
             document.getElementById('svgPrimaryModelText').textContent = primarySpec.badge.replace('Martin® ', '');
             document.getElementById('svgSecondaryModelText').textContent = secondarySpec.badge.replace('Martin® ', '');
-            document.getElementById('svgScaleInfo').textContent = `Pulley Ø${ pulleyDisplay } | Blade: ${ bladeWidthMm }mm (${ bladeWidthIn }")`;
+            document.getElementById('svgScaleInfo').textContent = `Pulley Ø${ pulleyDisplay } | Blade: ${ fmtLen(bladeWidthMm, bladeWidthIn) }`;
 
             if (needsTertiary) {
                 document.getElementById('svgTertiaryMarker').classList.remove('hidden');
@@ -1704,6 +1606,7 @@
                             <div class="flex justify-between gap-2"><span class="text-slate-400">Mainframe Spec:</span><span class="font-semibold text-white text-right">${ primarySpec.mainframe }</span></div>
                             <div class="flex justify-between gap-2"><span class="text-slate-400">Blade Compound:</span><span class="font-semibold text-orange-300 text-right">${ primarySpec.bladeCompoundLabel || urethaneObj.fullTitle }</span></div>
                             <div class="flex justify-between gap-2"><span class="text-slate-400">Tensioner System:</span><span class="font-semibold text-white text-right">${ primarySpec.tensionerName }</span></div>
+                            <div class="flex justify-between gap-2"><span class="text-slate-400">Martin® Data Sheet:</span><span class="font-semibold text-white text-right">${ primarySpec.dataSheet }</span></div>
                             <div class="flex justify-between gap-2"><span class="text-slate-400">Stage Efficiency:</span><span class="font-semibold text-emerald-400 text-right">50% – 70% Bulk Carryback</span></div>
                         </div>
                     </div>
@@ -1790,13 +1693,13 @@
             currentSelectionState = {
                 beltWidthMm,
                 beltWidthIn,
-                troughAngle,
-                troughRuleLabel,
                 bladeWidthMm,
                 bladeWidthIn,
                 pulleyMm,
                 pulleyIn,
                 pulleyDisplay,
+                beltWidthLabel,
+                bladeWidthLabel: fmtLen(bladeWidthMm, bladeWidthIn),
                 pulleyScaleText,
                 speedMs,
                 speedFpm,
@@ -1804,7 +1707,7 @@
                 tempLabel: document.getElementById('tempRange').options[document.getElementById('tempRange').selectedIndex].text,
                 spliceLabel: document.getElementById('spliceType').options[document.getElementById('spliceType').selectedIndex].text,
                 reversingLabel: document.getElementById('reversingBelt').options[document.getElementById('reversingBelt').selectedIndex].text,
-                metallurgyLabel: metallurgy === 'C' ? '304/316 Stainless Steel (Corrosive)' : 'Painted Industrial Steel (Martin Orange)',
+                metallurgyLabel: primarySpec.mainframe,
                 urethaneObj,
                 primarySpec,
                 secondarySpec,
@@ -1835,9 +1738,9 @@
                 <div>
                     <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">1. Conveyor & Material Design Parameters</h2>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs border border-slate-200 rounded-xl p-4 bg-slate-50">
-                        <div><span class="text-slate-500 block">Belt Width:</span><strong class="text-slate-900 font-mono text-sm">${ s.beltWidthMm } mm (${ s.beltWidthIn } in)</strong></div>
-                        <div><span class="text-slate-500 block">Troughing Angle:</span><strong class="text-slate-900 font-mono text-sm">${ s.troughAngle }° Trough</strong></div>
-                        <div><span class="text-slate-500 block">Calculated Blade Width:</span><strong class="text-orange-600 font-mono text-sm">${ s.bladeWidthMm } mm (${ s.bladeWidthIn } in)</strong></div>
+                        <div><span class="text-slate-500 block">Belt Width:</span><strong class="text-slate-900 font-mono text-sm">${ s.beltWidthLabel }</strong></div>
+                        <div><span class="text-slate-500 block">Mainframe Finishing:</span><strong class="text-slate-900 text-sm">${ s.metallurgyLabel }</strong></div>
+                        <div><span class="text-slate-500 block">Calculated Blade Width:</span><strong class="text-orange-600 font-mono text-sm">${ s.bladeWidthLabel }</strong></div>
                         <div><span class="text-slate-500 block">Head Pulley Diameter:</span><strong class="text-slate-900 font-mono text-sm">Ø${ s.pulleyDisplay }</strong></div>
                         <div><span class="text-slate-500 block">Belt Operating Speed:</span><strong class="text-slate-900 font-mono text-sm">${ s.speedMs } m/s (${ s.speedFpm } fpm)</strong></div>
                         <div><span class="text-slate-500 block">Conveyed Material:</span><strong class="text-slate-900">${ s.materialLabel }</strong></div>
@@ -1864,7 +1767,7 @@
                                 <td class="p-2.5 font-bold text-orange-700 border border-slate-300">Stage 1: Primary</td>
                                 <td class="p-2.5 border border-slate-300">
                                     <div class="font-bold text-slate-900">${ s.primarySpec.title }</div>
-                                    <div class="text-[11px] text-slate-600">${ s.primarySpec.mainframe } | ${ s.primarySpec.bladeCompoundLabel || s.urethaneObj.fullTitle }</div>
+                                    <div class="text-[11px] text-slate-600">${ s.primarySpec.mainframe } | ${ s.primarySpec.bladeCompoundLabel || s.urethaneObj.fullTitle } | Data Sheet ${ s.primarySpec.dataSheet }</div>
                                 </td>
                                 <td class="p-2.5 font-mono font-bold text-slate-900 border border-slate-300">${ s.primarySpec.assemblyPart }</td>
                                 <td class="p-2.5 font-mono text-slate-700 border border-slate-300">${ s.primarySpec.bladePart }</td>
@@ -1909,7 +1812,7 @@
                 <!-- Section 3: Engineering Notes -->
                 <div class="bg-slate-100 border border-slate-300 rounded-xl p-4 text-xs space-y-1.5">
                     <div class="font-bold text-slate-900 uppercase">3. Martin® Engineering Installation & Sizing Notes:</div>
-                    <div>• <strong>Material Path Rule:</strong> ${ s.troughRuleLabel } yields a ${ s.bladeWidthMm } mm (${ s.bladeWidthIn } in) blade width to prevent uneven "smiling" blade wear.</div>
+                    <div>• <strong>Blade Width:</strong> ${ s.primarySpec.bladeRule } gives a ${ s.bladeWidthLabel } blade.</div>
                     <div>• <strong>Urethane Specification:</strong> ${ s.urethaneObj.fullTitle } rated for ${ s.urethaneObj.tempRange }.</div>
                     ${ s.warnings.map(w => `<div>• ${ w }</div>`).join('') }
                 </div>
@@ -1980,7 +1883,6 @@
 
         function resetForm() {
             document.getElementById('beltWidthSelect').value = '1050';
-            document.getElementById('troughAngle').value = '35';
             document.getElementById('pulleyDiameter').value = '500';
             if (currentUnitSystem === 'metric') {
                 document.getElementById('beltSpeed').value = 3.5;
@@ -1992,8 +1894,7 @@
             document.getElementById('moistureLevel').value = 'damp';
             document.getElementById('spliceType').value = 'vulcanized';
             document.getElementById('reversingBelt').value = 'no';
-            document.getElementById('serviceStyle').value = 'standard';
-            document.getElementById('metallurgy').value = 'P';
+            ['tensionerType', 'mainframeFinish'].forEach(id => { const el = document.getElementById(id); el.dataset.sig = ''; el.innerHTML = ''; });
             calculateScrapers();
         }
 
@@ -2002,20 +1903,19 @@
             const report = `MARTIN® ENGINEERING BELT CLEANER SPECIFICATION & BILL OF MATERIALS
 ==================================================================
 1. CONVEYOR & MATERIAL PARAMETERS:
-   - Belt Width: ${ s.beltWidthMm } mm (${ s.beltWidthIn } in)
-   - Trough Angle: ${ s.troughAngle }° (${ s.troughRuleLabel })
-   - Calculated Material Path Blade Width: ${ s.bladeWidthMm } mm (${ s.bladeWidthIn } in)
-   - Head Pulley Diameter: Ø${ s.pulleyDisplay } [${ s.pulleyScaleText }]
+   - Belt Width: ${ s.beltWidthLabel }
+   - Blade Width: ${ s.bladeWidthLabel } (${ s.primarySpec.bladeRule })
+   - Head Pulley Diameter: Ø${ s.pulleyDisplay }
    - Belt Speed: ${ s.speedMs } m/s (${ s.speedFpm } fpm)
    - Conveyed Material: ${ s.materialLabel }
    - Operating Temp: ${ s.tempLabel }
    - Martin® Urethane Compound: ${ s.urethaneObj.fullTitle } [Code: ${ s.urethaneObj.code }]
    - Splice & Direction: ${ s.spliceLabel } | ${ s.reversingLabel }
-   - Metallurgy: ${ s.metallurgyLabel }
+   - Mainframe Finishing: ${ s.metallurgyLabel }
 
 2. RECOMMENDED BILL OF MATERIALS (BOM):
    [STAGE 1 - PRIMARY PRE-CLEANER]
-   - Model: ${ s.primarySpec.title }
+   - Model: ${ s.primarySpec.title } (Data Sheet ${ s.primarySpec.dataSheet })
    - Assembly Part Number: ${ s.primarySpec.assemblyPart }
    - Replacement Blade P/N: ${ s.primarySpec.bladePart }
    - Tensioner System: ${ s.primarySpec.tensionerName } (P/N: ${ s.primarySpec.tensionerPart })
@@ -2059,6 +1959,7 @@ Generated by Martin® Engineering Belt Cleaner Selection Workbench`;
         }
 
         window.onload = function() {
+            updateDropdownLabels();
             calculateScrapers();
         };
     </script>
