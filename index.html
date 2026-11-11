@@ -36,6 +36,8 @@
         .fsel:focus { outline: none; border-color: #f97316; }
         .fsel:disabled { opacity: .6; cursor: not-allowed; }
         .flabel { display: block; font-size: .75rem; font-weight: 600; color: #cbd5e1; margin-bottom: .375rem; }
+        /* Required field still empty */
+        .need { border-color: rgba(245, 158, 11, .65) !important; }
         .page { display: none; }
         .page.active { display: block; }
         .qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
@@ -73,7 +75,7 @@
                     <span>Catalog Matrices & Urethanes</span>
                 </button>
 
-                <button type="button" id="btnReset" onclick="resetForm()" class="hidden bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 px-3 py-2 rounded-xl font-medium transition border border-slate-800 text-xs" title="Reset to Defaults">
+                <button type="button" id="btnReset" onclick="resetForm()" class="hidden bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 px-3 py-2 rounded-xl font-medium transition border border-slate-800 text-xs" title="Clear all fields">
                     <i class="fa-solid fa-rotate-right"></i>
                 </button>
 
@@ -175,7 +177,7 @@
                                 <i class="fa-solid fa-sliders text-orange-500"></i>
                                 <span>Selection Checklist</span>
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Live updates Part Numbers and Replacement Blades</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Fill in every field with your conveyor data</p>
                         </div>
                         <span class="text-[11px] font-mono text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg border border-orange-500/20 font-bold">CEMA / ISO</span>
                     </div>
@@ -189,17 +191,18 @@
                                     <span class="sec-num w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 inline-flex items-center justify-center text-[10px]">1</span>
                                     <span>Belt Width</span>
                                 </h3>
-                                <span id="badgeBeltStandard" class="text-[11px] font-mono text-slate-400">1050 mm</span>
+                                <span id="badgeBeltStandard" class="text-[11px] font-mono text-slate-400">—</span>
                             </div>
                             <div>
                                 <label class="flabel">Standard Belt Width</label>
                                 <select id="beltWidthSelect" onchange="calculateAll()" class="fsel">
+                                    <option value="" selected>— Select belt width —</option>
                                     <option value="300">300 mm (12 in)</option>
                                     <option value="450">450 mm (18 in)</option>
                                     <option value="600">600 mm (24 in)</option>
                                     <option value="750">750 mm (30 in)</option>
                                     <option value="900">900 mm (36 in)</option>
-                                    <option value="1050" selected>1050 mm (42 in)</option>
+                                    <option value="1050">1050 mm (42 in)</option>
                                     <option value="1200">1200 mm (48 in)</option>
                                     <option value="1350">1350 mm (54 in)</option>
                                     <option value="1500">1500 mm (60 in)</option>
@@ -211,17 +214,6 @@
                                     <option value="3000">3000 mm (120 in)</option>
                                 </select>
                             </div>
-
-                            <!-- Primary blade coverage bar -->
-                            <div id="coverageBox" class="bg-slate-900 p-3 rounded-lg border border-slate-800">
-                                <div class="flex justify-between text-[11px] mb-1">
-                                    <span class="text-slate-400">Primary Blade Coverage of Belt Width</span>
-                                    <span id="pathRatioText" class="font-mono text-orange-400 font-bold">—</span>
-                                </div>
-                                <div class="w-full bg-slate-950 h-4 rounded-full overflow-hidden flex items-center justify-center p-0.5 border border-slate-800">
-                                    <div id="pathVisualBar" class="bg-gradient-to-r from-orange-600 via-orange-400 to-orange-600 h-full rounded-full transition-all duration-300 flex items-center justify-center text-[9px] font-black text-slate-950 tracking-wider" style="width: 85%;">MATERIAL PATH</div>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- SECTION: Head Pulley & Belt Speed -->
@@ -231,17 +223,18 @@
                                     <span class="sec-num w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 inline-flex items-center justify-center text-[10px]">2</span>
                                     <span id="speedSectionTitle">Head Pulley & Belt Speed</span>
                                 </h3>
-                                <span id="speedPulleyStatus" class="text-[11px] font-mono text-emerald-400">Matched</span>
+                                <span id="speedPulleyStatus" class="text-[11px] font-mono text-slate-400">—</span>
                             </div>
 
                             <div id="speedGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div id="pulleyField">
                                     <label class="flabel" id="labelPulleyDia">Head Pulley Diameter (incl. belt &amp; lagging)</label>
                                     <select id="pulleyDiameter" onchange="calculateAll()" class="fsel font-mono">
+                                        <option value="" selected>— Select pulley diameter —</option>
                                         <option value="150">150</option>
                                         <option value="300">300</option>
                                         <option value="400">400</option>
-                                        <option value="500" selected>500</option>
+                                        <option value="500">500</option>
                                         <option value="600">600</option>
                                         <option value="700">700</option>
                                         <option value="800">800</option>
@@ -255,11 +248,11 @@
                                 <div>
                                     <div class="flex justify-between items-center mb-1">
                                         <label class="text-xs font-semibold text-slate-300" id="labelBeltSpeed">Belt Speed (m/s)</label>
-                                        <span id="subBeltSpeed" class="text-[11px] font-mono text-orange-400">689 fpm</span>
+                                        <span id="subBeltSpeed" class="text-[11px] font-mono text-orange-400">—</span>
                                     </div>
-                                    <input type="number" id="beltSpeed" value="3.5" min="0.5" max="10" step="0.1" oninput="calculateAll()"
+                                    <input type="number" id="beltSpeed" value="" placeholder="Enter belt speed" min="0.5" max="10" step="0.1" oninput="calculateAll()"
                                         class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white font-mono focus:outline-none focus:border-orange-500">
-                                    <input type="range" id="speedSlider" min="0.5" max="10" step="0.1" value="3.5" oninput="syncSpeedFromSlider()" class="w-full accent-orange-500 mt-1.5 cursor-pointer">
+                                    <input type="range" id="speedSlider" min="0.5" max="10" step="0.1" value="0.5" oninput="syncSpeedFromSlider()" class="w-full accent-orange-500 mt-1.5 cursor-pointer">
                                 </div>
                             </div>
                         </div>
@@ -271,14 +264,15 @@
                                     <span class="sec-num w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 inline-flex items-center justify-center text-[10px]">3</span>
                                     <span>Material, Environment & Temperature</span>
                                 </h3>
-                                <span id="urethaneCodeBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">Code: OR</span>
+                                <span id="urethaneCodeBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">—</span>
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="flabel">Conveyed Material</label>
                                     <select id="materialType" onchange="calculateAll()" class="fsel">
-                                        <option value="coal" selected>Coal / Ore / Bauxite / Coke / Refuse (Standard)</option>
+                                        <option value="" selected>— Select material —</option>
+                                        <option value="coal">Coal / Ore / Bauxite / Coke / Refuse (Standard)</option>
                                         <option value="clinker_hot">Hot Clinker / Sinter / Slag (High Temp)</option>
                                         <option value="limestone_chem">Limestone / Wet Clay / Chemicals (pH 4–11)</option>
                                         <option value="sand_gravel">Dry Sand / Gravel / Fine Aggregate (Dry)</option>
@@ -288,7 +282,8 @@
                                 <div>
                                     <label class="flabel">Operating Temperature</label>
                                     <select id="tempRange" onchange="calculateAll()" class="fsel">
-                                        <option value="standard" selected>Standard (-20°F to 180°F / -30°C to 80°C)</option>
+                                        <option value="" selected>— Select temperature —</option>
+                                        <option value="standard">Standard (-20°F to 180°F / -30°C to 80°C)</option>
                                         <option value="subzero">Sub-Zero Chemical (-40°F to 180°F / -40°C to 80°C)</option>
                                         <option value="high">High Temp (-40°F to 300°F / 150°C; 350°F / 177°C Peak)</option>
                                         <option value="extreme">Extreme Temp (&gt;300°F / &gt;150°C Metal-Tipped)</option>
@@ -296,31 +291,33 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div id="envGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="flabel">Moisture / Environment</label>
                                     <select id="envType" onchange="calculateAll()" class="fsel">
-                                        <option value="dry" selected>Dry / normal</option>
+                                        <option value="" selected>— Select environment —</option>
+                                        <option value="dry">Dry / normal</option>
                                         <option value="wet">Wet / high moisture</option>
                                         <option value="corrosive">Wet & corrosive (washdown, salt, chemicals)</option>
                                     </select>
                                 </div>
-                                <div>
+                                <div id="abrasField">
                                     <label class="flabel">Material Abrasiveness</label>
                                     <select id="abrasiveness" onchange="calculateAll()" class="fsel">
+                                        <option value="" selected>— Select abrasiveness —</option>
                                         <option value="low">Low (soft, fine material)</option>
-                                        <option value="moderate" selected>Moderate</option>
+                                        <option value="moderate">Moderate</option>
                                         <option value="high">High (hard rock, ore, sharp material)</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="flabel">Martin® Urethane (used for every urethane blade in this selection)</label>
+                                <label class="flabel">Martin® Urethane (calculated, used for every urethane blade in this selection)</label>
                                 <div class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-slate-200 font-semibold flex items-center justify-between">
                                     <span class="flex items-center space-x-2">
-                                        <span id="autoUrethaneDot" class="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block"></span>
-                                        <span id="autoUrethaneText">Orange (OR) — 83 Shore A</span>
+                                        <span id="autoUrethaneDot" class="w-2.5 h-2.5 rounded-full bg-slate-600 inline-block"></span>
+                                        <span id="autoUrethaneText">Calculated from material, temperature &amp; environment</span>
                                     </span>
                                     <span class="text-[10px] font-mono text-orange-400 bg-orange-500/10 px-1.5 py-0.5 rounded border border-orange-500/20">AUTO</span>
                                 </div>
@@ -338,7 +335,8 @@
                                 <div id="spliceField">
                                     <label class="flabel">Belt Splice Type</label>
                                     <select id="spliceType" onchange="calculateAll()" class="fsel">
-                                        <option value="vulcanized" selected>Vulcanized Endless (Preferred)</option>
+                                        <option value="" selected>— Select splice type —</option>
+                                        <option value="vulcanized">Vulcanized Endless (Preferred)</option>
                                         <option value="mech_skived">Mechanical Fasteners (Recessed / Skived)</option>
                                         <option value="mech_unskived">Mechanical Fasteners (Unskived Metal Clips)</option>
                                     </select>
@@ -346,7 +344,8 @@
                                 <div>
                                     <label class="flabel">Belt Direction / Rollback</label>
                                     <select id="reversingBelt" onchange="calculateAll()" class="fsel">
-                                        <option value="no" selected>Unidirectional Forward</option>
+                                        <option value="" selected>— Select belt direction —</option>
+                                        <option value="no">Unidirectional Forward</option>
                                         <option value="rollback">Incline with Slight Rollback</option>
                                         <option value="yes">Full Reversing Belt (Bi-Directional)</option>
                                     </select>
@@ -359,6 +358,10 @@
                                     <span id="optionsForLabel" class="text-[11px] font-mono text-slate-400">—</span>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                    <div class="sm:col-span-2">
+                                        <label class="flabel">Blade Width</label>
+                                        <select id="bladeWidthSel" onchange="calculateAll()" class="fsel"></select>
+                                    </div>
                                     <div>
                                         <label class="flabel">Tensioner</label>
                                         <select id="tensionerType" onchange="calculateAll()" class="fsel"></select>
@@ -386,6 +389,7 @@
                                 <div>
                                     <label class="flabel">Space just past the head pulley</label>
                                     <select id="secSpace" class="fsel" onchange="calculateAll()">
+                                        <option value="" selected>— Select —</option>
                                         <option value="standard">Standard space (more than 7 in / 178 mm)</option>
                                         <option value="tight">Tight space (7 in / 178 mm or less)</option>
                                     </select>
@@ -393,6 +397,7 @@
                                 <div>
                                     <label class="flabel">Blade change preference</label>
                                     <select id="secService" class="fsel" onchange="calculateAll()">
+                                        <option value="" selected>— Select —</option>
                                         <option value="standard">Standard service</option>
                                         <option value="quick">Fastest possible change (slide-out cartridge, minimal downtime)</option>
                                     </select>
@@ -406,41 +411,42 @@
                             </div>
                             <div>
                                 <label class="flabel">Model to configure</label>
-                                <select id="secModel" class="fsel" onchange="markTouched(this)"></select>
+                                <select id="secModel" class="fsel" onchange="calculateAll()"></select>
                             </div>
+                            <div id="secChoiceWarn" class="hidden bg-amber-950/60 border border-amber-500/50 rounded-xl p-3 text-xs text-amber-100 leading-relaxed"></div>
 
                             <div class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 pt-1">C. Configuration</div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div id="w_secBladeStyle">
                                     <label class="flabel">Blade Style</label>
-                                    <select id="secBladeStyle" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secBladeStyle" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secBladeType">
                                     <label class="flabel" id="lbl_secBladeType">Blade / Tip Type</label>
-                                    <select id="secBladeType" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secBladeType" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secCoverage">
                                     <label class="flabel" id="lbl_secCoverage">Blade Coverage</label>
-                                    <select id="secCoverage" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secCoverage" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secBuffer">
                                     <label class="flabel">Blade Buffer</label>
-                                    <select id="secBuffer" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secBuffer" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secMainframe">
                                     <label class="flabel">Mainframe</label>
-                                    <select id="secMainframe" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secMainframe" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secTensioner">
                                     <label class="flabel">Tensioner</label>
-                                    <select id="secTensioner" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secTensioner" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_secDoor">
                                     <label class="flabel">Cover Door</label>
-                                    <select id="secDoor" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="secDoor" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                             </div>
-                            <p class="text-[10px] text-slate-500">Any urethane blade uses the same Martin® urethane as the rest of this selection.</p>
+                            <p id="secCfgHint" class="text-[10px] text-slate-500">Choose a model to see its configuration options. Any urethane blade uses the same calculated Martin® urethane as the rest of this selection.</p>
                         </div>
 
                         <!-- SECTION: V-Plow / Diagonal Plow Options -->
@@ -457,29 +463,33 @@
                                 <div>
                                     <label class="flabel">Material on the return belt</label>
                                     <select id="plowLoad" class="fsel" onchange="calculateAll()">
+                                        <option value="" selected>— Select —</option>
                                         <option value="light">Light (occasional stray material)</option>
-                                        <option value="moderate" selected>Moderate (regular spillage)</option>
+                                        <option value="moderate">Moderate (regular spillage)</option>
                                         <option value="heavy">Heavy (lots of spillage or large lumps)</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="flabel">Does the belt sag or bounce at the plow?</label>
                                     <select id="plowSag" class="fsel" onchange="calculateAll()">
-                                        <option value="no" selected>No, belt runs steady</option>
+                                        <option value="" selected>— Select —</option>
+                                        <option value="no">No, belt runs steady</option>
                                         <option value="yes">Yes, belt tension / travel changes</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="flabel">Clearance under the return belt</label>
                                     <select id="plowClearance" class="fsel" onchange="calculateAll()">
-                                        <option value="normal" selected>Normal clearance</option>
+                                        <option value="" selected>— Select —</option>
+                                        <option value="normal">Normal clearance</option>
                                         <option value="limited">Limited, low-profile plow needed</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="flabel">Installation priority</label>
                                     <select id="plowPriority" class="fsel" onchange="calculateAll()">
-                                        <option value="cost" selected>Lowest cost</option>
+                                        <option value="" selected>— Select —</option>
+                                        <option value="cost">Lowest cost</option>
                                         <option value="easy">Easy to carry and bolt together</option>
                                     </select>
                                 </div>
@@ -492,34 +502,35 @@
                             </div>
                             <div>
                                 <label class="flabel">Model to configure</label>
-                                <select id="plowModel" class="fsel" onchange="markTouched(this)"></select>
+                                <select id="plowModel" class="fsel" onchange="calculateAll()"></select>
                             </div>
+                            <div id="plowChoiceWarn" class="hidden bg-amber-950/60 border border-amber-500/50 rounded-xl p-3 text-xs text-amber-100 leading-relaxed"></div>
 
                             <div class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 pt-1">C. Configuration</div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div id="w_plowBlade">
                                     <label class="flabel">Blade Material</label>
-                                    <select id="plowBlade" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowBlade" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_plowFrame">
                                     <label class="flabel" id="lbl_plowFrame">Frame Material</label>
-                                    <select id="plowFrame" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowFrame" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_plowArm" class="sm:col-span-2">
                                     <label class="flabel" id="lbl_plowArm">Arm Length</label>
-                                    <select id="plowArm" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowArm" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_plowPipes">
                                     <label class="flabel">Hanger Pipes</label>
-                                    <select id="plowPipes" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowPipes" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_plowAssembly">
                                     <label class="flabel">Assembly Option</label>
-                                    <select id="plowAssembly" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowAssembly" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                                 <div id="w_plowMount">
                                     <label class="flabel">Mounting Kit</label>
-                                    <select id="plowMount" class="fsel" onchange="markTouched(this)"></select>
+                                    <select id="plowMount" class="fsel" onchange="calculateAll()"></select>
                                 </div>
                             </div>
                             <p class="text-[10px] text-slate-500">V-plows protect the tail pulley on one direction of travel. For reversing belts the Diagonal Plow is recommended.</p>
@@ -563,8 +574,8 @@
                             <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
                                 <div class="text-[11px] text-slate-400">Urethane Formulation</div>
                                 <div class="flex items-center space-x-1.5 mt-0.5">
-                                    <span id="kpiUrethaneDot" class="w-3 h-3 rounded-full bg-orange-500 inline-block border border-white/30"></span>
-                                    <span id="kpiUrethaneName" class="text-sm sm:text-base font-black text-white">Orange (OR)</span>
+                                    <span id="kpiUrethaneDot" class="w-3 h-3 rounded-full bg-slate-600 inline-block border border-white/30"></span>
+                                    <span id="kpiUrethaneName" class="text-sm sm:text-base font-black text-white">—</span>
                                 </div>
                                 <div id="kpiUrethaneTemp" class="text-[10px] text-slate-500 mt-0.5">—</div>
                             </div>
@@ -613,7 +624,7 @@
                             <path d="M 40,50 L 380,50 A 52,52 0 0,1 380,154 L 245,144 L 40,144" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="8 6"/>
 
                             <path d="M 150,36 L 195,36 M 188,31 L 196,36 L 188,41" stroke="#f97316" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                            <text id="svgDirectionLabel" x="172" y="28" fill="#f97316" font-size="8" font-weight="bold" text-anchor="middle">BELT TRAVEL (3.5 m/s)</text>
+                            <text id="svgDirectionLabel" x="172" y="28" fill="#f97316" font-size="8" font-weight="bold" text-anchor="middle">BELT TRAVEL</text>
 
                             <circle id="svgHeadPulley" cx="380" cy="102" r="52" fill="#1e293b" stroke="#64748b" stroke-width="4"/>
                             <circle cx="380" cy="102" r="14" fill="#0f172a" stroke="#f97316" stroke-width="3"/>
@@ -646,6 +657,15 @@
                     </div>
                 </div>
 
+                <!-- Missing fields notice -->
+                <div id="missingBox" class="hidden bg-slate-900/90 border border-amber-500/40 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 flex items-start space-x-3.5 shadow-lg">
+                    <i class="fa-solid fa-list-check text-amber-400 text-lg mt-0.5"></i>
+                    <div class="flex-1">
+                        <div class="font-bold text-amber-300 mb-1.5">Complete the following fields to see your Martin® selection:</div>
+                        <ul id="missingList" class="list-disc pl-4 space-y-0.5 text-slate-300"></ul>
+                    </div>
+                </div>
+
                 <!-- Engineering Advisory Box -->
                 <div id="alertBox" class="hidden bg-amber-950/50 border border-amber-500/40 rounded-2xl p-4 text-amber-100 text-xs sm:text-sm flex items-start space-x-3.5 shadow-lg">
                     <i class="fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5"></i>
@@ -655,20 +675,21 @@
                 <!-- Product Cards -->
                 <div id="cleanerCardsGrid" class="grid grid-cols-1 gap-5"></div>
 
-                <!-- Export Bar -->
+                <!-- Go to Cart Bar -->
                 <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center space-x-3.5">
                         <div class="bg-orange-500/20 p-3 rounded-xl text-orange-400 border border-orange-500/30">
-                            <i class="fa-solid fa-file-contract text-xl"></i>
+                            <i class="fa-solid fa-cart-shopping text-xl"></i>
                         </div>
                         <div>
-                            <div class="font-bold text-white text-sm sm:text-base">Engineering Bill of Materials & Submittal Sheet</div>
-                            <div class="text-xs text-slate-400">Assembly, replacement blade and tensioner P/Ns, with links to each technical data sheet</div>
+                            <div class="font-bold text-white text-sm sm:text-base">Ready to order?</div>
+                            <div class="text-xs text-slate-400">Review the parts you added and place your order</div>
                         </div>
                     </div>
-                    <button type="button" onclick="downloadSpecHtml()" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold px-4 py-2.5 rounded-xl transition border border-slate-700 text-xs sm:text-sm flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Download Spec (.HTML)</span>
+                    <button type="button" onclick="goCart()" class="w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-600/30 text-xs sm:text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Go to Cart</span>
+                        <span id="cartCountBottom" class="bg-white/20 rounded-full px-1.5">0</span>
                     </button>
                 </div>
             </section>
@@ -818,22 +839,6 @@
         </div>
     </div>
 
-    <!-- Modal Notification Box -->
-    <div id="modalNotification" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-            <div class="flex items-center space-x-3 mb-4">
-                <div id="modalIcon" class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-500 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-circle-check"></i>
-                </div>
-                <h3 id="modalTitle" class="text-lg font-bold text-white">Notification</h3>
-            </div>
-            <p id="modalMessage" class="text-sm text-slate-300 leading-relaxed mb-6"></p>
-            <div class="flex justify-end">
-                <button type="button" onclick="closeModal()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl transition shadow-md text-sm">Understood</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 border border-emerald-500/40 text-emerald-300 text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl opacity-0 translate-y-2 pointer-events-none flex items-center space-x-2">
         <i class="fa-solid fa-cart-plus"></i><span id="toastText"></span>
@@ -852,7 +857,6 @@
         // GLOBAL STATE
         // =====================================================================
         let currentUnitSystem = 'metric';
-        let currentSelectionState = {};
         let selectedItems = [];      // 'primary' | 'secondary' | 'vplow'
         let cart = [];               // { pn, desc, qty }
         let partRegistry = [];       // parts rendered on the selection page (for Add to Cart)
@@ -1062,63 +1066,140 @@
             shd1200: SHD_FINISH
         };
 
-        // Rebuild a primary option select only when its option set changes; keep the user's choice when it is still offered
+        // SHD cleaner table (L3439)
+        const SHD_TABLE = {
+            42: { bw: '42', a: '39', aIn: 39.38, b12: 0, b20: 2 },
+            48: { bw: '48', a: '43', aIn: 43.31, b12: 2, b20: 1 },
+            54: { bw: '54', a: '51', aIn: 51.19, b12: 1, b20: 2 },
+            60: { bw: '60', a: '59', aIn: 59.06, b12: 0, b20: 3 },
+            72: { bw: '72', a: '71', aIn: 70.88, b12: 1, b20: 3 },
+            84: { bw: '84', a: '79', aIn: 78.75, b12: 0, b20: 6 },
+            96: { bw: '96', a: '83', aIn: 82.69, b12: 2, b20: 3 },
+            108: { bw: 'A8', a: '98', aIn: 98.44, b12: 0, b20: 5 },
+            120: { bw: 'C0', a: 'A2', aIn: 102.38, b12: 2, b20: 4 }
+        };
+        const COMPACT_WIDTHS = [12, 14, 16, 18, 24, 30, 36, 42, 45, 48];
+
+        // Which primary cleaner applies (same rules as computePrimary); null = no standard cleaner
+        function primaryProductKey(bw, pulleyIn) {
+            if (pulleyIn < 12) return COMPACT_WIDTHS.includes(bw) ? 'compact' : null;
+            if (pulleyIn < 24) {
+                const isPV = pulleyIn < 16;
+                return (bw >= 18 && bw <= (isPV ? 72 : 96)) ? (isPV ? 'pv' : 'hd') : null;
+            }
+            if (pulleyIn < 32 && bw <= 72) return bw < 18 ? null : (bw >= 54 ? 'xhd' : 'hdmax');
+            return SHD_TABLE[bw] ? (pulleyIn >= 48 ? 'shd1200' : 'shd600') : null;
+        }
+
+        // Primary option select: starts blank; keeps the customer's choice when it is still offered.
+        // A set with a single option is filled with that option (there is nothing to choose).
         function fillOptionSelect(sel, opts, showPn) {
-            const sig = opts.map(o => o.label).join('|');
+            const idOf = o => o.id || o.label;
+            const sig = opts.map(o => idOf(o) + '=' + o.label).join('|');
             if (sel.dataset.sig !== sig) {
-                const prev = sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex].dataset.label : null;
-                sel.innerHTML = opts.map((o, i) => {
+                const prev = sel.value !== '' && sel.selectedIndex >= 0 ? sel.options[sel.selectedIndex].dataset.id : null;
+                const placeholder = opts.length > 1 ? '<option value="">— Select —</option>' : '';
+                sel.innerHTML = placeholder + opts.map((o, i) => {
                     const text = `${ o.code ? o.code + ' — ' : '' }${ o.label }${ showPn && o.pn ? ' (' + o.pn + ')' : '' }`;
-                    return `<option value="${ i }" data-label="${ o.label }">${ text }</option>`;
+                    return `<option value="${ i }" data-id="${ idOf(o) }">${ text }</option>`;
                 }).join('');
-                const keep = opts.findIndex(o => o.label === prev);
-                sel.value = String(keep >= 0 ? keep : 0);
+                const keep = opts.findIndex(o => idOf(o) === prev);
+                sel.value = opts.length === 1 ? '0' : (keep >= 0 ? String(keep) : '');
                 sel.dataset.sig = sig;
             }
             sel.disabled = opts.length < 2;
-            return opts[parseInt(sel.value) || 0];
+            return sel.value === '' ? null : opts[parseInt(sel.value)];
         }
 
-        function applyProductOptions(key, beltIn) {
+        // Blade widths each primary cleaner offers (L4135, L4151, L4174, L4176, L3667, L3439).
+        // The customer sees only the width; the code (S2, S6, S8, SC) is generated for the part number.
+        function bladeWidthOptions(key, bwIn, bwMm) {
+            const imperial = currentUnitSystem === 'imperial';
+            const rel = (bcode, ded, note) => ({
+                bcode, ded, id: `${ bcode || 'std' }@${ bwIn }`,
+                label: `${ imperial ? `${ bwIn - ded } in` : `${ bwMm - ded * MM_PER_IN } mm` }${ note ? ' ' + note : '' }`
+            });
+            if (key === 'compact') return [rel('', 2)];
+            if (key === 'pv' || key === 'hd') return [rel('S2', 2), rel('S6', 6)];
+            if (key === 'hdmax' || key === 'xhd') {
+                return [rel('S6', 6, '(standard)'), rel('S8', 8), rel('SC', 12, '(for 45° troughed belt / centered material)')].filter(o => bwIn - o.ded > 0);
+            }
+            const row = SHD_TABLE[bwIn];
+            return [{
+                bcode: '', ded: bwIn - row.aIn, id: `dimA@${ bwIn }`,
+                label: imperial ? `${ row.aIn } in` : `${ Math.round(row.aIn * 25.4) } mm`
+            }];
+        }
+
+        function applyProductOptions(key, beltIn, pendingText, beltMm) {
             const tSel = $('tensionerType');
             const fSel = $('mainframeFinish');
+            const bSel = $('bladeWidthSel');
             const note = $('optionsForLabel');
             if (!key) {
-                [tSel, fSel].forEach(sel => {
-                    sel.innerHTML = '<option>— No standard cleaner —</option>';
+                [bSel, tSel, fSel].forEach(sel => {
+                    sel.innerHTML = `<option value="">${ pendingText || '— No standard cleaner —' }</option>`;
                     sel.dataset.sig = '';
+                    sel.value = '';
                     sel.disabled = true;
+                    sel.classList.remove('need');
                 });
-                note.innerText = 'No cleaner selected';
-                return {};
+                note.innerText = pendingText ? 'Awaiting belt width & pulley' : 'No cleaner selected';
+                return { ten: null, fin: null, blade: null };
             }
+            const blade = fillOptionSelect(bSel, bladeWidthOptions(key, beltIn, beltMm), false);
             const tOpts = TENSIONER_OPTIONS[key].filter(o => !o.maxBelt || beltIn <= o.maxBelt);
             const ten = fillOptionSelect(tSel, tOpts, true);
             const fin = fillOptionSelect(fSel, FINISH_OPTIONS[key], false);
             note.innerText = `For ${ PRODUCT_NAMES[key] }`;
-            return { ten, fin };
+            return { ten, fin, blade };
         }
 
         // Generic option select for secondary & plow questions.
-        // opts: [{ key, text }]; rec = recommended key. Follows the recommendation until the user changes the field.
-        function setOptions(sel, opts, rec) {
+        // opts: [{ key, text }]. Starts blank — nothing is pre-selected for the customer.
+        // A set with a single option is filled with that option (there is nothing to choose).
+        function setOptions(sel, opts) {
             const sig = opts.map(o => o.key + '=' + o.text).join('|');
-            const recKey = opts.some(o => o.key === rec) ? rec : (opts[0] ? opts[0].key : '');
             if (sel.dataset.sig !== sig) {
-                const prev = sel.value;
-                sel.innerHTML = opts.map(o => `<option value="${ o.key }">${ o.text }</option>`).join('');
+                const prev = sel.value || sel.dataset.keep || '';
+                const placeholder = opts.length > 1 ? '<option value="">— Select —</option>' : '';
+                sel.innerHTML = placeholder + opts.map(o => `<option value="${ o.key }">${ o.text }</option>`).join('');
                 sel.dataset.sig = sig;
-                sel.value = (sel.dataset.touched === '1' && opts.some(o => o.key === prev)) ? prev : recKey;
-            } else if (sel.dataset.touched !== '1') {
-                sel.value = recKey;
+                delete sel.dataset.keep;
+                if (opts.length === 1) sel.value = opts[0].key;
+                else sel.value = prev && opts.some(o => o.key === prev) ? prev : '';
             }
             sel.disabled = opts.length < 2;
-            return opts.find(o => o.key === sel.value) || opts[0];
+            return opts.find(o => o.key === sel.value) || null;
         }
 
-        function markTouched(el) {
-            el.dataset.touched = '1';
-            calculateAll();
+        // Disable a select with an explanatory placeholder (remembers the choice so it returns when re-enabled)
+        function disableSelect(sel, text) {
+            if (sel.value) sel.dataset.keep = sel.value;
+            sel.innerHTML = `<option value="">${ text }</option>`;
+            sel.dataset.sig = '';
+            sel.value = '';
+            sel.disabled = true;
+            sel.classList.remove('need');
+        }
+
+        // Fully clear selects (used when the model or blade style changes, so no old answer carries over)
+        function clearSelects(ids) {
+            ids.forEach(id => {
+                const el = $(id);
+                el.innerHTML = '';
+                el.dataset.sig = '';
+                delete el.dataset.keep;
+                el.value = '';
+                el.classList.remove('need');
+            });
+        }
+
+        // Required-field check: records the missing field and highlights it
+        function req(id, label, ok, missing) {
+            const el = $(id);
+            if (el) el.classList.toggle('need', !ok && !el.disabled);
+            if (!ok) missing.push(label);
         }
 
         function showWrap(id, show) { $(id).classList.toggle('hidden', !show); }
@@ -1130,10 +1211,12 @@
         function updateDropdownLabels() {
             const imperial = currentUnitSystem === 'imperial';
             Array.from($('beltWidthSelect').options).forEach(o => {
+                if (!o.value) return;
                 const mm = parseInt(o.value);
                 o.text = imperial ? `${ BELT_WIDTH_TABLE[mm] } in` : `${ mm } mm`;
             });
             Array.from($('pulleyDiameter').options).forEach(o => {
+                if (!o.value) return;
                 o.text = pulleyRangeLabel(parseInt(o.value), imperial);
             });
         }
@@ -1151,23 +1234,8 @@
         };
 
         // =====================================================================
-        // MODALS / TOAST / CATALOG
+        // TOAST / CATALOG
         // =====================================================================
-        function showNotification(title, message, isWarning = false) {
-            $('modalTitle').innerText = title;
-            $('modalMessage').innerText = message;
-            const iconDiv = $('modalIcon');
-            if (isWarning) {
-                iconDiv.className = "w-10 h-10 rounded-xl bg-amber-500/20 text-amber-500 flex items-center justify-center text-lg";
-                iconDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
-            } else {
-                iconDiv.className = "w-10 h-10 rounded-xl bg-orange-500/20 text-orange-500 flex items-center justify-center text-lg";
-                iconDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-            }
-            $('modalNotification').classList.remove('hidden');
-        }
-        function closeModal() { $('modalNotification').classList.add('hidden'); }
-
         let toastTimer = null;
         function showToast(text) {
             const t = $('toast');
@@ -1195,19 +1263,21 @@
             if (system === currentUnitSystem) return;
             const speedInput = $('beltSpeed');
             const speedSlider = $('speedSlider');
-            let currentSpeed = parseFloat(speedInput.value) || 3.5;
+            const raw = String(speedInput.value).trim();
+            const currentSpeed = parseFloat(raw);
+            const hasSpeed = raw !== '' && !isNaN(currentSpeed) && currentSpeed > 0;
 
             if (system === 'imperial') {
-                const speedFpm = Math.round(currentSpeed * 196.85);
+                const speedFpm = hasSpeed ? Math.round(currentSpeed * 196.85) : '';
                 Object.assign(speedInput, { min: 100, max: 2000, step: 25 }); speedInput.value = speedFpm;
-                Object.assign(speedSlider, { min: 100, max: 2000, step: 25 }); speedSlider.value = speedFpm;
+                Object.assign(speedSlider, { min: 100, max: 2000, step: 25 }); speedSlider.value = hasSpeed ? speedFpm : 100;
                 $('labelBeltSpeed').innerText = 'Belt Speed (fpm)';
                 $('btnImperial').className = 'px-3 py-1.5 rounded-lg bg-orange-600 text-white transition';
                 $('btnMetric').className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition';
             } else {
-                const speedMs = Math.round((currentSpeed / 196.85) * 10) / 10;
+                const speedMs = hasSpeed ? Math.round((currentSpeed / 196.85) * 10) / 10 : '';
                 Object.assign(speedInput, { min: 0.5, max: 10, step: 0.1 }); speedInput.value = speedMs;
-                Object.assign(speedSlider, { min: 0.5, max: 10, step: 0.1 }); speedSlider.value = speedMs;
+                Object.assign(speedSlider, { min: 0.5, max: 10, step: 0.1 }); speedSlider.value = hasSpeed ? speedMs : 0.5;
                 $('labelBeltSpeed').innerText = 'Belt Speed (m/s)';
                 $('btnMetric').className = 'px-3 py-1.5 rounded-lg bg-orange-600 text-white transition';
                 $('btnImperial').className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition';
@@ -1223,51 +1293,69 @@
         }
 
         // =====================================================================
-        // SHARED INPUTS
+        // SHARED INPUTS (blank fields return null / '')
         // =====================================================================
         function readSharedInputs() {
-            const beltWidthMm = parseInt($('beltWidthSelect').value) || 1050;
-            const beltWidthIn = BELT_WIDTH_TABLE[beltWidthMm] || Math.round(beltWidthMm / MM_PER_IN);
-            const beltWidthLabel = fmtLen(beltWidthMm, beltWidthIn);
+            const bwVal = $('beltWidthSelect').value;
+            const beltWidthMm = bwVal ? parseInt(bwVal) : null;
+            const beltWidthIn = beltWidthMm ? (BELT_WIDTH_TABLE[beltWidthMm] || Math.round(beltWidthMm / MM_PER_IN)) : null;
+            const beltWidthLabel = beltWidthMm ? fmtLen(beltWidthMm, beltWidthIn) : '—';
             $('badgeBeltStandard').innerText = beltWidthLabel;
 
-            const rawSpeed = parseFloat($('beltSpeed').value) || 3.5;
-            let speedMs, speedFpm;
-            if (currentUnitSystem === 'metric') {
-                speedMs = rawSpeed;
-                speedFpm = Math.round(rawSpeed * 196.85);
-                $('subBeltSpeed').innerText = `${ speedFpm } fpm`;
-                $('speedSlider').value = Math.min(10, speedMs);
+            const rawStr = String($('beltSpeed').value).trim();
+            const rawSpeed = parseFloat(rawStr);
+            let speedMs = null, speedFpm = null;
+            if (rawStr !== '' && !isNaN(rawSpeed) && rawSpeed > 0) {
+                if (currentUnitSystem === 'metric') {
+                    speedMs = rawSpeed;
+                    speedFpm = Math.round(rawSpeed * 196.85);
+                    $('subBeltSpeed').innerText = `${ speedFpm } fpm`;
+                    $('speedSlider').value = Math.min(10, speedMs);
+                } else {
+                    speedFpm = rawSpeed;
+                    speedMs = Math.round((rawSpeed / 196.85) * 100) / 100;
+                    $('subBeltSpeed').innerText = `${ speedMs } m/s`;
+                    $('speedSlider').value = Math.min(2000, speedFpm);
+                }
             } else {
-                speedFpm = rawSpeed;
-                speedMs = Math.round((rawSpeed / 196.85) * 100) / 100;
-                $('subBeltSpeed').innerText = `${ speedMs } m/s`;
-                $('speedSlider').value = Math.min(2000, speedFpm);
+                $('subBeltSpeed').innerText = '—';
             }
 
             const materialType = $('materialType').value;
             const tempRange = $('tempRange').value;
-
-            // Auto-select urethane (unchanged rule)
-            let urethaneKey = 'OR';
-            if (tempRange === 'high' || tempRange === 'extreme' || materialType === 'clinker_hot') urethaneKey = 'GR';
-            else if (tempRange === 'subzero' || materialType === 'limestone_chem') urethaneKey = 'BR';
-            else if (materialType === 'sand_gravel') urethaneKey = 'CL';
-            else if (materialType === 'cement_sticky') urethaneKey = 'NB';
             const envType = $('envType').value;
             const abrasiveness = $('abrasiveness').value;
-            // Brown (BR) reduces water absorption for high-moisture environments (Martin® urethane guide)
-            if (urethaneKey === 'OR' && envType !== 'dry') urethaneKey = 'BR';
-            const urethaneObj = URETHANE_DB[urethaneKey];
+
+            // Urethane is always calculated, never chosen by the customer.
+            // Temperature overrides material (e.g. a general-purpose material at high temperature gets Green).
+            let urethaneKey = null;
+            if (materialType && tempRange && envType) {
+                urethaneKey = 'OR';
+                if (tempRange === 'high' || tempRange === 'extreme' || materialType === 'clinker_hot') urethaneKey = 'GR';
+                else if (tempRange === 'subzero' || materialType === 'limestone_chem') urethaneKey = 'BR';
+                else if (materialType === 'sand_gravel') urethaneKey = 'CL';
+                else if (materialType === 'cement_sticky') urethaneKey = 'NB';
+                // Brown (BR) reduces water absorption for high-moisture environments (Martin® urethane guide)
+                if (urethaneKey === 'OR' && envType !== 'dry') urethaneKey = 'BR';
+            }
 
             return {
                 beltWidthMm, beltWidthIn, beltWidthLabel, speedMs, speedFpm, materialType, tempRange, envType, abrasiveness,
                 spliceType: $('spliceType').value, reversingBelt: $('reversingBelt').value,
-                urethaneKey, urethaneObj
+                urethaneKey, urethaneObj: urethaneKey ? URETHANE_DB[urethaneKey] : null
             };
         }
 
         function updateUrethaneUI(u) {
+            if (!u) {
+                $('urethaneCodeBadge').innerText = '—';
+                $('kpiUrethaneDot').className = 'w-3 h-3 rounded-full inline-block border border-white/30 bg-slate-600';
+                $('kpiUrethaneName').innerText = '—';
+                $('kpiUrethaneTemp').innerText = 'Set by material, temperature & environment';
+                $('autoUrethaneDot').className = 'w-2.5 h-2.5 rounded-full inline-block bg-slate-600';
+                $('autoUrethaneText').innerText = 'Calculated from material, temperature & environment';
+                return;
+            }
             $('urethaneCodeBadge').innerText = `${ u.name } [${ u.durometer }]`;
             $('kpiUrethaneDot').className = `w-3 h-3 rounded-full inline-block border border-white/30 ${ u.dotClass }`;
             $('kpiUrethaneName').innerText = u.name;
@@ -1276,13 +1364,26 @@
             $('autoUrethaneText').innerText = `${ u.name } — ${ u.durometer }`;
         }
 
+        // Clears the primary result displays while fields are missing
+        function clearPrimaryDisplay() {
+            ['kpiBladeWidth', 'kpiBladeRule', 'kpiPulleyClass', 'kpiPulleyMm', 'kpiRatedSpeed', 'kpiRatedFpm'].forEach(id => $(id).innerText = '—');
+            $('decoderActiveModel').innerText = '—';
+            $('partNumberTokens').innerHTML = '<span class="text-xs text-slate-500">The part number appears once every field is complete.</span>';
+            const st = $('speedPulleyStatus');
+            st.innerText = '—';
+            st.className = 'text-[11px] font-mono text-slate-400';
+            $('svgHeadPulley').setAttribute('r', 52);
+            $('svgPulleyText').textContent = '';
+            $('svgPrimaryModelText').textContent = '';
+        }
+
         // =====================================================================
-        // PRIMARY CLEANER SELECTION (unchanged rules; driven by HEAD PULLEY RANGE and BELT WIDTH)
+        // PRIMARY CLEANER SELECTION (only runs when every field is complete)
         // Source: Martin® Technical Data Sheets L3667, L4135, L4151, L4174, L4176, L3439
         // =====================================================================
         function computePrimary(inp, warnings) {
-            const { beltWidthMm, beltWidthIn, beltWidthLabel, speedMs, speedFpm, tempRange, reversingBelt, urethaneKey, urethaneObj } = inp;
-            const pulleyMm = parseInt($('pulleyDiameter').value) || 500;
+            const { beltWidthIn, beltWidthLabel, speedMs, speedFpm, tempRange, reversingBelt, urethaneKey, urethaneObj } = inp;
+            const pulleyMm = parseInt($('pulleyDiameter').value);
             const pulleyIn = pulleyMm / MM_PER_IN;
             const pulleyDisplay = pulleyRangeLabel(pulleyMm, currentUnitSystem === 'imperial');
 
@@ -1305,19 +1406,20 @@
             }
 
             let primarySpec = {};
-            let selectedBladeDed = 6;
+            let selectedBladeDed = 0;
+            let bladeLabel = null;
             let productFamily = '';
             let productKey = null;
 
             if (pulleyIn < 12) {
                 // ---------- Martin® Compact Cleaner (L3667) ----------
                 productFamily = 'Compact Cleaner (6–11 in / 150–299 mm pulley)';
-                const compactWidths = [12, 14, 16, 18, 24, 30, 36, 42, 45, 48];
-                if (!compactWidths.includes(beltWidthIn)) {
+                if (!COMPACT_WIDTHS.includes(beltWidthIn)) {
                     primarySpec = noSelection(`The Martin® Compact Cleaner (L3667) is the cleaner for 6–11 in (150–299 mm) pulleys and is offered for belts of 12–48 in only. A ${ beltWidthLabel } belt is outside that range.`);
                 } else {
                     productKey = 'compact';
-                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const { ten, fin, blade: bo } = applyProductOptions(productKey, beltWidthIn, null, inp.beltWidthMm);
+                    bladeLabel = bo.label;
                     const seg = '11';
                     const col = COMPACT_COLOR[urethaneKey];
                     selectedBladeDed = 2;
@@ -1355,12 +1457,13 @@
                         warnings.push('<strong>Pulley Range 20–23 in (500–599 mm):</strong> L4151 rates the QC1+™ HD for pulleys up to 22 in (559 mm). For 23 in (584 mm) and larger, confirm with your Martin® representative.');
                     }
                     productKey = isPV ? 'pv' : 'hd';
-                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const { ten, fin, blade: bo } = applyProductOptions(productKey, beltWidthIn, null, inp.beltWidthMm);
+                    bladeLabel = bo.label;
                     const prefix = isPV ? 'C1QCP1' : 'C1QCH1';
                     const bladePrefix = isPV ? 'C1QCPBS' : 'C1QCHBS';
-                    const blade = 'S6';
+                    const blade = bo.bcode;
                     const dual = beltWidthIn >= 54 && !!ten.pn;
-                    selectedBladeDed = 6;
+                    selectedBladeDed = bo.ded;
                     const assemblyPart = `${ prefix }S${ bwCode }${ blade }${ uc }3${ fin.code }${ ten.code }`;
                     const bladePart = `${ bladePrefix }${ bwCode }${ blade }${ uc }3`;
                     primarySpec = {
@@ -1371,14 +1474,14 @@
                             : 'Heavy-duty primary cleaner for 16–22 in (400–559 mm) head pulleys, belt speeds up to 900 fpm (4.6 m/s). 4.5 in (114 mm) usable blade wear life.',
                         mainframe: fin.label, finishStainless: fin.ss,
                         bladeCompoundLabel: `${ urethaneObj.fullTitle } — Solid w/ Slots`,
-                        dataSheet: isPV ? 'L4135' : 'L4151', bladeRule: 'S6 — belt width less 6 in',
+                        dataSheet: isPV ? 'L4135' : 'L4151', bladeRule: `Belt width less ${ bo.ded } in (code ${ blade })`,
                         ratedSpeedMs: isPV ? 2.54 : 4.6, ratedSpeedFpm: isPV ? 500 : 900,
                         assemblyPart, bladePart,
                         tensionerPart: tensionerPn(ten, dual),
                         tensionerName: `${ ten.label }${ dual ? ' — Dual (belt 54 in+)' : '' }`,
                         tokens: [
                             { code: prefix, label: isPV ? 'QC1+ PV' : 'QC1+ HD' }, { code: `S${ bwCode }`, label: `${ beltWidthLabel } Belt` },
-                            { code: blade, label: 'Belt less 6 in' }, { code: uc, label: urethaneObj.name }, { code: '3', label: 'Solid w/ Slots' },
+                            { code: blade, label: `Blade ${ bo.label } (belt less ${ bo.ded } in)` }, { code: uc, label: urethaneObj.name }, { code: '3', label: 'Solid w/ Slots' },
                             { code: fin.code, label: fin.short }, { code: ten.code || '(blank)', label: ten.short }
                         ],
                         parts: [
@@ -1399,9 +1502,10 @@
                     primarySpec = noSelection(`QC1+™ HD Max / XHD part numbers start at 18 in belt width. A ${ beltWidthLabel } belt is outside that range.`);
                 } else {
                     productKey = useXHD ? 'xhd' : 'hdmax';
-                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
-                    const blade = 'S6';
-                    selectedBladeDed = 6;
+                    const { ten, fin, blade: bo } = applyProductOptions(productKey, beltWidthIn, null, inp.beltWidthMm);
+                    bladeLabel = bo.label;
+                    const blade = bo.bcode;
+                    selectedBladeDed = bo.ded;
                     const prefix = useXHD ? 'C1QCE3' : 'C1QCG3';
                     const bladePrefix = useXHD ? 'C1QCEBS' : 'C1QCGBS';
                     const dual = beltWidthIn >= 48 && !!ten.pn;
@@ -1413,14 +1517,14 @@
                         desc: `${ useXHD ? 'Extra heavy-duty' : 'Heavy-duty' } pre-cleaner with three-piece mainframe for 24–30 in (600–762 mm) head pulleys, belt speeds up to 1200 fpm (6 m/s).`,
                         mainframe: `3-pc ${ fin.label }`, finishStainless: fin.ss,
                         bladeCompoundLabel: `${ urethaneObj.fullTitle } — Solid Blade`,
-                        dataSheet: useXHD ? 'L4176' : 'L4174', bladeRule: 'S6 — belt width less 6 in',
+                        dataSheet: useXHD ? 'L4176' : 'L4174', bladeRule: `Belt width less ${ bo.ded } in (code ${ blade })`,
                         ratedSpeedMs: 6.0, ratedSpeedFpm: 1200,
                         assemblyPart, bladePart,
                         tensionerPart: tensionerPn(ten, dual),
                         tensionerName: `${ ten.label }${ dual ? ' — Dual (belt 48 in+)' : '' }`,
                         tokens: [
                             { code: prefix, label: useXHD ? 'QC1+ XHD' : 'QC1+ HD Max' }, { code: `S${ bwCode }`, label: `${ beltWidthLabel } Belt` },
-                            { code: blade, label: 'Belt less 6 in' }, { code: uc, label: urethaneObj.name }, { code: '1', label: 'Solid Blade' },
+                            { code: blade, label: `Blade ${ bo.label } (belt less ${ bo.ded } in)` }, { code: uc, label: urethaneObj.name }, { code: '1', label: 'Solid Blade' },
                             { code: fin.code, label: fin.short }, { code: ten.code || '(blank)', label: ten.short }
                         ],
                         parts: [
@@ -1434,23 +1538,13 @@
                 // ---------- Martin® SHD Cleaner (L3439) ----------
                 const is1200 = pulleyIn >= 48;
                 productFamily = is1200 ? 'SHD 1200 (48 in / 1200 mm and over)' : 'SHD 600 (24–47 in / 600–1199 mm pulley)';
-                const SHD_TABLE = {
-                    42: { bw: '42', a: '39', aIn: 39.38, b12: 0, b20: 2 },
-                    48: { bw: '48', a: '43', aIn: 43.31, b12: 2, b20: 1 },
-                    54: { bw: '54', a: '51', aIn: 51.19, b12: 1, b20: 2 },
-                    60: { bw: '60', a: '59', aIn: 59.06, b12: 0, b20: 3 },
-                    72: { bw: '72', a: '71', aIn: 70.88, b12: 1, b20: 3 },
-                    84: { bw: '84', a: '79', aIn: 78.75, b12: 0, b20: 6 },
-                    96: { bw: '96', a: '83', aIn: 82.69, b12: 2, b20: 3 },
-                    108: { bw: 'A8', a: '98', aIn: 98.44, b12: 0, b20: 5 },
-                    120: { bw: 'C0', a: 'A2', aIn: 102.38, b12: 2, b20: 4 }
-                };
                 const row = SHD_TABLE[beltWidthIn];
                 if (!row) {
                     primarySpec = noSelection(`The Martin® SHD Cleaner (L3439) is listed for 42, 48, 54, 60, 72, 84, 96, 108 and 120 in belts. A ${ beltWidthLabel } belt has no standard SHD assembly${ beltWidthIn < 42 ? ', and no other cleaner in these data sheets covers this pulley size on a belt that narrow' : '' }.`);
                 } else {
                     productKey = is1200 ? 'shd1200' : 'shd600';
-                    const { ten, fin } = applyProductOptions(productKey, beltWidthIn);
+                    const { ten, fin, blade: bo } = applyProductOptions(productKey, beltWidthIn, null, inp.beltWidthMm);
+                    bladeLabel = bo.label;
                     const profile = is1200 ? '1' : '6';
                     const SHD_COLOR = { OR: 'O', BR: 'B', GR: 'G' };
                     let col = SHD_COLOR[urethaneKey];
@@ -1498,12 +1592,8 @@
             if (!productKey) applyProductOptions(null, beltWidthIn);
 
             // Actual blade width from the selected blade
-            const bladeWidthIn = Math.max(6, beltWidthIn - selectedBladeDed);
+            const bladeWidthIn = beltWidthIn - selectedBladeDed;
             const bladeWidthMm = Math.round(bladeWidthIn * 25);
-            const coveragePctSel = Math.round((bladeWidthIn / beltWidthIn) * 1000) / 10;
-            $('pathRatioText').innerText = productKey ? `${ fmtLen(bladeWidthMm, bladeWidthIn) } / ${ beltWidthLabel } (${ coveragePctSel }%)` : '—';
-            $('pathVisualBar').style.width = `${ Math.max(40, Math.min(96, coveragePctSel)) }%`;
-            $('pathVisualBar').innerText = productKey ? `BLADE WIDTH: ${ fmtLen(bladeWidthMm, bladeWidthIn) }` : 'NO STANDARD BLADE';
 
             // Speed check against the selected cleaner's rating
             const statusEl = $('speedPulleyStatus');
@@ -1529,7 +1619,7 @@
             }
 
             // KPI cards & decoder
-            $('kpiBladeWidth').innerText = productKey ? fmtLen(bladeWidthMm, bladeWidthIn) : '—';
+            $('kpiBladeWidth').innerText = productKey ? bladeLabel.replace(/ \(.*\)$/, '') : '—';
             $('kpiBladeRule').innerText = primarySpec.bladeRule;
             $('kpiPulleyClass').innerText = pulleyDisplay;
             $('kpiPulleyMm').innerText = productFamily;
@@ -1548,11 +1638,11 @@
             Object.assign(primarySpec, {
                 parts: (primarySpec.parts || []).filter(p => p.pn),
                 stage: 'Primary Cleaner', accent: 'orange', productFamily, pulleyMm, pulleyDisplay,
-                bladeWidthIn, bladeWidthMm, bladeWidthLabel: fmtLen(bladeWidthMm, bladeWidthIn),
+                bladeWidthIn, bladeWidthMm, bladeWidthLabel: productKey ? bladeLabel.replace(/ \(.*\)$/, '') : '—',
                 rows: [
                     ['Mainframe Spec', primarySpec.mainframe],
                     ['Blade Compound', primarySpec.bladeCompoundLabel || urethaneObj.fullTitle],
-                    ['Blade Width', productKey ? `${ fmtLen(bladeWidthMm, bladeWidthIn) } (${ primarySpec.bladeRule })` : '—'],
+                    ['Blade Width', productKey ? `${ bladeLabel.replace(/ \(.*\)$/, '') } (${ primarySpec.bladeRule })` : '—'],
                     ['Tensioner System', primarySpec.tensionerName],
                     ['Head Pulley', `Ø${ pulleyDisplay }`]
                 ]
@@ -1561,8 +1651,38 @@
         }
 
         // =====================================================================
+        // RECOMMENDATION + CUSTOMER-CHOICE NOTICE (shared by secondary & plow)
+        // =====================================================================
+        // Model dropdown: starts blank. Martin's recommendation is listed first and labelled.
+        function modelSelect(sel, eligible, rec, models) {
+            const order = [rec, ...eligible.filter(k => k !== rec)];
+            const opts = order.map(k => ({ key: k, text: k === rec ? `★ ${ models[k].label } (Martin® recommendation)` : models[k].label }));
+            const o = setOptions(sel, opts);
+            return o ? o.key : null;
+        }
+
+        function setRecPending(prefix, text) {
+            $(prefix + 'RecName').innerText = '—';
+            $(prefix + 'RecReason').innerText = text;
+            $(prefix + 'ChoiceWarn').classList.add('hidden');
+        }
+
+        function showChoiceWarn(prefix, model, rec, models) {
+            const el = $(prefix + 'ChoiceWarn');
+            if (model && rec && model !== rec) {
+                el.innerHTML = `<div class="font-bold text-amber-300 mb-0.5"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Customer-selected model</div>
+                    Martin® recommends the <strong>${ models[rec].name }</strong> for your answers. You selected the <strong>${ models[model].name }</strong>.
+                    This choice is at the customer's own discretion and responsibility.`;
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // =====================================================================
         // SECONDARY CLEANER SELECTION
         // Sources: L4227 (P2 HD), L3828 (SQC2S), L4093 (SQC2S Reduced Mini), L3685 (DT2S)
+        // Returns a spec when complete, or null while fields are missing (they are added to `missing`).
         // =====================================================================
         const SEC_MODELS = {
             sqc2s: { name: 'Martin® SQC2S™ Cleaner', short: 'SQC2S', ds: 'L3828', minBw: 18, maxBw: 96, label: 'SQC2S™ — cushioned blades, splice & reversing friendly' },
@@ -1572,6 +1692,8 @@
         };
         const SAF2_LIMIT_MS = 5.08; // 1000 fpm
         const SQC2S_LIMIT_MS = 7.5; // 1500 fpm
+        const SEC_WRAPS = ['w_secBladeStyle', 'w_secBladeType', 'w_secCoverage', 'w_secBuffer', 'w_secMainframe', 'w_secTensioner', 'w_secDoor'];
+        const SEC_CFG = ['secBladeStyle', 'secBladeType', 'secCoverage', 'secBuffer', 'secMainframe', 'secTensioner', 'secDoor'];
 
         function secEligible(bw) {
             return Object.keys(SEC_MODELS).filter(k => {
@@ -1606,16 +1728,7 @@
             return { key, reason };
         }
 
-        // Model dropdown: Martin's recommendation first, then the customer's own choices
-        function modelSelect(sel, eligible, rec, models) {
-            const opts = [{ key: 'rec', text: `Use Martin® recommendation — ${ models[rec].label }` }]
-                .concat(eligible.filter(k => k !== rec).map(k => ({ key: k, text: `Customer's choice — ${ models[k].label }` })));
-            const o = setOptions(sel, opts, 'rec');
-            sel.disabled = false;
-            return o.key === 'rec' ? rec : o.key;
-        }
-
-        function coverageOpts(bw, fullAllowed, unit) {
+        function coverageOpts(bw, fullAllowed) {
             const r = bw - 6;
             const opts = [{ key: 'r', text: `Belt width less 6 in — ${ inchMm(r) } cleaning width`, w: r }];
             if (fullAllowed) opts.push({ key: 'f', text: `Full belt width — ${ inchMm(bw) } cleaning width`, w: bw });
@@ -1629,61 +1742,83 @@
             return { key: 'OR', code: allowed.OR, obj: URETHANE_DB.OR };
         }
 
-        const SEC_WRAPS = ['w_secBladeStyle', 'w_secBladeType', 'w_secCoverage', 'w_secBuffer', 'w_secMainframe', 'w_secTensioner', 'w_secDoor'];
-
-        function computeSecondary(inp, warnings) {
+        function computeSecondary(inp, warnings, missing) {
             const bw = inp.beltWidthIn;
-            const bwc = String(bw).padStart(2, '0');
+            const bwc = bw ? String(bw).padStart(2, '0') : '';
             const space = $('secSpace').value;
-            const eligible = secEligible(bw);
+            const service = $('secService').value;
+            const hideCfg = () => SEC_WRAPS.forEach(w => showWrap(w, false));
+            req('secSpace', 'Secondary: Space just past the head pulley', !!space, missing);
+            req('secService', 'Secondary: Blade change preference', !!service, missing);
 
-            if (!eligible.length) {
-                setOptions($('secModel'), [{ key: 'none', text: '— No standard secondary cleaner for this belt —' }], 'none');
-                SEC_WRAPS.forEach(w => showWrap(w, false));
+            if (bw && !secEligible(bw).length) {
+                disableSelect($('secModel'), '— No standard secondary cleaner for this belt —');
+                hideCfg();
+                setRecPending('sec', 'No standard secondary cleaner for this belt width.');
                 $('secOptionsFor').innerText = 'No model';
-                $('svgSecondaryModelText').textContent = 'N/A';
                 return {
                     stage: 'Secondary Cleaner', accent: 'sky', badge: 'No Standard Selection',
                     title: 'No Standard Martin® Secondary Cleaner for This Belt',
                     desc: `The secondary cleaners in data sheets L4227, L3828, L4093 and L3685 start at 18 in (450 mm) belt width. A ${ inp.beltWidthLabel } belt is outside that range. Contact Martin® Engineering.`,
-                    dataSheet: null, rows: [], tokens: [], parts: [], assemblyPart: 'Contact Martin Engineering'
+                    dataSheet: null, rows: [], tokens: [], parts: [], assemblyPart: 'Contact Martin Engineering', svgText: 'N/A'
                 };
             }
 
-            const recObj = secRecommend(inp, space, $('secService').value, eligible);
+            const recReady = bw && inp.speedMs !== null && inp.spliceType && inp.reversingBelt && inp.abrasiveness && space && service;
+            if (!recReady) {
+                setRecPending('sec', 'Fill in belt width, belt speed, splice type, belt direction, abrasiveness and the application questions above to see the Martin® recommendation.');
+                disableSelect($('secModel'), '— Answer the questions above first —');
+                $('secOptionsFor').innerText = '—';
+                hideCfg();
+                missing.push('Secondary: Model to configure');
+                return null;
+            }
+
+            const eligible = secEligible(bw);
+            const recObj = secRecommend(inp, space, service, eligible);
             const rec = recObj.key;
             $('secRecName').innerText = SEC_MODELS[rec].name;
             $('secRecReason').innerText = recObj.reason;
             const model = modelSelect($('secModel'), eligible, rec, SEC_MODELS);
+            req('secModel', 'Secondary: Model to configure', !!model, missing);
+            showChoiceWarn('sec', model, rec, SEC_MODELS);
+            if (!model) {
+                $('secOptionsFor').innerText = '—';
+                hideCfg();
+                return null;
+            }
+            // A different model starts its configuration from blank
+            if ($('secModel').dataset.cfgFor !== model) { clearSelects(SEC_CFG); $('secModel').dataset.cfgFor = model; }
+
             const M = SEC_MODELS[model];
             $('secOptionsFor').innerText = `For ${ M.short } (${ M.ds })`;
             const unskived = inp.spliceType === 'mech_unskived';
             const rev = inp.reversingBelt;
-            const corr = inp.envType === 'corrosive';
             let spec;
 
             if (model === 'sqc2s') {
-                showWrap('w_secBladeStyle', true); showWrap('w_secBladeType', true); showWrap('w_secCoverage', true);
-                showWrap('w_secMainframe', true); showWrap('w_secTensioner', true); showWrap('w_secDoor', true);
-                const styleRec = unskived && inp.speedMs <= SAF2_LIMIT_MS ? 'saf2' : 'sqc';
-                const style = setOptions($('secBladeStyle'), [
+                ['w_secBladeStyle', 'w_secBladeType', 'w_secCoverage', 'w_secMainframe', 'w_secTensioner', 'w_secDoor'].forEach(w => showWrap(w, true));
+                $('lbl_secBladeType').innerText = 'Blade Type';
+                const styleO = setOptions($('secBladeStyle'), [
                     { key: 'sqc', text: 'SQC2S™ cushioned blades (up to 1500 fpm / 7.5 m/s)' },
                     { key: 'saf2', text: 'SAF2™-style 3 in wide blades (up to 1000 fpm / 5.08 m/s)' }
-                ], styleRec).key;
-                const isSaf = style === 'saf2';
-                showWrap('w_secBuffer', !isSaf);
-                $('lbl_secBladeType').innerText = 'Blade Type';
+                ]);
+                req('secBladeStyle', 'Secondary: Blade Style', !!styleO, missing);
+                const isSaf = !!styleO && styleO.key === 'saf2';
+                const styleKey = styleO ? styleO.key : '';
+                if ($('secBladeType').dataset.forStyle !== styleKey) {
+                    clearSelects(['secBladeType', 'secCoverage', 'secBuffer']);
+                    $('secBladeType').dataset.forStyle = styleKey;
+                }
+                showWrap('w_secBuffer', !!styleO && !isSaf);
 
-                let bladeOpts, bladeRec;
-                if (!isSaf) {
-                    bladeOpts = [
+                let blade = null, cov = null, buffer = null;
+                if (styleO) {
+                    const bladeOpts = !isSaf ? [
                         { key: 'R', text: 'R — Tungsten carbide, general applications & reversing' },
                         { key: 'C', text: 'C — Tungsten carbide, corrosion resistant (316 SS)' },
                         { key: 'S', text: 'S — Corrosion resistant 316 SS (no carbide)' }
-                    ];
-                    bladeRec = corr ? 'C' : 'R';
-                } else {
-                    bladeOpts = [
+                    ] : [
                         { key: 'T', text: 'T — Tungsten carbide blade' },
                         { key: 'C', text: 'C — Tungsten carbide with stainless insert' },
                         { key: 'S', text: 'S — Stainless insert' },
@@ -1691,36 +1826,46 @@
                         { key: 'R', text: 'R — Reversing urethane blade' },
                         { key: 'D', text: 'D — Slit urethane blade' }
                     ];
-                    bladeRec = unskived ? (rev === 'no' ? 'U' : 'R') : (corr ? 'C' : 'T');
+                    blade = setOptions($('secBladeType'), bladeOpts);
+                    cov = setOptions($('secCoverage'), coverageOpts(bw, isSaf || bw < 96));
+                    if (!isSaf) {
+                        buffer = setOptions($('secBuffer'), [
+                            { key: 'MR', text: 'MR — Molded rubber' },
+                            { key: 'FR', text: 'FR — Flame-retardant rubber' }
+                        ]);
+                        req('secBuffer', 'Secondary: Blade Buffer', !!buffer, missing);
+                    }
+                } else {
+                    disableSelect($('secBladeType'), '— Choose a blade style first —');
+                    disableSelect($('secCoverage'), '— Choose a blade style first —');
                 }
-                const blade = setOptions($('secBladeType'), bladeOpts, bladeRec);
-                const covOpts = coverageOpts(bw, isSaf || bw < 96);
-                const cov = setOptions($('secCoverage'), covOpts, 'r');
-                const cw = cov.w;
-                const buffer = isSaf ? null : setOptions($('secBuffer'), [
-                    { key: 'MR', text: 'MR — Molded rubber' },
-                    { key: 'FR', text: 'FR — Flame-retardant rubber' }
-                ], 'MR');
+                req('secBladeType', 'Secondary: Blade Type', !!blade, missing);
+                req('secCoverage', 'Secondary: Blade Coverage', !!cov, missing);
                 const mf = setOptions($('secMainframe'), [
                     { key: 'P', text: 'P — Painted' },
                     { key: 'S', text: 'S — Stainless' }
-                ], corr ? 'S' : 'P');
-                const TEN = { T: '38664', H: '38664-HD' };
+                ]);
                 const ten = setOptions($('secTensioner'), [
                     { key: 'T', text: 'T — Tensioner (38664)' },
                     { key: 'S', text: 'S — 316 SS tensioner' },
                     { key: 'H', text: 'H — HD tensioner (38664-HD)' },
                     { key: 'G', text: 'G — 316 SS HD tensioner' },
                     { key: '0', text: '0 — No tensioner' }
-                ], corr ? 'S' : 'T');
+                ]);
                 const door = setOptions($('secDoor'), [
                     { key: '0', text: '0 — None' },
                     { key: 'D', text: 'D — Dust-tight steel cover door' },
                     { key: 'S', text: 'S — Dust-tight stainless steel cover door' },
                     { key: 'U', text: 'U — Magnetic urethane cover door' }
-                ], '0');
+                ]);
+                req('secMainframe', 'Secondary: Mainframe', !!mf, missing);
+                req('secTensioner', 'Secondary: Tensioner', !!ten, missing);
+                req('secDoor', 'Secondary: Cover Door', !!door, missing);
+                if (!styleO || !blade || !cov || (!isSaf && !buffer) || !mf || !ten || !door || !inp.urethaneObj) return null;
 
-                let mid, midLabel, parts = [], rows = [], bladeCount, colorInfo = null;
+                const TEN = { T: '38664', H: '38664-HD' };
+                const cw = cov.w;
+                let mid, midLabel, parts = [], bladeCount;
                 if (!isSaf) {
                     mid = buffer.key; midLabel = buffer.text.split('— ')[1];
                     bladeCount = cw / 6;
@@ -1730,7 +1875,7 @@
                     if (inp.speedMs > SQC2S_LIMIT_MS) warnings.push(`<strong>Secondary Speed:</strong> L3828 rates SQC2S™ blades to 1500 fpm (7.5 m/s). Current speed is ${ inp.speedFpm } fpm. Consult your Martin® representative.`);
                     if (unskived) warnings.push('<strong>Unskived Mechanical Fasteners:</strong> Tungsten carbide tips can be damaged by metal clips. Consider SAF2™-style urethane blades, or skive/recess the splice.');
                 } else {
-                    colorInfo = secUrethaneColor(inp, warnings, { OR: 'O3', BR: 'B3', GR: 'G3', NB: 'N3' }, 'SQC2S™ SAF2™');
+                    const colorInfo = secUrethaneColor(inp, warnings, { OR: 'O3', BR: 'B3', GR: 'G3', NB: 'N3' }, 'SQC2S™ SAF2™');
                     mid = colorInfo.code; midLabel = colorInfo.obj.name;
                     bladeCount = cw / 3;
                     const sfx = { OR: '', BR: 'BR', GR: 'GR', NB: 'NB' }[colorInfo.key];
@@ -1782,25 +1927,32 @@
                     { key: 'M', text: 'M — Standard (no carbide)' },
                     { key: 'C', text: 'C — Corrosion resistant with tungsten carbide tips' },
                     { key: 'S', text: 'S — Corrosion resistant (no carbide)' }
-                ], corr ? 'C' : 'R');
-                const cov = setOptions($('secCoverage'), coverageOpts(bw, true), 'r');
-                const cw = cov.w;
+                ]);
+                const cov = setOptions($('secCoverage'), coverageOpts(bw, true));
                 const mf = setOptions($('secMainframe'), [
                     { key: 'P', text: 'P — Painted' },
                     { key: 'E', text: 'E — Extended painted' },
                     { key: 'S', text: 'S — Stainless steel' },
                     { key: 'ES', text: 'ES — Extended stainless steel' }
-                ], corr ? 'S' : 'P');
+                ]);
                 const ten = setOptions($('secTensioner'), [
                     { key: 'T', text: 'T — Tensioner (39448)' },
                     { key: 'S', text: 'S — Stainless steel tensioner' },
                     { key: '0', text: '0 — No tensioner' }
-                ], corr ? 'S' : 'T');
+                ]);
                 const door = setOptions($('secDoor'), [
                     { key: '0', text: '0 — None' },
                     { key: 'D', text: 'D — Dust-tight steel cover door' },
                     { key: 'S', text: 'S — Stainless steel cover door' }
-                ], '0');
+                ]);
+                req('secBladeType', 'Secondary: Blade Type', !!blade, missing);
+                req('secCoverage', 'Secondary: Blade Coverage', !!cov, missing);
+                req('secMainframe', 'Secondary: Mainframe', !!mf, missing);
+                req('secTensioner', 'Secondary: Tensioner', !!ten, missing);
+                req('secDoor', 'Secondary: Cover Door', !!door, missing);
+                if (!blade || !cov || !mf || !ten || !door) return null;
+
+                const cw = cov.w;
                 const bladeCount = cw / 6;
                 const assemblyPart = `SQC2RM-${ bwc }${ blade.key }${ cw }MR${ mf.key }${ ten.key }${ door.key }`;
                 const parts = [
@@ -1839,27 +1991,34 @@
                     { key: '4', text: '4 — V tip 10x3 (tungsten carbide)' },
                     { key: '5', text: '5 — V tip 15x5 (tungsten carbide)' },
                     { key: 'C', text: 'C — C tip (tungsten carbide)' }
-                ], '4');
+                ]);
                 const n1 = (bw - 6) / 6, n2 = bw / 6;
                 const covText = n => `${ n } tips — ${ Math.round(150 * n + 50) } mm (${ ((150 * n + 50) / 25.4).toFixed(1) } in) coverage`;
-                const cov = setOptions($('secCoverage'), [{ key: String(n1), text: covText(n1) }, { key: String(n2), text: covText(n2) }], String(n1));
-                const nTips = parseInt(cov.key);
+                const cov = setOptions($('secCoverage'), [{ key: String(n1), text: covText(n1) }, { key: String(n2), text: covText(n2) }]);
                 const BUF = { '5': ['55A standard stainless', 'B14-C10-001'], '7': ['70A heavy stainless', 'B14-C10-002'] };
                 const buf = setOptions($('secBuffer'), [
                     { key: '5', text: '5 — 55A standard buffer' },
                     { key: '7', text: '7 — 70A heavy buffer' }
-                ], '5');
+                ]);
                 const mf = setOptions($('secMainframe'), [
                     { key: 'P', text: 'P — Painted steel' },
                     { key: 'E', text: 'E — Extended painted steel (+18 in / 457 mm)' },
                     { key: 'F', text: 'F — 304 stainless steel' },
                     { key: 'Z', text: 'Z — 304 stainless steel extended (+18 in / 457 mm)' }
-                ], corr ? 'F' : 'P');
+                ]);
                 const ten = setOptions($('secTensioner'), [
                     { key: 'C', text: 'C — Compression spring tensioner' },
                     { key: 'B', text: 'B — Bolt tensioner' },
                     { key: 'N', text: 'N — No tensioner' }
-                ], 'C');
+                ]);
+                req('secBladeType', 'Secondary: Tip Type', !!tip, missing);
+                req('secCoverage', 'Secondary: Tips / Coverage', !!cov, missing);
+                req('secBuffer', 'Secondary: Blade Buffer', !!buf, missing);
+                req('secMainframe', 'Secondary: Mainframe', !!mf, missing);
+                req('secTensioner', 'Secondary: Tensioner', !!ten, missing);
+                if (!tip || !cov || !buf || !mf || !ten) return null;
+
+                const nTips = parseInt(cov.key);
                 const nn = String(nTips).padStart(2, '0');
                 const assemblyPart = `C2PH1S${ bwc }${ nn }${ tip.key }${ buf.key }${ mf.key }${ ten.key }`;
                 const parts = [
@@ -1902,18 +2061,24 @@
                     { key: 'U', text: 'U — Urethane reversing blade (clip friendly)' },
                     { key: 'S', text: 'S — Stainless steel reversing blade' },
                     { key: 'M', text: 'M — Mild steel reversing blade' }
-                ], unskived ? 'U' : (corr ? 'R' : 'T'));
-                const cov = setOptions($('secCoverage'), coverageOpts(bw, true), 'r');
-                const cw = cov.w;
-                const colorInfo = secUrethaneColor(inp, warnings, { OR: 'OR', BR: 'BR', GR: 'GR' }, 'DT2S');
+                ]);
+                const cov = setOptions($('secCoverage'), coverageOpts(bw, true));
                 const mf = setOptions($('secMainframe'), [
                     { key: 'P', text: 'P — Standard duty' },
                     { key: 'S', text: 'S — 316 stainless steel' }
-                ], corr ? 'S' : 'P');
+                ]);
                 const ten = setOptions($('secTensioner'), [
                     { key: 'S', text: 'S — Spring tensioner' },
                     { key: 'A', text: 'A — Air tensioner' }
-                ], 'S');
+                ]);
+                req('secBladeType', 'Secondary: Blade Type', !!blade, missing);
+                req('secCoverage', 'Secondary: Blade Coverage', !!cov, missing);
+                req('secMainframe', 'Secondary: Mainframe', !!mf, missing);
+                req('secTensioner', 'Secondary: Tensioner', !!ten, missing);
+                if (!blade || !cov || !mf || !ten || !inp.urethaneObj) return null;
+
+                const cw = cov.w;
+                const colorInfo = secUrethaneColor(inp, warnings, { OR: 'OR', BR: 'BR', GR: 'GR' }, 'DT2S');
                 const bladeCount = cw / 6;
                 const assemblyPart = `DT2S-${ bwc }${ blade.key }${ cw }${ colorInfo.code }${ mf.key }${ ten.key }`;
                 const parts = [
@@ -1948,13 +2113,16 @@
             if (rev === 'yes' && model !== 'dt2s' && model !== 'p2') {
                 warnings.push(`<strong>Reversing Belt (Secondary):</strong> ${ M.short } handles reversal through its rubber buffers. The DT2S is purpose-built for reversing belts if you prefer.`);
             }
-            $('svgSecondaryModelText').textContent = M.short;
-            return Object.assign(spec, { stage: 'Secondary Cleaner', accent: 'sky', modelKey: model, recommended: model === rec, recName: SEC_MODELS[rec].name, recReason: recObj.reason });
+            if (model !== rec) {
+                warnings.push(`<strong>Customer-Selected Secondary Model:</strong> Martin® recommends the ${ SEC_MODELS[rec].name } for these answers. The ${ M.name } was selected by the customer, at the customer's own discretion and responsibility.`);
+            }
+            return Object.assign(spec, { stage: 'Secondary Cleaner', accent: 'sky', modelKey: model, recommended: model === rec, recName: SEC_MODELS[rec].name, recReason: recObj.reason, svgText: M.short });
         }
 
         // =====================================================================
         // V-PLOW / DIAGONAL PLOW SELECTION
         // Sources: L4184 (VPlow HD), L4099 (VPlow Modular), L4120 (Torsion VPlow Plus), L3772 (VPlow XHD), L4149 (Diagonal Plow)
+        // Returns a spec when complete, or null while fields are missing (they are added to `missing`).
         // =====================================================================
         const PLOW_MODELS = {
             hd: { name: 'Martin® VPlow HD', short: 'VPlow HD', ds: 'L4184', speedMs: 4.6, widths: null, label: 'VPlow HD — economical tail protection, pivot-arm mount' },
@@ -1964,6 +2132,7 @@
             diagonal: { name: 'Martin® Diagonal Plow', short: 'Diagonal Plow', ds: 'L4149', speedMs: 4.6, widths: [18, 24, 30, 36, 42, 48, 54, 60, 72, 84, 96, 120], label: 'Diagonal Plow — for reversing belts (either direction)' }
         };
         const PLOW_WRAPS = ['w_plowBlade', 'w_plowFrame', 'w_plowArm', 'w_plowPipes', 'w_plowAssembly', 'w_plowMount'];
+        const PLOW_CFG = ['plowBlade', 'plowFrame', 'plowArm', 'plowPipes', 'plowAssembly', 'plowMount'];
         const HD_ARMS = [ // Dim F min – Dim E max, from L4184
             { key: '0', f: 6.50, e: 7.25 }, { key: '1', f: 9.75, e: 10.50 }, { key: '5', f: 10.13, e: 10.88 },
             { key: '6', f: 11.25, e: 12.00 }, { key: '4', f: 11.75, e: 12.50 }, { key: '2', f: 12.75, e: 13.50 },
@@ -1982,8 +2151,8 @@
         }
 
         // Recommendation from the customer's answers; returns { key, reason }
-        function plowRecommend(inp, eligible) {
-            const load = $('plowLoad').value, sag = $('plowSag').value, clr = $('plowClearance').value, pri = $('plowPriority').value;
+        function plowRecommend(inp, eligible, v) {
+            const { load, sag, clr, pri } = v;
             let key = 'hd', reason = 'Steady belt, normal clearance, lowest cost: the VPlow HD is the economical tail-pulley protection.';
             if (inp.reversingBelt === 'yes') {
                 key = 'diagonal'; reason = 'Full reversing belt: the Diagonal Plow protects the tail pulley in either direction of travel.';
@@ -2006,46 +2175,79 @@
             return { key, reason };
         }
 
-        // Plow blade: rubber or urethane only; urethane color always follows the shared Martin® urethane
-        function plowBladeChoice(inp, warnings, M, allowed, urethaneRec) {
+        // Plow blade: rubber or urethane only; urethane color always follows the calculated Martin® urethane
+        function plowBladeChoice(inp, allowed, missing) {
             const u = inp.urethaneObj;
-            const code = allowed[inp.urethaneKey];
+            const code = u ? allowed[inp.urethaneKey] : undefined;
             const opts = [];
             if (allowed.R !== undefined) opts.push({ key: 'R', text: 'Rubber blade (60A nitrile)' });
-            opts.push({ key: 'U', text: code !== undefined ? `Urethane blade — ${ u.name }` : `Urethane blade — ${ u.name } not offered, Orange supplied` });
-            const b = setOptions($('plowBlade'), opts, urethaneRec ? 'U' : 'R');
-            if (b.key === 'U' && code === undefined) {
-                warnings.push(`<strong>${ M.short } Urethane:</strong> The selection uses ${ u.name }, but ${ M.ds } does not offer it for this plow. Orange is shown; confirm the color with your Martin® representative.`);
-            }
-            return { rubber: b.key === 'R', code: b.key === 'R' ? allowed.R : (code !== undefined ? code : allowed.OR), text: b.text };
+            const uText = !u ? 'Urethane blade (color set by material, temperature & environment)'
+                : (code !== undefined ? `Urethane blade — ${ u.name }` : `Urethane blade — ${ u.name } not offered, Orange supplied`);
+            opts.push({ key: 'U', text: uText });
+            const b = setOptions($('plowBlade'), opts);
+            req('plowBlade', 'V-Plow: Blade Material', !!b, missing);
+            if (!b) return null;
+            return {
+                rubber: b.key === 'R',
+                code: b.key === 'R' ? allowed.R : (code !== undefined ? code : allowed.OR),
+                text: b.text,
+                notOffered: b.key === 'U' && !!u && code === undefined
+            };
         }
 
-        function computePlow(inp, warnings) {
+        function computePlow(inp, warnings, missing) {
             const bw = inp.beltWidthIn;
-            const eligible = plowEligible(bw);
-            if (!eligible.length) {
-                setOptions($('plowModel'), [{ key: 'none', text: '— No standard plow for this belt —' }], 'none');
-                PLOW_WRAPS.forEach(w => showWrap(w, false));
+            const v = { load: $('plowLoad').value, sag: $('plowSag').value, clr: $('plowClearance').value, pri: $('plowPriority').value };
+            const hideCfg = () => PLOW_WRAPS.forEach(w => showWrap(w, false));
+            req('plowLoad', 'V-Plow: Material on the return belt', !!v.load, missing);
+            req('plowSag', 'V-Plow: Belt sag / bounce at the plow', !!v.sag, missing);
+            req('plowClearance', 'V-Plow: Clearance under the return belt', !!v.clr, missing);
+            req('plowPriority', 'V-Plow: Installation priority', !!v.pri, missing);
+
+            if (bw && !plowEligible(bw).length) {
+                disableSelect($('plowModel'), '— No standard plow for this belt —');
+                hideCfg();
+                setRecPending('plow', 'No standard plow for this belt width.');
                 $('plowOptionsFor').innerText = 'No model';
-                $('svgVPlowText').textContent = 'N/A';
                 return {
                     stage: 'Tail Pulley Protection', accent: 'emerald', badge: 'No Standard Selection',
                     title: 'No Standard Martin® Plow for This Belt',
                     desc: `The plows in data sheets L4184, L4099, L4120, L3772 and L4149 start at 18 in (450 mm) belt width. A ${ inp.beltWidthLabel } belt is outside that range. Contact Martin® Engineering.`,
-                    dataSheet: null, rows: [], tokens: [], parts: [], assemblyPart: 'Contact Martin Engineering'
+                    dataSheet: null, rows: [], tokens: [], parts: [], assemblyPart: 'Contact Martin Engineering', svgText: 'N/A'
                 };
             }
-            const recObj = plowRecommend(inp, eligible);
+
+            const recReady = bw && inp.speedMs !== null && inp.reversingBelt && v.load && v.sag && v.clr && v.pri;
+            if (!recReady) {
+                setRecPending('plow', 'Fill in belt width, belt speed, belt direction and the application questions above to see the Martin® recommendation.');
+                disableSelect($('plowModel'), '— Answer the questions above first —');
+                $('plowOptionsFor').innerText = '—';
+                hideCfg();
+                missing.push('V-Plow: Model to configure');
+                return null;
+            }
+
+            const eligible = plowEligible(bw);
+            const recObj = plowRecommend(inp, eligible, v);
             const rec = recObj.key;
             $('plowRecName').innerText = PLOW_MODELS[rec].name;
             $('plowRecReason').innerText = recObj.reason;
             const model = modelSelect($('plowModel'), eligible, rec, PLOW_MODELS);
-            const corr = inp.envType === 'corrosive';
+            req('plowModel', 'V-Plow: Model to configure', !!model, missing);
+            showChoiceWarn('plow', model, rec, PLOW_MODELS);
+            if (!model) {
+                $('plowOptionsFor').innerText = '—';
+                hideCfg();
+                return null;
+            }
+            // A different model starts its configuration from blank
+            if ($('plowModel').dataset.cfgFor !== model) { clearSelects(PLOW_CFG); $('plowModel').dataset.cfgFor = model; }
+
             const M = PLOW_MODELS[model];
             $('plowOptionsFor').innerText = `For ${ M.short } (${ M.ds })`;
             const bwc = plowBwCode(bw);
             const bw2 = String(bw).padStart(2, '0');
-            const uk = inp.urethaneKey;
+            const urethaneNotOffered = bc => bc.notOffered && warnings.push(`<strong>${ M.short } Urethane:</strong> The selection uses ${ inp.urethaneObj.name }, but ${ M.ds } does not offer it for this plow. Orange is shown; confirm the color with your Martin® representative.`);
             let spec;
 
             if (model === 'hd') {
@@ -2053,24 +2255,31 @@
                 ['w_plowPipes', 'w_plowAssembly'].forEach(w => showWrap(w, false));
                 $('lbl_plowFrame').innerText = 'Frame Material';
                 $('lbl_plowArm').innerText = 'Pivot Arm Height (belt to mounting surface, Dim F min – Dim E max)';
-                const bc = plowBladeChoice(inp, warnings, M, { R: 'R', OR: '', BR: 'BR', GR: 'GR', NB: 'BL' }, true);
-                const B = bc.rubber
-                    ? { asm: 'R', col: '', blade: 'R', text: 'Rubber blade (60A nitrile)' }
-                    : { asm: 'U', col: bc.code, blade: 'U' + bc.code, text: bc.text };
+                const bc = plowBladeChoice(inp, { R: 'R', OR: '', BR: 'BR', GR: 'GR', NB: 'BL' }, missing);
                 const mat = setOptions($('plowFrame'), [
                     { key: 'T', text: 'T — Painted steel' },
                     { key: 'S', text: 'S — 304 stainless steel' },
                     { key: 'F', text: 'F — 316 stainless steel' }
-                ], corr ? 'S' : 'T');
+                ]);
                 const arm = setOptions($('plowArm'), HD_ARMS.map(a => ({
                     key: a.key,
                     text: `Code ${ a.key }${ a.key === '0' ? ' (standard)' : '' } — ${ a.f.toFixed(2) }–${ a.e.toFixed(2) } in (${ Math.round(a.f * 25.4) }–${ Math.round(a.e * 25.4) } mm)`
-                })), '0');
+                })));
                 const mount = setOptions($('plowMount'), [
-                    { key: '', text: 'No mounting option (weld / bolt to structure)' },
+                    { key: 'N', text: 'No mounting option (weld / bolt to structure)' },
                     { key: 'C', text: 'C — U-bolt mounting kit' }
-                ], '');
-                const assemblyPart = `BUS14092-${ bwc }${ B.asm }${ arm.key }${ mat.key }${ B.col }${ mount.key }`;
+                ]);
+                req('plowFrame', 'V-Plow: Frame Material', !!mat, missing);
+                req('plowArm', 'V-Plow: Pivot Arm Height', !!arm, missing);
+                req('plowMount', 'V-Plow: Mounting Kit', !!mount, missing);
+                if (!bc || !mat || !arm || !mount || !inp.urethaneObj) return null;
+
+                urethaneNotOffered(bc);
+                const B = bc.rubber
+                    ? { asm: 'R', col: '', blade: 'R', text: 'Rubber blade (60A nitrile)' }
+                    : { asm: 'U', col: bc.code, blade: 'U' + bc.code, text: bc.text };
+                const mk = mount.key === 'N' ? '' : mount.key;
+                const assemblyPart = `BUS14092-${ bwc }${ B.asm }${ arm.key }${ mat.key }${ B.col }${ mk }`;
                 const bladePn = `31134-${ bwc }${ B.blade }`;
                 if (bw >= 108) warnings.push(`<strong>VPlow HD ${ bw } in:</strong> The A8/C0 belt-width code follows the Martin® VPlow HD manual; confirm the replacement blade P/N ${ bladePn } with your Martin® representative.`);
                 if (B.col) warnings.push(`<strong>VPlow HD Urethane Color:</strong> L4184 does not print the assembly nomenclature. The color suffix (${ B.col }) follows Martin® drawing BUS14092 ("material for urethane blades"). Confirm before ordering.`);
@@ -2086,7 +2295,7 @@
                         { code: 'BUS14092', label: 'VPlow HD' }, { code: bwc, label: `${ inp.beltWidthLabel } Belt` },
                         { code: B.asm, label: B.asm === 'R' ? 'Rubber Blade' : 'Urethane Blade' }, { code: arm.key, label: 'Pivot Arm' },
                         { code: mat.key, label: 'Frame Material' }, { code: B.col || '(blank)', label: 'Urethane Color' },
-                        { code: mount.key || '(blank)', label: 'Mounting Kit' }
+                        { code: mk || '(blank)', label: 'Mounting Kit' }
                     ],
                     parts: [
                         { role: 'Plow Assembly', pn: assemblyPart, qty: 1 },
@@ -2099,23 +2308,22 @@
                 showWrap('w_plowMount', false);
                 $('lbl_plowFrame').innerText = 'Frame Material';
                 $('lbl_plowArm').innerText = 'Front Hanger Arm';
-                const bc = plowBladeChoice(inp, warnings, M, { R: 'R', OR: 'O', BR: 'B', GR: 'G' }, true);
-                const b = { key: bc.code, text: `${ bc.code } — ${ bc.text }` };
+                const bc = plowBladeChoice(inp, { R: 'R', OR: 'O', BR: 'B', GR: 'G' }, missing);
                 const arm = setOptions($('plowArm'), [
                     { key: '01', text: '01 — 2.56 in (65 mm)' },
                     { key: '02', text: '02 — 6.89 in (175 mm)' },
                     { key: '03', text: '03 — 7.87 in (200 mm)' },
                     { key: '04', text: '04 — 11.81 in (300 mm)' }
-                ], '01');
+                ]);
                 const pipes = setOptions($('plowPipes'), [
                     { key: 'S', text: 'S — Standard 1-piece' },
                     { key: 'C', text: 'C — Compact 3-piece' }
-                ], 'S');
+                ]);
                 const mat = setOptions($('plowFrame'), [
                     { key: 'T', text: 'T — Painted mild steel' },
                     { key: 'S', text: 'S — 304 stainless steel' },
                     { key: 'F', text: 'F — 316 stainless steel' }
-                ], corr ? 'S' : 'T');
+                ]);
                 const asmOpts = [
                     { key: 'A', text: 'A — Assembled' },
                     { key: 'B', text: 'B — Assembled with hub mount kit' },
@@ -2123,7 +2331,15 @@
                     { key: 'V', text: 'V — Unassembled with hub mount kit' }
                 ];
                 if (!isTor) asmOpts.push({ key: 'E', text: 'E — Extended coverage +5.90 in (150 mm)' });
-                const asm = setOptions($('plowAssembly'), asmOpts, 'A');
+                const asm = setOptions($('plowAssembly'), asmOpts);
+                req('plowArm', 'V-Plow: Front Hanger Arm', !!arm, missing);
+                req('plowPipes', 'V-Plow: Hanger Pipes', !!pipes, missing);
+                req('plowFrame', 'V-Plow: Frame Material', !!mat, missing);
+                req('plowAssembly', 'V-Plow: Assembly Option', !!asm, missing);
+                if (!bc || !arm || !pipes || !mat || !asm || !inp.urethaneObj) return null;
+
+                urethaneNotOffered(bc);
+                const b = { key: bc.code, text: `${ bc.code } — ${ bc.text }` };
                 const prefix = isTor ? 'CPVTAS' : 'CPVHAS';
                 const bp = isTor ? 'CPVTB' : 'CPVHB';
                 const assemblyPart = `${ prefix }${ bwc }${ b.key }${ arm.key }${ pipes.key }${ mat.key }${ asm.key }`;
@@ -2140,7 +2356,7 @@
                         : 'Economical, bolt-together tail protection for medium to heavy-duty applications. One-piece urethane nose and 1 in thick side blades give 2 in (50 mm) of wear. Up to 900 fpm (4.6 m/s).',
                     assemblyPart,
                     rows: [
-                        ['Blade', b.text.split('— ')[1]], ['Front Hanger Arm', arm.text.split('— ')[1]],
+                        ['Blade', b.text.split('— ').slice(1).join('— ')], ['Front Hanger Arm', arm.text.split('— ')[1]],
                         ['Hanger Pipes', pipes.text.split('— ')[1]], ['Frame Material', mat.text.split('— ')[1]],
                         ['Assembly', asm.text.split('— ')[1]], ['Max Belt Speed', '900 fpm (4.6 m/s)']
                     ],
@@ -2155,14 +2371,18 @@
                 ['w_plowBlade', 'w_plowFrame'].forEach(w => showWrap(w, true));
                 ['w_plowArm', 'w_plowPipes', 'w_plowAssembly', 'w_plowMount'].forEach(w => showWrap(w, false));
                 $('lbl_plowFrame').innerText = 'Frame Construction / Tensioner';
-                const bc = plowBladeChoice(inp, warnings, M, { OR: 'OR', BR: 'BR', GR: 'GR' }, true);
-                const b = { key: bc.code, text: `${ bc.code } — ${ bc.text.replace('Urethane blade — ', '') }` };
+                const bc = plowBladeChoice(inp, { OR: 'OR', BR: 'BR', GR: 'GR' }, missing);
                 const fr = setOptions($('plowFrame'), [
                     { key: 'P', text: 'P — Painted' },
                     { key: 'C', text: 'C — 304 stainless steel' },
                     { key: 'T', text: 'T — Painted steel with spring tensioner' },
                     { key: 'CT', text: 'CT — 304 stainless steel with spring tensioner' }
-                ], corr ? 'C' : 'P');
+                ]);
+                req('plowFrame', 'V-Plow: Frame Construction / Tensioner', !!fr, missing);
+                if (!bc || !fr || !inp.urethaneObj) return null;
+
+                urethaneNotOffered(bc);
+                const b = { key: bc.code, text: `${ bc.code } — ${ bc.text.replace('Urethane blade — ', '') }` };
                 const assemblyPart = `PLWVH-${ bw2 }${ b.key }${ fr.key }`;
                 if (inp.tempRange === 'high' || inp.tempRange === 'extreme') warnings.push('<strong>VPlow XHD Temperature:</strong> L3772 lists an operating range of -20° to 160°F (-29° to 71°C). Confirm with your Martin® representative for higher temperatures.');
                 spec = {
@@ -2187,15 +2407,17 @@
                 // Diagonal Plow
                 showWrap('w_plowBlade', true);
                 ['w_plowFrame', 'w_plowArm', 'w_plowPipes', 'w_plowAssembly', 'w_plowMount'].forEach(w => showWrap(w, false));
-                const hot = inp.tempRange === 'high' || inp.tempRange === 'extreme';
-                const bc = plowBladeChoice(inp, warnings, M, { R: 'R', OR: 'U' }, !hot);
+                const bc = plowBladeChoice(inp, { R: 'R', OR: 'U' }, missing);
+                if (!bc || !inp.urethaneObj) return null;
+
+                urethaneNotOffered(bc);
                 const b = { key: bc.rubber ? 'R' : 'U', text: bc.rubber ? 'R — Rubber blade (60A nitrile, to 250°F / 121°C)' : `U — ${ bc.text }` };
                 const assemblyPart = `22662-${ bw2 }${ b.key }`;
                 spec = {
                     title: M.name, badge: 'Martin® Diagonal Plow', dataSheet: 'L4149',
                     desc: 'Tail protection for reversing belts. Hung from brackets on both sides of the conveyor, it floats on the belt to remove material without needing adjustment. Up to 900 fpm (4.6 m/s).',
                     assemblyPart,
-                    rows: [['Blade', b.text.split('— ')[1]], ['Blade Wear', '1.5 in (38 mm)'], ['Max Belt Speed', '900 fpm (4.6 m/s)'], ['Direction', 'Protects the pulley in either direction of travel']],
+                    rows: [['Blade', b.text.split('— ').slice(1).join('— ')], ['Blade Wear', '1.5 in (38 mm)'], ['Max Belt Speed', '900 fpm (4.6 m/s)'], ['Direction', 'Protects the pulley in either direction of travel']],
                     tokens: [{ code: '22662', label: 'Diagonal Plow' }, { code: bw2, label: `${ inp.beltWidthLabel } Belt` }, { code: b.key, label: b.key === 'R' ? 'Rubber Blade' : 'Urethane Blade' }],
                     parts: [
                         { role: 'Plow Assembly', pn: assemblyPart, qty: 1 },
@@ -2210,9 +2432,11 @@
             if (inp.reversingBelt === 'rollback' && model !== 'diagonal' && eligible.includes('diagonal')) warnings.push('<strong>Belt Rollback (Plow):</strong> If rollback carries material toward the tail pulley, consider the Diagonal Plow (L4149), which works in either direction.');
             if (inp.tempRange === 'extreme') warnings.push('<strong>Plow Temperature:</strong> Extreme temperatures are above the ratings in the plow data sheets. Contact Martin® Engineering.');
             else if (inp.tempRange === 'high' && (model === 'hd' || model === 'modular' || model === 'torsion')) warnings.push(`<strong>Plow Temperature:</strong> ${ M.ds } does not list a high-temperature rating for the ${ M.short }. Confirm with your Martin® representative.`);
+            if (model !== rec) {
+                warnings.push(`<strong>Customer-Selected Plow Model:</strong> Martin® recommends the ${ PLOW_MODELS[rec].name } for these answers. The ${ M.name } was selected by the customer, at the customer's own discretion and responsibility.`);
+            }
 
-            $('svgVPlowText').textContent = M.short;
-            return Object.assign(spec, { stage: 'Tail Pulley Protection', accent: 'emerald', modelKey: model, recommended: model === rec, recName: PLOW_MODELS[rec].name, recReason: recObj.reason });
+            return Object.assign(spec, { stage: 'Tail Pulley Protection', accent: 'emerald', modelKey: model, recommended: model === rec, recName: PLOW_MODELS[rec].name, recReason: recObj.reason, svgText: M.short });
         }
 
         // =====================================================================
@@ -2277,7 +2501,7 @@
                     ${ spec.recName && !spec.recommended ? `
                     <div class="mb-4 bg-amber-950/60 border border-amber-500/50 rounded-xl p-3 text-xs text-amber-100 leading-relaxed">
                         <div class="font-bold text-amber-300 mb-0.5"><i class="fa-solid fa-user-pen mr-1"></i>Customer-selected model</div>
-                        Martin® recommends the <strong>${ spec.recName }</strong> for your answers. You selected the <strong>${ spec.title }</strong>; this selection is at the customer's discretion.
+                        Martin® recommends the <strong>${ spec.recName }</strong> for your answers. You selected the <strong>${ spec.title }</strong>; this selection is at the customer's own discretion and responsibility.
                     </div>` : '' }
 
                     ${ spec.rows && spec.rows.length ? `
@@ -2318,21 +2542,24 @@
 
         // =====================================================================
         // MAIN CALCULATION
+        // Nothing is selected and no part number is shown until every required field is filled in.
         // =====================================================================
         function calculateAll() {
             const has = k => selectedItems.includes(k);
             const inp = readSharedInputs();
             updateUrethaneUI(inp.urethaneObj);
-            const warnings = [];
+            const missing = [];
+            const wPrim = [], wSec = [], wPlow = [];
             partRegistry = [];
 
             // Visibility of questions — only what each selected product needs
-            $('coverageBox').classList.toggle('hidden', !has('primary'));
             $('pulleyField').classList.toggle('hidden', !has('primary'));
             $('speedGrid').className = has('primary') ? 'grid grid-cols-1 sm:grid-cols-2 gap-3.5' : 'grid grid-cols-1 gap-3.5';
             $('speedSectionTitle').innerText = has('primary') ? 'Head Pulley & Belt Speed' : 'Belt Speed';
             $('speedPulleyStatus').classList.toggle('hidden', !has('primary'));
             $('primaryOptionsBox').classList.toggle('hidden', !has('primary'));
+            $('abrasField').classList.toggle('hidden', !has('secondary'));
+            $('envGrid').className = has('secondary') ? 'grid grid-cols-1 sm:grid-cols-2 gap-3.5' : 'grid grid-cols-1 gap-3.5';
             $('spliceField').classList.toggle('hidden', !has('secondary'));
             $('directionGrid').className = has('secondary') ? 'grid grid-cols-1 sm:grid-cols-2 gap-3.5' : 'grid grid-cols-1 gap-3.5';
             $('directionSectionTitle').innerText = has('secondary') ? 'Splices, Direction & Architecture' : (has('primary') ? 'Direction & Architecture' : 'Belt Direction');
@@ -2345,9 +2572,62 @@
             if (!has('primary')) { $('svgHeadPulley').setAttribute('r', 52); $('svgPulleyText').textContent = ''; }
             renumberSections();
 
-            const primary = has('primary') ? computePrimary(inp, warnings) : null;
-            const secondary = has('secondary') ? computeSecondary(inp, warnings) : null;
-            const plow = has('vplow') ? computePlow(inp, warnings) : null;
+            // Shared required fields
+            req('beltWidthSelect', 'Belt Width', !!inp.beltWidthIn, missing);
+            req('beltSpeed', 'Belt Speed', inp.speedMs !== null, missing);
+            req('materialType', 'Conveyed Material', !!inp.materialType, missing);
+            req('tempRange', 'Operating Temperature', !!inp.tempRange, missing);
+            req('envType', 'Moisture / Environment', !!inp.envType, missing);
+            if (has('secondary')) {
+                req('abrasiveness', 'Material Abrasiveness', !!inp.abrasiveness, missing);
+                req('spliceType', 'Belt Splice Type', !!inp.spliceType, missing);
+            }
+            req('reversingBelt', 'Belt Direction / Rollback', !!inp.reversingBelt, missing);
+
+            // Primary required fields (tensioner & finishing depend on belt width + pulley)
+            if (has('primary')) {
+                const pulVal = $('pulleyDiameter').value;
+                req('pulleyDiameter', 'Head Pulley Diameter', !!pulVal, missing);
+                if (inp.beltWidthIn && pulVal) {
+                    const key = primaryProductKey(inp.beltWidthIn, parseInt(pulVal) / MM_PER_IN);
+                    const { ten, fin, blade } = applyProductOptions(key, inp.beltWidthIn, null, inp.beltWidthMm);
+                    if (key) {
+                        req('bladeWidthSel', 'Primary: Blade Width', !!blade, missing);
+                        req('tensionerType', 'Primary: Tensioner', !!ten, missing);
+                        req('mainframeFinish', 'Primary: Mainframe Finishing', !!fin, missing);
+                    }
+                } else {
+                    applyProductOptions(null, null, '— Select belt width & head pulley first —');
+                    missing.push('Primary: Blade Width', 'Primary: Tensioner', 'Primary: Mainframe Finishing');
+                }
+            }
+
+            const secondary = has('secondary') ? computeSecondary(inp, wSec, missing) : null;
+            const plow = has('vplow') ? computePlow(inp, wPlow, missing) : null;
+            const ready = missing.length === 0;
+
+            $('svgDirectionLabel').textContent = inp.speedMs === null ? 'BELT TRAVEL'
+                : (currentUnitSystem === 'metric' ? `BELT TRAVEL (${ inp.speedMs } m/s)` : `BELT TRAVEL (${ inp.speedFpm } fpm)`);
+
+            if (!ready) {
+                // Nothing is selected while any field is missing
+                if (has('primary')) clearPrimaryDisplay();
+                $('svgSecondaryModelText').textContent = '';
+                $('svgVPlowText').textContent = '';
+                $('cleanerCardsGrid').innerHTML = '';
+                $('alertBox').classList.add('hidden');
+                $('missingList').innerHTML = [...new Set(missing)].map(m => `<li>${ m }</li>`).join('');
+                $('missingBox').classList.remove('hidden');
+                $('efficiencyBadge').innerText = 'Awaiting customer data';
+                $('svgScaleInfo').textContent = '—';
+                return;
+            }
+            $('missingBox').classList.add('hidden');
+
+            const primary = has('primary') ? computePrimary(inp, wPrim) : null;
+            const warnings = [...wPrim, ...wSec, ...wPlow];
+            $('svgSecondaryModelText').textContent = secondary ? secondary.svgText : '';
+            $('svgVPlowText').textContent = plow ? plow.svgText : '';
 
             // Header badge & schematic labels
             const stages = [primary && 'Primary', secondary && 'Secondary', plow && 'Tail Protection'].filter(Boolean);
@@ -2357,7 +2637,6 @@
             } else {
                 badge.innerText = `${ stages.join(' + ') } Selection`;
             }
-            $('svgDirectionLabel').textContent = currentUnitSystem === 'metric' ? `BELT TRAVEL (${ inp.speedMs } m/s)` : `BELT TRAVEL (${ inp.speedFpm } fpm)`;
             $('svgScaleInfo').textContent = primary
                 ? `Pulley Ø${ primary.pulleyDisplay } | Blade: ${ primary.bladeWidthLabel }`
                 : `Belt ${ inp.beltWidthLabel } | ${ currentUnitSystem === 'metric' ? inp.speedMs + ' m/s' : inp.speedFpm + ' fpm' }`;
@@ -2376,18 +2655,7 @@
             } else {
                 $('alertBox').classList.add('hidden');
             }
-
-            currentSelectionState = {
-                ...inp,
-                materialLabel: $('materialType').options[$('materialType').selectedIndex].text,
-                tempLabel: $('tempRange').options[$('tempRange').selectedIndex].text,
-                spliceLabel: $('spliceType').options[$('spliceType').selectedIndex].text,
-                reversingLabel: $('reversingBelt').options[$('reversingBelt').selectedIndex].text,
-                primary, secondary, plow, warnings
-            };
         }
-        // Backwards-compatible name used by the original code
-        const calculateScrapers = calculateAll;
 
         // =====================================================================
         // CART
@@ -2398,6 +2666,7 @@
             const n = cartTotalQty();
             $('cartCount').innerText = n;
             $('cartCountInline').innerText = n;
+            $('cartCountBottom').innerText = n;
         }
 
         function addToCart(idx) {
@@ -2560,159 +2829,17 @@
         }
 
         // =====================================================================
-        // DOWNLOAD SPEC (standalone HTML)
-        // =====================================================================
-        function buildPrintableSpecMarkup() {
-            const s = currentSelectionState;
-            const dateStr = new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' });
-            const sections = [s.primary, s.secondary, s.plow].filter(Boolean);
-            const params = [
-                ['Belt Width', s.beltWidthLabel],
-                ['Belt Operating Speed', `${ s.speedMs } m/s (${ s.speedFpm } fpm)`],
-                ['Conveyed Material', s.materialLabel],
-                ['Operating Temperature', s.tempLabel],
-                ['Moisture / Environment', $('envType').options[$('envType').selectedIndex].text],
-                ['Material Abrasiveness', $('abrasiveness').options[$('abrasiveness').selectedIndex].text],
-                ['Urethane Formulation', `${ s.urethaneObj.name } [${ s.urethaneObj.code }]`],
-                ['Belt Direction', s.reversingLabel]
-            ];
-            if (s.primary) params.push(['Head Pulley Diameter', `Ø${ s.primary.pulleyDisplay }`], ['Primary Blade Width', s.primary.bladeWidthLabel], ['Primary Mainframe Finishing', s.primary.mainframe]);
-            if (s.secondary) params.push(['Belt Splice', s.spliceLabel]);
-
-            const stageColor = { orange: 'text-orange-700', sky: 'text-sky-700', emerald: 'text-emerald-700' };
-            const bomRows = sections.map(sec => {
-                const parts = (sec.parts || []).filter(p => p.pn && p.qty > 0);
-                const ds = sec.dataSheet && dsUrl(sec.dataSheet);
-                const head = `
-                    <tr class="bg-slate-50">
-                        <td class="p-2.5 border border-slate-300 font-bold ${ stageColor[sec.accent] }">${ sec.stage }</td>
-                        <td class="p-2.5 border border-slate-300" colspan="3">
-                            <div class="font-bold text-slate-900">${ sec.title }${ sec.recName && !sec.recommended ? ' <span class="text-amber-700 text-[11px]">(customer-selected model)</span>' : '' }</div>
-                            ${ ds ? `<a href="${ ds }" class="text-[11px] text-orange-700 underline">Technical Data Sheet ${ sec.dataSheet } (PDF)</a>` : '<span class="text-[11px] text-slate-500">Contact Martin® Engineering</span>' }
-                        </td>
-                    </tr>`;
-                return head + parts.map(p => `
-                    <tr>
-                        <td class="p-2.5 border border-slate-300"></td>
-                        <td class="p-2.5 border border-slate-300 text-slate-700">${ p.role }</td>
-                        <td class="p-2.5 border border-slate-300 font-mono font-bold text-slate-900">${ p.pn }</td>
-                        <td class="p-2.5 border border-slate-300 font-mono text-right">${ p.qty }</td>
-                    </tr>`).join('');
-            }).join('');
-
-            return `
-                <div class="border-b-4 border-orange-600 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div class="flex items-center gap-3">
-                        <div style="background:linear-gradient(135deg,#f97316,#c2410c)" class="w-12 h-12 rounded-xl flex items-center justify-center text-white text-2xl font-black"><span class="italic">m</span></div>
-                        <div>
-                            <div class="text-xs font-extrabold uppercase tracking-widest text-orange-600">Martin® Engineering Specification Submittal</div>
-                            <h1 class="text-2xl font-black text-slate-900 mt-0.5">CONVEYOR BELT CLEANER SYSTEM DATA SHEET</h1>
-                            <p class="text-xs text-slate-500">Generated per Martin® technical data sheets</p>
-                        </div>
-                    </div>
-                    <div class="text-right text-xs font-mono text-slate-600">
-                        <div><strong>Date:</strong> ${ dateStr }</div>
-                        <div><strong>Scope:</strong> ${ sections.map(x => x.stage).join(', ') }</div>
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">1. Conveyor & Material Design Parameters</h2>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs border border-slate-200 rounded-xl p-4 bg-slate-50">
-                        ${ params.map(([k, v]) => `<div><span class="text-slate-500 block">${ k }:</span><strong class="text-slate-900">${ v }</strong></div>`).join('') }
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">2. Recommended Martin® Bill of Materials (BOM)</h2>
-                    <table class="w-full text-left text-xs border border-slate-300 border-collapse">
-                        <thead>
-                            <tr class="bg-slate-900 text-white">
-                                <th class="p-2.5 border border-slate-300">Stage</th>
-                                <th class="p-2.5 border border-slate-300">Item</th>
-                                <th class="p-2.5 border border-slate-300">Part No.</th>
-                                <th class="p-2.5 border border-slate-300 text-right">Qty</th>
-                            </tr>
-                        </thead>
-                        <tbody>${ bomRows }</tbody>
-                    </table>
-                </div>
-
-                <div class="bg-slate-100 border border-slate-300 rounded-xl p-4 text-xs space-y-1.5">
-                    <div class="font-bold text-slate-900 uppercase">3. Installation & Sizing Notes:</div>
-                    ${ sections.map(sec => `<div>• <strong>${ sec.stage }:</strong> ${ (sec.rows || []).map(([k, v]) => `${ k }: ${ v }`).join('; ') }</div>`).join('') }
-                    ${ sections.filter(sec => sec.recName).map(sec => sec.recommended
-                        ? `<div>• <strong>${ sec.stage } model:</strong> ${ sec.title } (Martin® recommendation). ${ sec.recReason }</div>`
-                        : `<div class="text-amber-800">• <strong>${ sec.stage } model — customer's choice:</strong> Martin® recommends the ${ sec.recName } (${ sec.recReason }) The customer selected the ${ sec.title }; this selection is at the customer's discretion.</div>`).join('') }
-                    ${ s.warnings.map(w => `<div>• ${ w }</div>`).join('') }
-                </div>
-
-                <div class="pt-4 border-t border-slate-300 flex justify-between items-center text-[11px] text-slate-500">
-                    <span>Martin Engineering Company — One Martin Place, Neponset, IL 61345 | 800-544-2947</span>
-                    <span>Backed by the Martin® Forever Belt Cleaner Guarantee</span>
-                </div>`;
-        }
-
-        function downloadSpecHtml() {
-            calculateAll();
-            const s = currentSelectionState;
-            const first = [s.primary, s.secondary, s.plow].filter(Boolean)[0];
-            const ref = first && first.assemblyPart ? first.assemblyPart.replace(/[^A-Za-z0-9-]/g, '') : 'Selection';
-            const fullDoc = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Martin Engineering Spec Sheet - ${ ref }</title>
-    <script src="https://cdn.tailwindcss.com"><\/script>
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 32px; }
-        @media print { .no-print { display: none !important; } body { background: white; padding: 0; } }
-    </style>
-</head>
-<body>
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow border border-slate-200 space-y-6">
-        <div class="no-print flex justify-between items-center bg-orange-50 border border-orange-200 p-3 rounded-lg mb-4">
-            <span class="text-xs font-bold text-orange-800">Ready to print or save as PDF from your browser.</span>
-            <button onclick="window.print()" class="bg-orange-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Print / Save as PDF</button>
-        </div>
-        ${ buildPrintableSpecMarkup() }
-    </div>
-    <script>window.onload = function() { setTimeout(function(){ window.print(); }, 500); };<\/script>
-</body>
-</html>`;
-            const blob = new Blob([fullDoc], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Martin-Engineering-Spec-${ ref }.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showNotification('Specification Downloaded', `Downloaded Martin-Engineering-Spec-${ ref }.html. Open it in any browser tab to print or save as PDF.`);
-        }
-
-        // =====================================================================
-        // RESET
+        // RESET — every field back to blank
         // =====================================================================
         function resetForm() {
-            $('beltWidthSelect').value = '1050';
-            $('pulleyDiameter').value = '500';
-            $('beltSpeed').value = currentUnitSystem === 'metric' ? 3.5 : 700;
-            $('materialType').value = 'coal';
-            $('tempRange').value = 'standard';
-            $('spliceType').value = 'vulcanized';
-            $('reversingBelt').value = 'no';
-            $('envType').value = 'dry';
-            $('abrasiveness').value = 'moderate';
-            $('secSpace').value = 'standard';
-            $('secService').value = 'standard';
-            $('plowLoad').value = 'moderate';
-            $('plowSag').value = 'no';
-            $('plowClearance').value = 'normal';
-            $('plowPriority').value = 'cost';
-            ['tensionerType', 'mainframeFinish'].forEach(id => { const el = $(id); el.dataset.sig = ''; el.innerHTML = ''; });
-            document.querySelectorAll('#secondaryBox select, #plowBox select').forEach(el => { el.dataset.touched = ''; el.dataset.sig = ''; });
+            ['beltWidthSelect', 'pulleyDiameter', 'materialType', 'tempRange', 'spliceType', 'reversingBelt', 'envType', 'abrasiveness',
+             'secSpace', 'secService', 'plowLoad', 'plowSag', 'plowClearance', 'plowPriority'].forEach(id => { $(id).value = ''; });
+            $('beltSpeed').value = '';
+            $('speedSlider').value = $('speedSlider').min;
+            clearSelects(['bladeWidthSel', 'tensionerType', 'mainframeFinish', 'secModel', 'plowModel', ...SEC_CFG, ...PLOW_CFG]);
+            delete $('secModel').dataset.cfgFor;
+            delete $('plowModel').dataset.cfgFor;
+            delete $('secBladeType').dataset.forStyle;
             calculateAll();
         }
 
